@@ -1,19 +1,21 @@
 import QuestionsAndAnswers from "../QuestionsAndAnswers";
 import Timer from "../Timer";
 import ScoreDisplay from "../ScoreDisplay";
+import { Container } from "@mui/system";
+import { Box } from "@mui/material";
 
 export default function MultiplayerGame() {
   function loadQuestion() {}
   return (
-    <div>
-      <div>
+    <Container align="center">
+      <Box align="center" sx={{ justifyContent: "space-between" }}>
         <Timer />
         <ScoreDisplay />
-      </div>
-      <div>
+      </Box>
+      <Box align="center">
         <QuestionsAndAnswers />
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 }
 
