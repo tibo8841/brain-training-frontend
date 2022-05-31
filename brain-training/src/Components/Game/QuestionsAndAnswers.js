@@ -1,5 +1,19 @@
+import { Stack, Button, Box } from "@mui/material";
+
 export default function QuestionsAndAnswers() {
-  return;
+  function handleClick(e) {}
+
+  return (
+    <Box>
+      <header>Question:</header>
+      <Stack spacing={2}>
+        <Button onClick={handleClick}>Answer 1</Button>
+        <Button onClick={handleClick}>Answer 2</Button>
+        <Button onClick={handleClick}>Answer 3</Button>
+        <Button onClick={handleClick}>Answer 4</Button>
+      </Stack>
+    </Box>
+  );
 }
 
 // -QuestionsAndAnswers
