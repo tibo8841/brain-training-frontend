@@ -5,7 +5,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemAvatar,
 } from "@mui/material";
 
 export default function MultiplayerResults() {
