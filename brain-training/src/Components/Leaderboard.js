@@ -6,12 +6,22 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Stack } from "@mui/material";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
-export default function Album() {
+export default function Leaderboard() {
+  const [sort, setSort] = React.useState("");
+
+  function handleChange(event) {
+    setSort(event.target.value);
+  }
   return (
     <ThemeProvider theme={theme}>
       <main>
@@ -35,11 +45,32 @@ export default function Album() {
             </Typography>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container maxWidth="md">
+          <Box marginBottom={5}>
+            <FormControl fullWidth>
+              <InputLabel id="sort-label">Sort</InputLabel>
+              <Select
+                labelId="sort-button-label"
+                id="sort-button"
+                value={sort}
+                label="Sort"
+                onChange={handleChange}
+              >
+                <MenuItem value={"ASC"}>Ascending</MenuItem>
+                <MenuItem value={"DSC"}>Descending</MenuItem>
+                <MenuItem value={"RAND"}>Random</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
           {/* End hero unit */}
-          <Grid container spacing={4}>
+          <Stack
+            sx={{ pt: 4 }}
+            direction="column"
+            spacing={2}
+            justifyContent="center"
+          >
             {cards.map((card) => (
-              <Grid item key={card} xs={2} sm={2} md={11}>
+              <Stack>
                 <Card
                   sx={{
                     height: "100%",
@@ -48,7 +79,7 @@ export default function Album() {
                     justifyContent: "center",
                   }}
                 >
-                  <CardContent sx={{ flexGrow: 1 }}>
+                  <CardContent>
                     <Typography
                       gutterBottom
                       variant="h5"
@@ -59,9 +90,9 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </Stack>
             ))}
-          </Grid>
+          </Stack>
         </Container>
       </main>
     </ThemeProvider>
