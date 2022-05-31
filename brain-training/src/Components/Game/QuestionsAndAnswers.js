@@ -1,5 +1,29 @@
+import Button from "@mui/material/Button";
+
 export default function QuestionsAndAnswers() {
-  return;
+  function handleClick(e) {}
+
+  return (
+    <div>
+      <div>
+        <header>Question:</header>
+      </div>
+      <div>
+        <Button variant="contained" onClick={handleClick}>
+          Answer 1
+        </Button>
+        <Button variant="contained" onClick={handleClick}>
+          Answer 2
+        </Button>
+        <Button variant="contained" onClick={handleClick}>
+          Answer 3
+        </Button>
+        <Button variant="contained" onClick={handleClick}>
+          Answer 4
+        </Button>
+      </div>
+    </div>
+  );
 }
 
 // -QuestionsAndAnswers
