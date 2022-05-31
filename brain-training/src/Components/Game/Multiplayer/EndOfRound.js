@@ -1,5 +1,20 @@
+import ScoreDisplay from "../ScoreDisplay";
+import Chat from "./Chat";
 export default function EndOfRound() {
-  return;
+  function timeOnPage() {}
+  function playerScores() {}
+  function checkEliminated() {}
+  return (
+    <div>
+      <div>
+        <ScoreDisplay />
+      </div>
+      <div>Eliminated Players</div>
+      <div>
+        <Chat />
+      </div>
+    </div>
+  );
 }
 
 // -EndOfRound
