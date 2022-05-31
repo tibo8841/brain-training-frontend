@@ -12,12 +12,8 @@ export default function CustomiseProfile() {
     fetchUserWinMessage();
   }, []);
 
-  function displayCustomWinMessage() {
-    return <h2> your win message is: {userWinMessage} </h2>;
-  }
-
   function handleCreateWinMessageSubmit() {
-    console.log("Win message submitted");
+    e.preventDefault();
   }
 
   return (

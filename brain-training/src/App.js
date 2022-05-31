@@ -19,7 +19,7 @@ function App() {
         <Route path="register" element={<Registration />} />
         <Route path="how+to+play" element={<HowToPlay />} />
         <Route path="leaderboard" element={<Leaderboard />} />
-        <Route path="profile" element={<CustomiseProfile />} />
+        <Route path="CustomiseProfile" element={<CustomiseProfile />} />
         <Route path="play" element={<SingleplayerGame />} />
         <Route path="play/results" element={<SingleplayerResults />} />
         <Route path="lobby" element={<Lobby />} />
