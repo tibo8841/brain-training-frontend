@@ -5,7 +5,7 @@ import { Container } from "@mui/system";
 import { Box } from "@mui/material";
 
 export default function MultiplayerGame() {
-  function loadQuestion() {}
+  // function loadQuestion() {}
   return (
     <Container align="center">
       <Box align="center" sx={{ justifyContent: "space-between" }}>

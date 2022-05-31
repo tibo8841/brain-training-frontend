@@ -2,9 +2,9 @@ import { Box, Typography } from "@mui/material";
 import ScoreDisplay from "../ScoreDisplay";
 import Chat from "./Chat";
 export default function EndOfRound() {
-  function timeOnPage() {}
-  function playerScores() {}
-  function checkEliminated() {}
+  // function timeOnPage() {}
+  // function playerScores() {}
+  // function checkEliminated() {}
   return (
     <Box>
       <Box>
