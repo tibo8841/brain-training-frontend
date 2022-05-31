@@ -11,7 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import { Stack } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-const cards = [1, 2, 3, 3, ,3 ,3 ,3, 3];
+const cards = [1, 2, 3, 3, 3, 3, 3, 3];
 
 const theme = createTheme();
 
