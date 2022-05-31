@@ -1,28 +1,20 @@
-import Button from "@mui/material/Button";
+
+import { Stack, Button, Box } from "@mui/material";
 
 export default function QuestionsAndAnswers() {
   function handleClick(e) {}
 
   return (
-    <div>
-      <div>
-        <header>Question:</header>
-      </div>
-      <div>
-        <Button variant="contained" onClick={handleClick}>
-          Answer 1
-        </Button>
-        <Button variant="contained" onClick={handleClick}>
-          Answer 2
-        </Button>
-        <Button variant="contained" onClick={handleClick}>
-          Answer 3
-        </Button>
-        <Button variant="contained" onClick={handleClick}>
-          Answer 4
-        </Button>
-      </div>
-    </div>
+
+    <Box>
+      <header>Question:</header>
+      <Stack spacing={2}>
+        <Button onClick={handleClick}>Answer 1</Button>
+        <Button onClick={handleClick}>Answer 2</Button>
+        <Button onClick={handleClick}>Answer 3</Button>
+        <Button onClick={handleClick}>Answer 4</Button>
+      </Stack>
+    </Box>
   );
 }
 
