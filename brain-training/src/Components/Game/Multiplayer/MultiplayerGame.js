@@ -1,5 +1,20 @@
+import QuestionsAndAnswers from "../QuestionsAndAnswers";
+import Timer from "../Timer";
+import ScoreDisplay from "../ScoreDisplay";
+
 export default function MultiplayerGame() {
-  return;
+  function loadQuestion() {}
+  return (
+    <div>
+      <div>
+        <Timer />
+        <ScoreDisplay />
+      </div>
+      <div>
+        <QuestionsAndAnswers />
+      </div>
+    </div>
+  );
 }
 
 //  -Display QuestionAndAnswers component
