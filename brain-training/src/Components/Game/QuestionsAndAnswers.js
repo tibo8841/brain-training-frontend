@@ -1,18 +1,20 @@
-
-import { Stack, Button, Box } from "@mui/material";
+import { Stack, Button, Box, Typography } from "@mui/material";
 
 export default function QuestionsAndAnswers() {
   function handleClick(e) {}
 
   return (
-
-    <Box>
-      <header>Question:</header>
+    <Box mt={"5%"}>
+      <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+        Question:
+      </Typography>
       <Stack spacing={2}>
         <Button onClick={handleClick}>Answer 1</Button>
         <Button onClick={handleClick}>Answer 2</Button>
         <Button onClick={handleClick}>Answer 3</Button>
-        <Button onClick={handleClick}>Answer 4</Button>
+        <Button onClick={handleClick} sx={{ marginBottom: "2%" }}>
+          Answer 4
+        </Button>
       </Stack>
     </Box>
   );

@@ -10,7 +10,6 @@ import Lobby from "./Components/Game/Multiplayer/Lobby";
 import SingleplayerResults from "./Components/Game/SingleplayerResults";
 import MultiplayerGame from "./Components/Game/Multiplayer/MultiplayerGame";
 import MultiplayerResults from "./Components/Game/Multiplayer/MultiplayerResults";
-
 function App() {
   return (
     <div className="App">
