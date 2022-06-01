@@ -1,44 +1,43 @@
-import { Avatar, TextField } from "@mui/material";
 import { React, useState, useEffect } from "react";
+import CollapsibleAvatarList from "./CollapsibleAvatarList";
+import UserCurrentAvatar from "./UserCurrentAvatar";
+import UserWinMessage from "./UserWinMessage";
 
 export default function CustomiseProfile() {
   const [userWinMessage, setUserWinMessage] = useState("I win!");
-
   useEffect(() => {
     async function fetchUserWinMessage() {
-      const userWinMessage = await " insert fetch request through networking";
+      const userWinMessage =
+        await "insert fetch request through networking to get win message";
       setUserWinMessage(userWinMessage);
     }
     fetchUserWinMessage();
   }, []);
 
-  function handleCreateWinMessageSubmit() {
-    e.preventDefault();
-  }
-
   return (
     <div>
-      <h2> Customise your profile! </h2>
-
-      <Avatar
-        alt="Remy Sharp"
-        src="brain-training/public/Avatars/blue-car.png"
-      />
-      <form autoComplete="off">
-        <TextField label="You win message:" variant="outlined" />
-      </form>
-      <button onClick={handleCreateWinMessageSubmit} type="submit">
-        Submit
-      </button>
+      <h1> Customise your profile! </h1>
+      <UserCurrentAvatar />
+      <UserWinMessage />
+      <CollapsibleAvatarList />
     </div>
   );
 }
 
-/*Create a drop down menu of possible avatars
+/*
+Create a drop down menu of possible avatars
   - find pictures of possible avatars - done 
   - upload folder of possible avatars to use source links - done 
     - find out how to upload the pictures folder into the App - done 
   - create a drop down menu displaying the pictures of the avatars
+    - how to make the list collapse - done 
+    - how to put the avatars in the content 
+    - how to put images in the content 
+    - how to select the images 
+
+  Make an avatar display 
+    - the users avatar should be in a frame 
+    
   - Avatar will be stored in database 
     - create a state
     - create a useEffect to update the picture 

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import CustomiseProfile from "./Components/CustomiseProfile";
+import CustomiseProfile from "./Components/Game/CustomiseProfile/CustomiseProfile";
 import HomePage from "./Components/HomePage";
 import Login from "./Components/Login";
 import Registration from "./Components/Registration";
@@ -19,7 +19,7 @@ function App() {
         <Route path="register" element={<Registration />} />
         <Route path="how+to+play" element={<HowToPlay />} />
         <Route path="leaderboard" element={<Leaderboard />} />
-        <Route path="CustomiseProfile" element={<CustomiseProfile />} />
+        <Route path="profile" element={<CustomiseProfile />} />
         <Route path="play" element={<SingleplayerGame />} />
         <Route path="play/results" element={<SingleplayerResults />} />
         <Route path="lobby" element={<Lobby />} />
