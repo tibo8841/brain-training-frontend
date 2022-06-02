@@ -21,6 +21,7 @@ export default function MultiplayerGame() {
     stop();
     setIsMusic(false);
   }
+
   return (
     <Container align="center">
       {!isMusic ? (
