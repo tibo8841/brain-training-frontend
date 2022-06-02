@@ -2,12 +2,33 @@ import QuestionsAndAnswers from "../QuestionsAndAnswers";
 import Timer from "../Timer";
 import ScoreDisplay from "../ScoreDisplay";
 import { Container } from "@mui/system";
+import { Button } from "@mui/material";
 import { Box } from "@mui/material";
+import useSound from "use-sound";
+import fromTheStart from "../../../Sounds/fromTheStart.mp3";
+import { useState } from "react";
 
 export default function MultiplayerGame() {
+  const [isMusic, setIsMusic] = useState(false);
+  const [play, { stop }] = useSound(fromTheStart, { volume: 0.4 });
   // function loadQuestion() {}
+
+  function handlePlayClick() {
+    play();
+    setIsMusic(true);
+  }
+  function handleStopClick() {
+    stop();
+    setIsMusic(false);
+  }
+
   return (
     <Container align="center">
+      {!isMusic ? (
+        <Button onClick={handlePlayClick}>Play Music!</Button>
+      ) : (
+        <Button onClick={handleStopClick}>Stop Music!</Button>
+      )}
       <Box align="center" sx={{ justifyContent: "space-between" }}>
         <Timer />
         <ScoreDisplay />
