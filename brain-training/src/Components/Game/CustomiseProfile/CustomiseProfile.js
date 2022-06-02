@@ -4,16 +4,6 @@ import UserCurrentAvatar from "./UserCurrentAvatar";
 import UserWinMessage from "./UserWinMessage";
 
 export default function CustomiseProfile() {
-  const [userWinMessage, setUserWinMessage] = useState("I win!");
-  useEffect(() => {
-    async function fetchUserWinMessage() {
-      const userWinMessage =
-        await "insert fetch request through networking to get win message";
-      setUserWinMessage(userWinMessage);
-    }
-    fetchUserWinMessage();
-  }, []);
-
   return (
     <div>
       <h1> Customise your profile! </h1>
