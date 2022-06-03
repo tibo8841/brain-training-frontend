@@ -11,7 +11,9 @@ import { useState } from "react";
 export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
   const [play, { stop }] = useSound(fromTheStart, { volume: 0.4 });
-  // function loadQuestion() {}
+  function loadQuestion() {
+    return <QuestionsAndAnswers />;
+  }
 
   function handlePlayClick() {
     play();
@@ -33,9 +35,7 @@ export default function MultiplayerGame() {
         <Timer />
         <ScoreDisplay />
       </Box>
-      <Box align="center">
-        <QuestionsAndAnswers />
-      </Box>
+      <Box align="center">{loadQuestion()}</Box>
     </Container>
   );
 }
