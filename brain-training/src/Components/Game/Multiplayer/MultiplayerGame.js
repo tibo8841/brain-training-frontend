@@ -1,5 +1,4 @@
 import QuestionsAndAnswers from "../QuestionsAndAnswers";
-import Timer from "../Timer";
 import ScoreDisplay from "../ScoreDisplay";
 import { Container } from "@mui/system";
 import { Button } from "@mui/material";
@@ -32,7 +31,6 @@ export default function MultiplayerGame() {
         <Button onClick={handleStopClick}>Stop Music!</Button>
       )}
       <Box align="center" sx={{ justifyContent: "space-between" }}>
-        <Timer />
         <ScoreDisplay />
       </Box>
       <Box align="center">{loadQuestion()}</Box>

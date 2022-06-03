@@ -1,7 +1,7 @@
 export function MathsQuestions() {
   return [
     {
-      Question: "What is 3 + 4",
+      Question: "What is 3 + 4?",
       Answers: [
         { answer: 3, correct: false },
         { answer: 7, correct: true },
@@ -10,7 +10,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 100 - 37",
+      Question: "What is 100 - 37?",
       Answers: [
         { answer: 23, correct: false },
         { answer: 62, correct: false },
@@ -19,7 +19,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is square root of 289",
+      Question: "What is square root of 289?",
       Answers: [
         { answer: 15, correct: false },
         { answer: 18, correct: false },
@@ -28,7 +28,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 320 X 9",
+      Question: "What is 320 X 9?",
       Answers: [
         { answer: 2880, correct: true },
         { answer: 2680, correct: false },
@@ -37,7 +37,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 1500 / 50",
+      Question: "What is 1500 / 50?",
       Answers: [
         { answer: 10, correct: false },
         { answer: 300, correct: false },

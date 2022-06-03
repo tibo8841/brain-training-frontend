@@ -5,12 +5,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MultiplayerGame from "./Game/Multiplayer/MultiplayerGame";
 
 const theme = createTheme();
 
 export default function HomePage() {
   return (
     <ThemeProvider theme={theme}>
+      <MultiplayerGame />
       <main>
         <Box
           sx={{

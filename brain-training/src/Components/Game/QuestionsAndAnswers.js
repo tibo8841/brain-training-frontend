@@ -1,6 +1,7 @@
 import { Grid, Button, Box, Typography, Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import { MathsQuestions } from "../../GameQuestions/MathsQuestions";
+import Timer from "./Timer";
 
 export default function QuestionsAndAnswers() {
   const [question, setQuestion] = useState("");
@@ -8,6 +9,8 @@ export default function QuestionsAndAnswers() {
   const [isClicked, setIsClicked] = useState(false);
   const [isClickedCorrect, setIsClickedCorrect] = useState(false);
   const [isClickedIncorrect, setIsClickedIncorrect] = useState(false);
+  const [points, setPoints] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(15);
 
   useEffect(function getRandomQuestionAndAnswers() {
     let randomQuestionIndex = Math.floor(
@@ -25,11 +28,20 @@ export default function QuestionsAndAnswers() {
 
   function handleClickCorrect(e) {
     setIsClicked(true);
+    setPoints((5 + secondsLeft) * 5);
     setIsClickedCorrect(true);
+  }
+
+  function calculateSecondsLeft(seconds) {
+    setSecondsLeft(seconds);
   }
 
   return (
     <Container maxWidth="md">
+      <Timer
+        calculateSecondsLeft={calculateSecondsLeft}
+        isClicked={isClicked}
+      />
       <Box mt={"5%"}>
         <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
           {question}
@@ -45,7 +57,7 @@ export default function QuestionsAndAnswers() {
                     color={isClicked ? "success" : "primary"}
                     disableElevation
                     size="xl"
-                    fullWidth="true"
+                    fullWidth={true}
                     sx={{
                       padding: "5%",
                       fontSize: "220%",
@@ -64,7 +76,7 @@ export default function QuestionsAndAnswers() {
                     color={isClicked ? "error" : "primary"}
                     disableElevation
                     size="xl"
-                    fullWidth="true"
+                    fullWidth={true}
                     sx={{
                       padding: "5%",
                       fontSize: "220%",
@@ -79,7 +91,7 @@ export default function QuestionsAndAnswers() {
         </Grid>
         {isClickedCorrect ? (
           <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
-            Correct! You got __ points
+            Correct! You got {points} points
           </Typography>
         ) : isClickedIncorrect ? (
           <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
