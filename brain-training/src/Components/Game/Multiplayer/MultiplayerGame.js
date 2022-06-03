@@ -1,5 +1,4 @@
 import QuestionsAndAnswers from "../QuestionsAndAnswers";
-import Timer from "../Timer";
 import ScoreDisplay from "../ScoreDisplay";
 import { Container } from "@mui/system";
 import { Button } from "@mui/material";
@@ -11,7 +10,9 @@ import { useState } from "react";
 export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
   const [play, { stop }] = useSound(fromTheStart, { volume: 0.4 });
-  // function loadQuestion() {}
+  function loadQuestion() {
+    return <QuestionsAndAnswers />;
+  }
 
   function handlePlayClick() {
     play();
@@ -30,12 +31,9 @@ export default function MultiplayerGame() {
         <Button onClick={handleStopClick}>Stop Music!</Button>
       )}
       <Box align="center" sx={{ justifyContent: "space-between" }}>
-        <Timer />
         <ScoreDisplay />
       </Box>
-      <Box align="center">
-        <QuestionsAndAnswers />
-      </Box>
+      <Box align="center">{loadQuestion()}</Box>
     </Container>
   );
 }

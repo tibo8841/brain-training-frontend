@@ -1,47 +1,103 @@
 import { Grid, Button, Box, Typography, Container } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MathsQuestions } from "../../GameQuestions/MathsQuestions";
+import Timer from "./Timer";
 
 export default function QuestionsAndAnswers() {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
-  // let MathsQuestionsArr = MathsQuestions();
+  const [isClicked, setIsClicked] = useState(false);
+  const [isClickedCorrect, setIsClickedCorrect] = useState(false);
+  const [isClickedIncorrect, setIsClickedIncorrect] = useState(false);
+  const [points, setPoints] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(15);
 
-  //Question would just be a question but answers would come as an array of 4 objects that we can map through
-  // array for answers would look like [{answer: 10, correct:false}, {answer:12, correct:true}]
-  // Then we can use the map to make the buttons and also assign which button is the correct one to click
-  // let MathsQuestionsArr = MathsQuestions();
-  // console.log(MathsQuestions().length);
-
-  function handleClick(e) {}
-
-  function getRandomQuestionAndAnswers() {
+  useEffect(function getRandomQuestionAndAnswers() {
     let randomQuestionIndex = Math.floor(
       Math.random() * MathsQuestions().length
     );
-    return MathsQuestions()[randomQuestionIndex];
+    let randomQuestionAndAnswers = MathsQuestions()[randomQuestionIndex];
+    setQuestion(randomQuestionAndAnswers.Question);
+    setAnswers(randomQuestionAndAnswers.Answers);
+  }, []);
+
+  function handleClickIncorrect(e) {
+    setIsClicked(true);
+    setIsClickedIncorrect(true);
+  }
+
+  function handleClickCorrect(e) {
+    setIsClicked(true);
+    setPoints((5 + secondsLeft) * 5);
+    setIsClickedCorrect(true);
+  }
+
+  function calculateSecondsLeft(seconds) {
+    setSecondsLeft(seconds);
   }
 
   return (
     <Container maxWidth="md">
+      <Timer
+        calculateSecondsLeft={calculateSecondsLeft}
+        isClicked={isClicked}
+      />
       <Box mt={"5%"}>
         <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
-          Question: Who did a thing?
+          {question}
         </Typography>
-        <Grid container spacing={2} rowSpacing={4}>
-          <Grid item xs={6}>
-            <Button onClick={handleClick}>Answer 1</Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button onClick={handleClick}>Answer 2</Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button onClick={handleClick}>Answer 3</Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button onClick={handleClick}>Answer 4</Button>
-          </Grid>
+        <Grid container spacing={4}>
+          {answers.map((answer) => {
+            if (answer.correct) {
+              return (
+                <Grid item xs={6}>
+                  <Button
+                    onClick={handleClickCorrect}
+                    variant="contained"
+                    color={isClicked ? "success" : "primary"}
+                    disableElevation
+                    size="xl"
+                    fullWidth={true}
+                    sx={{
+                      padding: "5%",
+                      fontSize: "220%",
+                    }}
+                  >
+                    {answer.answer}
+                  </Button>
+                </Grid>
+              );
+            } else {
+              return (
+                <Grid item xs={6}>
+                  <Button
+                    onClick={handleClickIncorrect}
+                    variant="contained"
+                    color={isClicked ? "error" : "primary"}
+                    disableElevation
+                    size="xl"
+                    fullWidth={true}
+                    sx={{
+                      padding: "5%",
+                      fontSize: "220%",
+                    }}
+                  >
+                    {answer.answer}
+                  </Button>
+                </Grid>
+              );
+            }
+          })}
         </Grid>
+        {isClickedCorrect ? (
+          <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+            Correct! You got {points} points
+          </Typography>
+        ) : isClickedIncorrect ? (
+          <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+            Incorrect... Unluckyyy
+          </Typography>
+        ) : null}
       </Box>
     </Container>
   );

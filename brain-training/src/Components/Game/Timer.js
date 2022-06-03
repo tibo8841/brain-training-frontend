@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Timer() {
+export default function Timer(props) {
   const [seconds, setSeconds] = useState(15);
 
   function countdownTimer() {
@@ -13,6 +13,8 @@ export default function Timer() {
     }
   }
 
+  props.calculateSecondsLeft(seconds);
+
   let timerColour = "black";
 
   if (seconds < 6 && seconds > 3) {
@@ -23,11 +25,13 @@ export default function Timer() {
     timerColour = "#ed1313";
   }
 
-  countdownTimer();
+  if (props.isClicked === false) {
+    countdownTimer();
+  }
 
   return (
     <div>
-      <h3 style={{ color: timerColour }}>{seconds}</h3>
+      <h3 style={{ color: timerColour, fontSize: "250%" }}>{seconds}</h3>
     </div>
   );
 }
