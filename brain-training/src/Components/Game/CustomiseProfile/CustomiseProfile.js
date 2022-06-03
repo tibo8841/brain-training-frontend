@@ -21,9 +21,14 @@ Create a drop down menu of possible avatars
     - find out how to upload the pictures folder into the App - done 
   - create a drop down menu displaying the pictures of the avatars
     - how to make the list collapse - done 
-    - how to put the avatars in the content 
-    - how to put images in the content 
-    - how to select the images 
+    - how to put the avatars in the content - done 
+    - how to put images in the content - done 
+    - how to select the images - done
+  - Be able to select a option
+    - When user clicks an option, the character should display on in a frame
+      - create a frame 
+      - create onClick for the option
+      - find out how to render it into a frame 
 
   Make an avatar display 
     - the users avatar should be in a frame 

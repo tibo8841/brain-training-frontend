@@ -23,7 +23,7 @@ import yellowCar from "../../../AvatarsPictures/yellowCar.jpg";
 export default function CollapsibleAvatarList(props) {
   const [isOpen, setIsOpen] = useState(false);
   //const [userAvatar, setUserAvatar] = useState({ blueCar });
-  //Task: When user selects their avatar, then the avatar should display.
+
   const avatarOptions = [
     { alt: "Blue car", src: blueCar },
     { alt: "Blue helicopter", src: blueHelicopter },
@@ -65,3 +65,12 @@ export default function CollapsibleAvatarList(props) {
     </div>
   );
 }
+
+/*
+Task: When user selects their avatar, then the avatar should display.
+  - Create a frame/ div of where the selected avatar swill render 
+  - create onClick handle functions that displays the selected avatar into the frame  
+   
+
+
+*/
