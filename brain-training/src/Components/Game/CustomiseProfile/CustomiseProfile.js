@@ -32,6 +32,9 @@ Create a drop down menu of possible avatars
 
   Make an avatar display 
     - the users avatar should be in a frame 
+      - create a container
+      - insert chosen avatar in to the container
+      - add boarder to container 
     
   - Avatar will be stored in database 
     - create a state

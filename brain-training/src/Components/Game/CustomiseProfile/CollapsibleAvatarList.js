@@ -7,6 +7,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Box,
+  Container,
 } from "@mui/material";
 import blueCar from "../../../AvatarsPictures/blueCar.jpg";
 import blueHelicopter from "../../../AvatarsPictures/blueHelicopter.jpg";
@@ -22,22 +24,24 @@ import yellowCar from "../../../AvatarsPictures/yellowCar.jpg";
 
 export default function CollapsibleAvatarList(props) {
   const [isOpen, setIsOpen] = useState(false);
-  //const [userAvatar, setUserAvatar] = useState({ blueCar });
-
+  const [userAvatar, setUserAvatar] = useState({ blueCar });
+  function handleChosenAvatarClick() {}
   const avatarOptions = [
-    { alt: "Blue car", src: blueCar },
-    { alt: "Blue helicopter", src: blueHelicopter },
-    { alt: "Blue train", src: blueTrain },
-    { alt: "Blue Tram", src: blueTram },
-    { alt: "Green car", src: greenCar },
-    { alt: "Green tram", src: greenTram },
-    { alt: "Orange tram", src: orangeTram },
-    { alt: "Pink helicopter", src: pinkHelicopter },
-    { alt: "Pink train", src: pinkTrain },
-    { alt: "Red bus", src: redBus },
-    { alt: "Yellow car", src: yellowCar },
+    { key: 1, alt: "Blue car", src: blueCar },
+    { key: 2, alt: "Blue helicopter", src: blueHelicopter },
+    { key: 3, alt: "Blue train", src: blueTrain },
+    { key: 4, alt: "Blue Tram", src: blueTram },
+    { key: 5, alt: "Green car", src: greenCar },
+    { key: 6, alt: "Green tram", src: greenTram },
+    { key: 7, alt: "Orange tram", src: orangeTram },
+    { key: 8, alt: "Pink helicopter", src: pinkHelicopter },
+    { key: 9, alt: "Pink train", src: pinkTrain },
+    { key: 10, alt: "Red bus", src: redBus },
+    { key: 11, alt: "Yellow car", src: yellowCar },
   ];
-
+  // make function to create buttons outside of return statement
+  // map the returns element individually, and replace with function
+  // each element should have a unique key.
   return (
     <div>
       <List sx={{ width: 300 }}>
@@ -51,9 +55,9 @@ export default function CollapsibleAvatarList(props) {
       <Collapse in={isOpen}>
         <List sx={{ width: 300, background: "grey" }}>
           {avatarOptions.map((avatar) => (
-            <ListItem divider>
+            <ListItem key={avatar.key}>
               <ListItemButton
-                onClick={() => console.log(`${avatar.alt} was clicked`)}
+                onClick={(event) => console.log(event.target.key)}
               >
                 {avatar.alt}
                 <ListItemText>{<Avatar src={avatar.src} />}</ListItemText>
@@ -62,6 +66,12 @@ export default function CollapsibleAvatarList(props) {
           ))}
         </List>
       </Collapse>
+
+      <Container align="center">
+        <Box align="center" sx={{ justifyContent: "space-between" }}></Box>
+        <h2> hello</h2>
+        <Box align="center"></Box>
+      </Container>
     </div>
   );
 }
