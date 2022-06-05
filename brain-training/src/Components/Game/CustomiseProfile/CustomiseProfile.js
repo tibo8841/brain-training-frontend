@@ -1,15 +1,24 @@
 import { React, useState, useEffect } from "react";
+import { Avatar } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
 import UserCurrentAvatar from "./UserCurrentAvatar";
 import UserWinMessage from "./UserWinMessage";
 
 export default function CustomiseProfile() {
+  const [userAvatar, setUserAvatar] = useState(
+    "/static/media/blueCar.3e6bc083ed4e8b29e3cc.jpg"
+  );
+
   return (
     <div>
       <h1> Customise your profile! </h1>
-      <UserCurrentAvatar />
+      <UserCurrentAvatar selectedAvatar={userAvatar} />
       <UserWinMessage />
-      <CollapsibleAvatarList />
+      <CollapsibleAvatarList
+        handleChosenAvatarClick={(chosenAvatarSrc) => {
+          setUserAvatar(chosenAvatarSrc);
+        }}
+      />
     </div>
   );
 }

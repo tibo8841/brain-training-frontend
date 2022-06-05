@@ -24,7 +24,6 @@ import yellowCar from "../../../AvatarsPictures/yellowCar.jpg";
 
 export default function CollapsibleAvatarList(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [userAvatar, setUserAvatar] = useState({ blueCar });
 
   const avatarOptions = [
     { alt: "Blue car", src: blueCar },
@@ -40,7 +39,7 @@ export default function CollapsibleAvatarList(props) {
     { alt: "Yellow car", src: yellowCar },
   ];
 
-  function handleChosenAvatarClick() {
+  function collapsibleAvatarlist(props) {
     return (
       <Collapse in={isOpen}>
         <List sx={{ width: 300, background: "grey" }}>
@@ -49,7 +48,8 @@ export default function CollapsibleAvatarList(props) {
               <ListItemButton
                 onClick={(event) => {
                   event.preventDefault();
-                  setUserAvatar(avatar.src);
+                  let selectedAvatarSrc = avatar.src;
+                  props.handleChosenAvatarClick(selectedAvatarSrc);
                 }}
               >
                 {avatar.alt}
@@ -66,7 +66,6 @@ export default function CollapsibleAvatarList(props) {
   // each element should have a unique key.
   return (
     <div>
-      <Avatar src={userAvatar} />
       <List sx={{ width: 300 }}>
         <ListItem>
           <ListItemButton onClick={() => setIsOpen(!isOpen)}>
@@ -75,10 +74,10 @@ export default function CollapsibleAvatarList(props) {
           </ListItemButton>
         </ListItem>
       </List>
-      {handleChosenAvatarClick()}
+      {collapsibleAvatarlist()}
       <Container align="center">
         <Box align="center" sx={{ justifyContent: "space-between" }}></Box>
-        <h2> hello</h2>
+        <h2> This is a centered box </h2>
         <Box align="center"></Box>
       </Container>
     </div>
