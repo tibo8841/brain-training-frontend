@@ -25,39 +25,32 @@ import yellowCar from "../../../AvatarsPictures/yellowCar.jpg";
 export default function CollapsibleAvatarList(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [userAvatar, setUserAvatar] = useState({ blueCar });
-  function handleChosenAvatarClick() {}
+
   const avatarOptions = [
-    { key: 1, alt: "Blue car", src: blueCar },
-    { key: 2, alt: "Blue helicopter", src: blueHelicopter },
-    { key: 3, alt: "Blue train", src: blueTrain },
-    { key: 4, alt: "Blue Tram", src: blueTram },
-    { key: 5, alt: "Green car", src: greenCar },
-    { key: 6, alt: "Green tram", src: greenTram },
-    { key: 7, alt: "Orange tram", src: orangeTram },
-    { key: 8, alt: "Pink helicopter", src: pinkHelicopter },
-    { key: 9, alt: "Pink train", src: pinkTrain },
-    { key: 10, alt: "Red bus", src: redBus },
-    { key: 11, alt: "Yellow car", src: yellowCar },
+    { alt: "Blue car", src: blueCar },
+    { alt: "Blue helicopter", src: blueHelicopter },
+    { alt: "Blue train", src: blueTrain },
+    { alt: "Blue Tram", src: blueTram },
+    { alt: "Green car", src: greenCar },
+    { alt: "Green tram", src: greenTram },
+    { alt: "Orange tram", src: orangeTram },
+    { alt: "Pink helicopter", src: pinkHelicopter },
+    { alt: "Pink train", src: pinkTrain },
+    { alt: "Red bus", src: redBus },
+    { alt: "Yellow car", src: yellowCar },
   ];
-  // make function to create buttons outside of return statement
-  // map the returns element individually, and replace with function
-  // each element should have a unique key.
-  return (
-    <div>
-      <List sx={{ width: 300 }}>
-        <listItem>
-          <ListItemButton onClick={() => setIsOpen(!isOpen)}>
-            <ListItemIcon>{"v"}</ListItemIcon>
-            <ListItemText primary={"Choose your Avatar."}></ListItemText>
-          </ListItemButton>
-        </listItem>
-      </List>
+
+  function handleChosenAvatarClick() {
+    return (
       <Collapse in={isOpen}>
         <List sx={{ width: 300, background: "grey" }}>
-          {avatarOptions.map((avatar) => (
-            <ListItem key={avatar.key}>
+          {avatarOptions.map((avatar, index) => (
+            <ListItem key={index}>
               <ListItemButton
-                onClick={(event) => console.log(event.target.key)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  setUserAvatar(avatar.src);
+                }}
               >
                 {avatar.alt}
                 <ListItemText>{<Avatar src={avatar.src} />}</ListItemText>
@@ -66,7 +59,23 @@ export default function CollapsibleAvatarList(props) {
           ))}
         </List>
       </Collapse>
-
+    );
+  }
+  // make function to create buttons outside of return statement
+  // map the returns element individually, and replace with function
+  // each element should have a unique key.
+  return (
+    <div>
+      <Avatar src={userAvatar} />
+      <List sx={{ width: 300 }}>
+        <ListItem>
+          <ListItemButton onClick={() => setIsOpen(!isOpen)}>
+            <ListItemIcon>{"v"}</ListItemIcon>
+            <ListItemText primary={"Choose your Avatar."}></ListItemText>
+          </ListItemButton>
+        </ListItem>
+      </List>
+      {handleChosenAvatarClick()}
       <Container align="center">
         <Box align="center" sx={{ justifyContent: "space-between" }}></Box>
         <h2> hello</h2>
