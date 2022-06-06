@@ -30,8 +30,8 @@ export default function CustomiseProfile() {
         <CollapsibleAvatarList
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
-        <UserWinMessageForm updateUsersWinMessage={updateUsersWinMessage} />
         <UserWinMessageDisplay userWinMessage={userWinMessage} />
+        <UserWinMessageForm updateUsersWinMessage={updateUsersWinMessage} />
       </Container>
     </div>
   );

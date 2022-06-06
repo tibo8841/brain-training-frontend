@@ -1,11 +1,11 @@
 import { React, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 export default function UserWinMessageForm(props) {
-  const [isOpen, setIsOpen] = useState(false);
   // const winMessageCharacterLimit = 20;
 
   function handleSubmit(event) {
     event.preventDefault();
+    event.target.reset();
   }
   let usersNewWinMessage = "";
   /*
@@ -19,9 +19,10 @@ export default function UserWinMessageForm(props) {
   }, []);
   */
   // setUserWinMessage(event.target.value)
+
   return (
     <div>
-      <h1>User's win message</h1>
+      <h1>User's win message:</h1>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           onChange={(event) => (usersNewWinMessage = event.target.value)}

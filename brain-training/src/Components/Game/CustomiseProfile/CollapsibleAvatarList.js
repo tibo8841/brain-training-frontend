@@ -68,7 +68,6 @@ export default function CollapsibleAvatarList(props) {
           </List>
         </Collapse>
         <Box align="center" sx={{ justifyContent: "space-between" }}></Box>
-        <h2> This is a centered box </h2>
         <Box align="center"></Box>
       </Container>
     </div>
