@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
-import UserCurrentAvatar from "./UserCurrentAvatar";
-import UserWinMessage from "./UserWinMessage";
+import UserCurrentAvatar from "./UserCurrentAvatarDisplay";
+import UserWinMessage from "./UserWinMessageForm";
 
 export default function CustomiseProfile() {
   const [userAvatar, setUserAvatar] = useState(
@@ -11,7 +11,6 @@ export default function CustomiseProfile() {
 
   function handleChosenAvatarClick(selectedAvatarSrc) {
     setUserAvatar(selectedAvatarSrc);
-    console.log(selectedAvatarSrc);
   }
 
   return (
@@ -56,6 +55,10 @@ Create a drop down menu of possible avatars
   - Avatar will be stored in database 
     - create a state
     - create a useEffect to update the picture 
+  
+  - Save all changes button
+    - create a button 
+    - write fetch requests to get changes
 */
 
 // - can change your profile picture, choose from ~16 options
