@@ -1,5 +1,9 @@
-export default function ScoreDisplay() {
-  return;
+export default function ScoreDisplay(props) {
+  return (
+    <div>
+      <h3>{props.score}</h3>
+    </div>
+  );
 }
 
 // -ScoreDisplay

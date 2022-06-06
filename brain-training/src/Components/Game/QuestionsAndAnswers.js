@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { MathsQuestions } from "../../GameQuestions/MathsQuestions";
 import Timer from "./Timer";
 
-export default function QuestionsAndAnswers() {
+export default function QuestionsAndAnswers(props) {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
@@ -22,14 +22,19 @@ export default function QuestionsAndAnswers() {
   }, []);
 
   function handleClickIncorrect(e) {
-    setIsClicked(true);
-    setIsClickedIncorrect(true);
+    if (!isClicked) {
+      setIsClicked(true);
+      setIsClickedIncorrect(true);
+    }
   }
 
   function handleClickCorrect(e) {
-    setIsClicked(true);
-    setPoints((5 + secondsLeft) * 5);
-    setIsClickedCorrect(true);
+    if (!isClicked) {
+      setIsClicked(true);
+      setPoints((5 + secondsLeft) * 5);
+      setIsClickedCorrect(true);
+      props.addToScore((5 + secondsLeft) * 5);
+    }
   }
 
   function calculateSecondsLeft(seconds) {
