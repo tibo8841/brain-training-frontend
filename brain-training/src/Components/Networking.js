@@ -71,3 +71,25 @@ export async function getProfile(userID) {
   const json = await result.json();
   return json;
 }
+
+export async function startSession(userID) {
+  const user = { userID };
+  const result = await fetch(`${URL}/sessions`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  const json = await result.json();
+  return json;
+}
+
+export async function endSession(userID) {
+  const user = { userID };
+  const result = await fetch(`${URL}/sessions`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  const json = await result.json();
+  return json;
+}
