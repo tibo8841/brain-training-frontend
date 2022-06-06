@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import Chat from "./Chat";
 import {
   Container,
   Typography,
@@ -12,7 +13,15 @@ import {
   Tooltip,
 } from "@mui/material";
 
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:3001");
+const room = 1234;
+const username = "username";
+
 export default function Lobby() {
+  socket.emit("join_room", { username, room });
+
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
     <Container sx={{ width: "80%" }}>
@@ -115,10 +124,7 @@ export default function Lobby() {
           </Grid>
           <Grid item xs={7} component={Box}>
             <Typography align="center" variant="h6">
-              Chat Component Below
-            </Typography>
-            <Typography align="center" marginTop={"5%"}>
-              Chat some rubbish
+              <Chat room={room} username={username} socket={socket} />
             </Typography>
           </Grid>
         </Grid>
