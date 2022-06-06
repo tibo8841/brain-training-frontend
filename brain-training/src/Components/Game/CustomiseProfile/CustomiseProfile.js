@@ -2,16 +2,21 @@ import { React, useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
 import UserCurrentAvatar from "./UserCurrentAvatarDisplay";
-import UserWinMessage from "./UserWinMessageDisplay";
+import UserWinMessageDisplay from "./UserWinMessageDisplay";
 import UserWinMessageForm from "./UserWinMessageForm";
 
 export default function CustomiseProfile() {
   const [userAvatar, setUserAvatar] = useState(
     "/static/media/blueCar.3e6bc083ed4e8b29e3cc.jpg"
   );
+  const [userWinMessage, setUserWinMessage] = useState("I win!");
 
   function handleChosenAvatarClick(selectedAvatarSrc) {
     setUserAvatar(selectedAvatarSrc);
+  }
+
+  function updateUsersWinMessage(usersUpdatedMessage) {
+    setUserWinMessage(usersUpdatedMessage);
   }
 
   return (
@@ -25,8 +30,8 @@ export default function CustomiseProfile() {
         <CollapsibleAvatarList
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
-        <UserWinMessageForm />
-        <UserWinMessage />
+        <UserWinMessageForm updateUsersWinMessage={updateUsersWinMessage} />
+        <UserWinMessageDisplay userWinMessage={userWinMessage} />
       </Container>
     </div>
   );

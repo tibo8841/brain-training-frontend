@@ -1,13 +1,13 @@
 import { React, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
-export default function UserWinMessage() {
-  const [userWinMessage, setUserWinMessage] = useState("I win!");
+export default function UserWinMessageForm(props) {
   const [isOpen, setIsOpen] = useState(false);
   // const winMessageCharacterLimit = 20;
 
   function handleSubmit(event) {
     event.preventDefault();
   }
+  let usersNewWinMessage = "";
   /*
   useEffect(() => {
     async function fetchUserWinMessage() {
@@ -18,20 +18,23 @@ export default function UserWinMessage() {
     fetchUserWinMessage();
   }, []);
   */
-
+  // setUserWinMessage(event.target.value)
   return (
     <div>
       <h1>User's win message</h1>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
-          onChange={(event) => setUserWinMessage(event.target.value)}
+          onChange={(event) => (usersNewWinMessage = event.target.value)}
           label="Enter your win message"
           variant="outlined"
           style={{ width: 300 }}
         />
         <button
-          onClick={() => {
-            console.log("write a fetch request for this win message: ");
+          onClick={(event) => {
+            props.updateUsersWinMessage(usersNewWinMessage);
+            console.log(
+              "write a fetch request to send the backend for this win message: "
+            );
           }}
           type="submit"
           variant="contained"
