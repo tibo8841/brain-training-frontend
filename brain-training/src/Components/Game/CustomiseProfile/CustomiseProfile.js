@@ -2,7 +2,8 @@ import { React, useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
 import UserCurrentAvatar from "./UserCurrentAvatarDisplay";
-import UserWinMessage from "./UserWinMessageForm";
+import UserWinMessage from "./UserWinMessageDisplay";
+import UserWinMessageForm from "./UserWinMessageForm";
 
 export default function CustomiseProfile() {
   const [userAvatar, setUserAvatar] = useState(
@@ -24,6 +25,7 @@ export default function CustomiseProfile() {
         <CollapsibleAvatarList
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
+        <UserWinMessageForm />
         <UserWinMessage />
       </Container>
     </div>
@@ -58,7 +60,7 @@ Create a drop down menu of possible avatars
   
   - Save all changes button
     - create a button 
-    - write fetch requests to get changes
+    - write fetch requests to get changes. 
 */
 
 // - can change your profile picture, choose from ~16 options

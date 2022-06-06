@@ -1,15 +1,12 @@
 import { React, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
-export default function UserWinMessageForm() {
+export default function UserWinMessage() {
   const [userWinMessage, setUserWinMessage] = useState("I win!");
   const [isOpen, setIsOpen] = useState(false);
   // const winMessageCharacterLimit = 20;
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (userWinMessage) {
-      console.log(userWinMessage);
-    }
   }
   /*
   useEffect(() => {
@@ -34,9 +31,7 @@ export default function UserWinMessageForm() {
         />
         <button
           onClick={() => {
-            console.log(
-              "write a fetch request for this win message: " + UserWinMessage
-            );
+            console.log("write a fetch request for this win message: ");
           }}
           type="submit"
           variant="contained"
