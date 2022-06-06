@@ -2,7 +2,7 @@
 //     -Function for each fetch request
 //     -import to other components when needed
 
-const URL = "https://brain-training-website.sigmalabs.co.uk";
+const URL = " asymmetrical-panda-clari8ly65npjsif4rfnhvg1.herokudns.com";
 
 export async function getLogin(username, password) {
   const result = await fetch(
@@ -62,6 +62,12 @@ export async function updateProfilePicture(userID, pictureID) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newPicture),
   });
+  const json = await result.json();
+  return json;
+}
+
+export async function getProfile(userID) {
+  const result = await fetch(`${URL}/profile?id=${userID}`);
   const json = await result.json();
   return json;
 }
