@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import CustomiseProfile from "./Components/CustomiseProfile";
+import CustomiseProfile from "./Components/Game/CustomiseProfile/CustomiseProfile";
 import HomePage from "./Components/HomePage";
 import Login from "./Components/Login";
 import Registration from "./Components/Registration";
