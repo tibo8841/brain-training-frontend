@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container, Box, Avatar } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
-import blueCar from "../../../AvatarsPictures/blueCar.jpg";
 
 export default function UserCurrentAvatar(props) {
   return (

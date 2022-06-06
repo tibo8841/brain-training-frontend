@@ -39,43 +39,34 @@ export default function CollapsibleAvatarList(props) {
     { alt: "Yellow car", src: yellowCar },
   ];
 
-  function collapsibleAvatarlist(props) {
-    return (
-      <Collapse in={isOpen}>
-        <List sx={{ width: 300, background: "grey" }}>
-          {avatarOptions.map((avatar, index) => (
-            <ListItem key={index}>
-              <ListItemButton
-                onClick={(event) => {
-                  event.preventDefault();
-                  let selectedAvatarSrc = avatar.src;
-                  props.handleChosenAvatarClick(selectedAvatarSrc);
-                }}
-              >
-                {avatar.alt}
-                <ListItemText>{<Avatar src={avatar.src} />}</ListItemText>
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Collapse>
-    );
-  }
   // make function to create buttons outside of return statement
   // map the returns element individually, and replace with function
   // each element should have a unique key.
   return (
     <div>
-      <List sx={{ width: 300 }}>
-        <ListItem>
-          <ListItemButton onClick={() => setIsOpen(!isOpen)}>
-            <ListItemIcon>{"v"}</ListItemIcon>
-            <ListItemText primary={"Choose your Avatar."}></ListItemText>
-          </ListItemButton>
-        </ListItem>
-      </List>
-      {collapsibleAvatarlist()}
       <Container align="center">
+        <List sx={{ width: 300 }}>
+          <ListItem>
+            <ListItemButton onClick={() => setIsOpen(!isOpen)}>
+              <ListItemIcon>{"v"}</ListItemIcon>
+              <ListItemText primary={"Choose your Avatar."}></ListItemText>
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Collapse in={isOpen}>
+          <List sx={{ width: 300, background: "grey" }}>
+            {avatarOptions.map((avatar, index) => (
+              <ListItem key={index} id={index}>
+                <ListItemButton
+                  onClick={(event) => props.handleChosenAvatarClick(avatar.src)}
+                >
+                  {avatar.alt}
+                  <ListItemText>{<Avatar src={avatar.src} />}</ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
         <Box align="center" sx={{ justifyContent: "space-between" }}></Box>
         <h2> This is a centered box </h2>
         <Box align="center"></Box>

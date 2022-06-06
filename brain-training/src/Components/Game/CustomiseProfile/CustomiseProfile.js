@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Avatar } from "@mui/material";
+import { Container } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
 import UserCurrentAvatar from "./UserCurrentAvatar";
 import UserWinMessage from "./UserWinMessage";
@@ -9,16 +9,24 @@ export default function CustomiseProfile() {
     "/static/media/blueCar.3e6bc083ed4e8b29e3cc.jpg"
   );
 
+  function handleChosenAvatarClick(selectedAvatarSrc) {
+    setUserAvatar(selectedAvatarSrc);
+    console.log(selectedAvatarSrc);
+  }
+
   return (
     <div>
-      <h1> Customise your profile! </h1>
-      <UserCurrentAvatar selectedAvatar={userAvatar} />
-      <UserWinMessage />
-      <CollapsibleAvatarList
-        handleChosenAvatarClick={(chosenAvatarSrc) => {
-          setUserAvatar(chosenAvatarSrc);
-        }}
-      />
+      <Container align="center">
+        <h1> Customise your profile! </h1>
+        <UserCurrentAvatar
+          selectedAvatar={userAvatar}
+          handleChosenAvatarClick={handleChosenAvatarClick}
+        />
+        <CollapsibleAvatarList
+          handleChosenAvatarClick={handleChosenAvatarClick}
+        />
+        <UserWinMessage />
+      </Container>
     </div>
   );
 }
