@@ -9,9 +9,11 @@ import { useState } from "react";
 
 export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
-  const [play, { stop }] = useSound(fromTheStart, { volume: 0.4 });
+  const [score, setScore] = useState(0);
+  const [play, { stop }] = useSound(fromTheStart, { volume: 0.1 });
+
   function loadQuestion() {
-    return <QuestionsAndAnswers />;
+    return <QuestionsAndAnswers addToScore={addToScore} />;
   }
 
   function handlePlayClick() {
@@ -23,6 +25,11 @@ export default function MultiplayerGame() {
     setIsMusic(false);
   }
 
+  function addToScore(points) {
+    const currentScore = score;
+    setScore(currentScore + points);
+  }
+
   return (
     <Container align="center">
       {!isMusic ? (
@@ -31,7 +38,7 @@ export default function MultiplayerGame() {
         <Button onClick={handleStopClick}>Stop Music!</Button>
       )}
       <Box align="center" sx={{ justifyContent: "space-between" }}>
-        <ScoreDisplay />
+        <ScoreDisplay score={score} />
       </Box>
       <Box align="center">{loadQuestion()}</Box>
     </Container>
