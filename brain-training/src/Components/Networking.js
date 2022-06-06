@@ -65,3 +65,9 @@ export async function updateProfilePicture(userID, pictureID) {
   const json = await result.json();
   return json;
 }
+
+export async function getProfile(userID) {
+  const result = await fetch(`${URL}/profile?id=${userID}`);
+  const json = await result.json();
+  return json;
+}
