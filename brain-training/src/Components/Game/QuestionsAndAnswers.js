@@ -21,20 +21,21 @@ export default function QuestionsAndAnswers(props) {
     setAnswers(randomQuestionAndAnswers.Answers);
   }, []);
 
-  function handleClickIncorrect(e) {
+  function handleClickIncorrect() {
     if (!isClicked) {
       setIsClicked(true);
       setIsClickedIncorrect(true);
     }
   }
 
-  function handleClickCorrect(e) {
+  function handleClickCorrect() {
     if (!isClicked) {
       setIsClicked(true);
       setPoints((5 + secondsLeft) * 5);
       setIsClickedCorrect(true);
       props.addToScore((5 + secondsLeft) * 5);
     }
+    setTimeout(props.newQuestion(), 3000);
   }
 
   function calculateSecondsLeft(seconds) {
@@ -46,6 +47,7 @@ export default function QuestionsAndAnswers(props) {
       <Timer
         calculateSecondsLeft={calculateSecondsLeft}
         isClicked={isClicked}
+        resetSneakySeconds={props.resetSneakySeconds}
       />
       <Box mt={"5%"}>
         <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
@@ -101,6 +103,10 @@ export default function QuestionsAndAnswers(props) {
         ) : isClickedIncorrect ? (
           <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
             Incorrect... Unluckyyy
+          </Typography>
+        ) : secondsLeft === 0 ? (
+          <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+            You ran out of time... Unluckyyy
           </Typography>
         ) : null}
       </Box>

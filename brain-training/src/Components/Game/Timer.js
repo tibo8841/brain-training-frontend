@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function Timer(props) {
   const [seconds, setSeconds] = useState(15);
+  const [sneakySeconds, setSneakySeconds] = useState(20);
 
   function countdownTimer() {
     for (let i = 0; i < 15; i++) {
@@ -12,6 +13,21 @@ export default function Timer(props) {
       }
     }
   }
+
+  function sneakyTimer() {
+    for (let i = 0; i < 20; i++) {
+      if (sneakySeconds > 0) {
+        setTimeout(() => {
+          setSneakySeconds(sneakySeconds - 1);
+        }, 1000);
+      }
+    }
+    if (sneakySeconds === 0) {
+      props.resetSneakySeconds();
+    }
+  }
+
+  sneakyTimer();
 
   props.calculateSecondsLeft(seconds);
 
@@ -32,6 +48,7 @@ export default function Timer(props) {
   return (
     <div>
       <h3 style={{ color: timerColour, fontSize: "250%" }}>{seconds}</h3>
+      <h5>next question in {sneakySeconds}</h5>
     </div>
   );
 }
