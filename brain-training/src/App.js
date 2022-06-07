@@ -10,9 +10,12 @@ import Lobby from "./Components/Game/Multiplayer/Lobby";
 import SingleplayerResults from "./Components/Game/SingleplayerResults";
 import MultiplayerGame from "./Components/Game/Multiplayer/MultiplayerGame";
 import MultiplayerResults from "./Components/Game/Multiplayer/MultiplayerResults";
+import Header from "./Components/Header";
+
 function App() {
   return (
     <div className="App">
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="login" element={<Login />} />
