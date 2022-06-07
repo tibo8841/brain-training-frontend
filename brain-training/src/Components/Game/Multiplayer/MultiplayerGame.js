@@ -7,7 +7,7 @@ import useSound from "use-sound";
 import fromTheStart from "../../../Sounds/fromTheStart.mp3";
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
-const socket = io.connect("https://shrouded-lowlands-96444.herokuapp.com/");
+const socket = io.connect("https://shrouded-lowlands-96444.herokuapp.com");
 const room = 5678;
 const username = "tibooooo";
 
@@ -52,6 +52,18 @@ export default function MultiplayerGame() {
     setScore(currentScore + points);
   }
 
+  const sendScore = async () => {
+    const scoreData = {
+      username: username,
+      score: score,
+      time: new Date(Date.now()).getUTCDate(),
+    };
+
+    await socket.emit("send_score", scoreData);
+    console.log("sending score is happening");
+    setScoreList([...scoreList, scoreData]);
+  };
+
   useEffect(() => {
     console.log("use effect running");
     socket.on("receive_score", (data) => {
@@ -61,19 +73,8 @@ export default function MultiplayerGame() {
   }, [scoreList]);
 
   useEffect(() => {
-    const sendScore = async () => {
-      const scoreData = {
-        username: username,
-        score: score,
-        time: new Date(Date.now()).getUTCDate(),
-      };
-
-      await socket.emit("send_score", scoreData);
-      console.log("sending score is happening");
-      setScoreList([...scoreList, scoreData]);
-    };
     sendScore();
-  }, [score, scoreList]);
+  }, [score]);
 
   return (
     <Container align="center">
