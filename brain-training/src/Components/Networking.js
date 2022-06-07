@@ -2,7 +2,7 @@
 //     -Function for each fetch request
 //     -import to other components when needed
 
-const URL = " asymmetrical-panda-clari8ly65npjsif4rfnhvg1.herokudns.com";
+const URL = "http://localhost:8080";
 
 export async function getLogin(username, password) {
   const result = await fetch(
