@@ -154,5 +154,97 @@ export function MathsQuestions() {
         { answer: 64, correct: false },
       ],
     },
+    // Kamilah's Amazing questions
+
+    {
+      Question: "What is 90* 4?",
+      Answers: [
+        { answer: 650, correct: false },
+        { answer: 360, correct: true },
+        { answer: 630, correct: false },
+        { answer: 560, correct: false },
+      ],
+    },
+    {
+      Question: "What is 50 +(12 * 4)?",
+      Answers: [
+        { answer: 89, correct: false },
+        { answer: 78, correct: false },
+        { answer: 98, correct: true },
+        { answer: 108, correct: false },
+      ],
+    },
+    {
+      Question: "What is 5 *(80 + 90)?",
+      Answers: [
+        { answer: 870, correct: false },
+        { answer: 770, correct: false },
+        { answer: 710, correct: false },
+        { answer: 850, correct: true },
+      ],
+    },
+    {
+      Question: "What is (70/7)+(80/8)+(59-9)?",
+      Answers: [
+        { answer: 30, correct: false },
+        { answer: 80, correct: false },
+        { answer: 70, correct: true },
+        { answer: 60, correct: false },
+      ],
+    },
+    {
+      Question: "What is 95*2+10?",
+      Answers: [
+        { answer: 190, correct: false },
+        { answer: 200, correct: true },
+        { answer: 205, correct: false },
+        { answer: 210, correct: false },
+      ],
+    },
+    {
+      Question: "What is 73*7?",
+      Answers: [
+        { answer: 511, correct: true },
+        { answer: 670, correct: false },
+        { answer: 710, correct: false },
+        { answer: 450, correct: false },
+      ],
+    },
+    {
+      Question: "What is 1000000*100000?",
+      Answers: [
+        { answer: 1000000000, correct: false },
+        { answer: 100000000, correct: false },
+        { answer: 10000000000, correct: false },
+        { answer: 100000000000, correct: true },
+      ],
+    },
+    {
+      Question: "What is 14 *(80 + 90)?",
+      Answers: [
+        { answer: 2380, correct: true },
+        { answer: 2460, correct: false },
+        { answer: 2480, correct: false },
+        { answer: 2560, correct: false },
+      ],
+    },
+    {
+      Question: "What is ((600/60)+(700/70))*2?",
+      Answers: [
+        { answer: 60, correct: false },
+        { answer: 20, correct: true },
+        { answer: 70, correct: false },
+        { answer: 50, correct: false },
+      ],
+    },
+    {
+      Question: "What is 10 *(80 + 90)?",
+      Answers: [
+        { answer: 870, correct: false },
+        { answer: 790, correct: false },
+        { answer: 890, correct: false },
+        { answer: 980, correct: true },
+      ],
+    },
   ];
 }
