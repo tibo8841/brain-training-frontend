@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import useSound from "use-sound";
 import fromTheStart from "../../Sounds/fromTheStart.mp3";
 import { useState } from "react";
+import SingleplayerResults from "./SingleplayerResults";
 
 export default function SingleplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
@@ -50,6 +51,14 @@ export default function SingleplayerGame() {
 
   function nextQuestion() {
     resetSneakySeconds();
+  }
+
+  if (questionNumber > 10) {
+    return (
+      <div>
+        <SingleplayerResults score={score} />
+      </div>
+    );
   }
 
   return (

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,26 +5,23 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Stack } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 
-export default function SingleplayerResults() {
-  //HOW WE PASS SCORE
-  const [score, setScore] = useState(8000);
-  //DONT FORGOTTEN THIS
+export default function SingleplayerResults(props) {
   const theme = createTheme();
 
   function displayMessage() {
-    if (score >= 750) {
+    if (props.score >= 750) {
       return "Very impressive! Grade: A+";
-    } else if (score >= 690) {
+    } else if (props.score >= 690) {
       return "Wow, nicely done! Grade: A";
-    } else if (score >= 660) {
+    } else if (props.score >= 660) {
       return "Nice try, keep it up! Grade: B+";
-    } else if (score >= 600) {
+    } else if (props.score >= 600) {
       return "Not quite genius, you can do better! Grade: B";
-    } else if (score >= 560) {
+    } else if (props.score >= 560) {
       return "Unlucky, you just missed the next grade! Grade: C+";
-    } else if (score >= 500) {
+    } else if (props.score >= 500) {
       return "Really? Is that all you got? Grade: C";
     } else {
       return "You are a failure, go back to school! Grade: U";
@@ -76,7 +72,7 @@ export default function SingleplayerResults() {
                     component="h2"
                     align="center"
                   >
-                    {`Your final score is ${score}`}
+                    {`Your final score is ${props.score}`}
                   </Typography>
                 </CardContent>
               </Card>
@@ -104,6 +100,9 @@ export default function SingleplayerResults() {
             </Stack>
           </Stack>
         </Container>
+        <Button>
+          This will eventually be a button to take you str8 to leaderbaord
+        </Button>
       </main>
     </ThemeProvider>
   );
