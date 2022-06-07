@@ -15,7 +15,9 @@ import {
 
 import io from "socket.io-client";
 
-const socket = io.connect("https://shrouded-lowlands-96444.herokuapp.com/");
+const socket = io.connect(
+  "https://brain-training-multiplayer.sigmalabs.co.uk/"
+);
 const room = 1234;
 const username = "username";
 

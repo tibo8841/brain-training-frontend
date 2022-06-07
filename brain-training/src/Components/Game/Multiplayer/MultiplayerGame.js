@@ -7,7 +7,7 @@ import useSound from "use-sound";
 import fromTheStart from "../../../Sounds/fromTheStart.mp3";
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
-const socket = io.connect("https://shrouded-lowlands-96444.herokuapp.com");
+const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
 const username = "tibooooo";
 
