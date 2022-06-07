@@ -5,12 +5,20 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
 import fromTheStart from "../../../Sounds/fromTheStart.mp3";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:3001");
+const room = 5678;
+const username = "tibooooo";
 
 export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
   const [score, setScore] = useState(0);
+  const [scoreList, setScoreList] = useState([]);
   const [play, { stop }] = useSound(fromTheStart, { volume: 0.1 });
+
+   socket.emit("join_room", { username, room });
 
   function loadQuestion() {
     return <QuestionsAndAnswers addToScore={addToScore} />;
@@ -29,6 +37,31 @@ export default function MultiplayerGame() {
     const currentScore = score;
     setScore(currentScore + points);
   }
+
+  const sendScore = async () => {
+    const scoreData = {
+      username: username,
+      score: score,
+      time: new Date(Date.now()).getUTCDate(),
+    };
+
+    await socket.emit("send_score", scoreData);
+    console.log("sending score is happening");
+    setScoreList([...scoreList, scoreData]);
+  };
+
+  useEffect(() => {
+    console.log("use effect running");
+    socket.on("receive_score", (data) => {
+      console.log(data);
+      setScoreList([...scoreList, data]);
+    });
+  }, [socket, scoreList]);
+
+  useEffect(() => {
+    sendScore()
+  }, [score]);
+  
 
   return (
     <Container align="center">
