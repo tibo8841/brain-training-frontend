@@ -52,29 +52,28 @@ export default function MultiplayerGame() {
     setScore(currentScore + points);
   }
 
-  const sendScore = async () => {
-    const scoreData = {
-      username: username,
-      score: score,
-      time: new Date(Date.now()).getUTCDate(),
-    };
-
-    await socket.emit("send_score", scoreData);
-    console.log("sending score is happening");
-    setScoreList([...scoreList, scoreData]);
-  };
-
   useEffect(() => {
     console.log("use effect running");
     socket.on("receive_score", (data) => {
       console.log(data);
       setScoreList([...scoreList, data]);
     });
-  }, [socket, scoreList]);
+  }, [scoreList]);
 
   useEffect(() => {
+    const sendScore = async () => {
+      const scoreData = {
+        username: username,
+        score: score,
+        time: new Date(Date.now()).getUTCDate(),
+      };
+
+      await socket.emit("send_score", scoreData);
+      console.log("sending score is happening");
+      setScoreList([...scoreList, scoreData]);
+    };
     sendScore();
-  }, [score]);
+  }, [score, scoreList]);
 
   return (
     <Container align="center">

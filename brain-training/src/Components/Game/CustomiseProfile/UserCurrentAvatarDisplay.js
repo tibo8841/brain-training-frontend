@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Box, Avatar } from "@mui/material";
 
 export default function UserCurrentAvatar(props) {
