@@ -2,7 +2,7 @@
 //     -Function for each fetch request
 //     -import to other components when needed
 
-const URL = "http://localhost:8080";
+const URL = "https://dr-alex-brain-trainer.herokuapp.com";
 
 export async function getLogin(username, password) {
   const result = await fetch(
