@@ -45,9 +45,17 @@ export function MathsQuestions() {
         { answer: 50, correct: false },
       ],
     },
-
     {
       Question: "What is 150 / 50?",
+      Answers: [
+        { answer: 15, correct: false },
+        { answer: 30, correct: false },
+        { answer: 3, correct: true },
+        { answer: 5, correct: false },
+      ],
+    },
+    {
+      Question: "What is 15 / 5?",
       Answers: [
         { answer: 15, correct: false },
         { answer: 30, correct: false },
@@ -65,7 +73,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 13-8?",
+      Question: "What is 13 - 8?",
       Answers: [
         { answer: 7, correct: false },
         { answer: 4, correct: false },
@@ -137,7 +145,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 95 - 49 +32?",
+      Question: "What is 95 - 49 + 32?",
       Answers: [
         { answer: 78, correct: true },
         { answer: 89, correct: false },
@@ -146,18 +154,16 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 800 / 32?",
+      Question: "What is 32 / 8?",
       Answers: [
-        { answer: 35, correct: false },
-        { answer: 25, correct: true },
-        { answer: 30, correct: false },
-        { answer: 64, correct: false },
+        { answer: 5, correct: false },
+        { answer: 4, correct: true },
+        { answer: 6, correct: false },
+        { answer: 3, correct: false },
       ],
     },
-    // Kamilah's Amazing questions
-
     {
-      Question: "What is 90* 4?",
+      Question: "What is 90 * 4?",
       Answers: [
         { answer: 650, correct: false },
         { answer: 360, correct: true },
@@ -166,7 +172,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 50 +(12 * 4)?",
+      Question: "What is 50 + (12 * 4)?",
       Answers: [
         { answer: 89, correct: false },
         { answer: 78, correct: false },
@@ -175,7 +181,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 5 *(80 + 90)?",
+      Question: "What is 5 * 170?",
       Answers: [
         { answer: 870, correct: false },
         { answer: 770, correct: false },
@@ -184,7 +190,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is (70/7)+(80/8)+(59-9)?",
+      Question: "What is (70/7) + (80/8) + (59 - 9)?",
       Answers: [
         { answer: 30, correct: false },
         { answer: 80, correct: false },
@@ -193,7 +199,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 95*2+10?",
+      Question: "What is 95 * 2 + 10?",
       Answers: [
         { answer: 190, correct: false },
         { answer: 200, correct: true },
@@ -202,7 +208,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 73*7?",
+      Question: "What is 73 * 7?",
       Answers: [
         { answer: 511, correct: true },
         { answer: 670, correct: false },
@@ -211,7 +217,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 1000000*100000?",
+      Question: "What is 1000000 * 100000?",
       Answers: [
         { answer: 1000000000, correct: false },
         { answer: 100000000, correct: false },
@@ -220,16 +226,16 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 14 *(80 + 90)?",
+      Question: "What is 14 * 6?",
       Answers: [
-        { answer: 2380, correct: true },
-        { answer: 2460, correct: false },
-        { answer: 2480, correct: false },
-        { answer: 2560, correct: false },
+        { answer: 84, correct: true },
+        { answer: 74, correct: false },
+        { answer: 88, correct: false },
+        { answer: 76, correct: false },
       ],
     },
     {
-      Question: "What is ((600/60)+(700/70))*2?",
+      Question: "What is ((600/60) + (700/70)) * 2?",
       Answers: [
         { answer: 60, correct: false },
         { answer: 20, correct: true },
@@ -238,12 +244,39 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is 10 *(80 + 90)?",
+      Question: "What is 10 * (80 + 90)?",
       Answers: [
         { answer: 870, correct: false },
         { answer: 790, correct: false },
         { answer: 890, correct: false },
-        { answer: 980, correct: true },
+        { answer: 1070, correct: true },
+      ],
+    },
+    {
+      Question: "How many corners/vertices does a triangular prism have?",
+      Answers: [
+        { answer: 6, correct: true },
+        { answer: 3, correct: false },
+        { answer: 8, correct: false },
+        { answer: 9, correct: false },
+      ],
+    },
+    {
+      Question: "What is 4³?",
+      Answers: [
+        { answer: 32, correct: false },
+        { answer: 64, correct: true },
+        { answer: 16, correct: false },
+        { answer: 12, correct: false },
+      ],
+    },
+    {
+      Question: "What is 99 + 98?",
+      Answers: [
+        { answer: 198, correct: false },
+        { answer: 199, correct: false },
+        { answer: 197, correct: true },
+        { answer: 196, correct: false },
       ],
     },
   ];
