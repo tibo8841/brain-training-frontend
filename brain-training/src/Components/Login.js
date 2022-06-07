@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+//import { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -12,11 +12,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { getLogin } from "./Networking";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export default function Login() {
-  const { login, setLogin } = useState("");
+  //const { login, setLogin } = useState("");
+  let navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,8 +28,9 @@ export default function Login() {
       data.get("password")
     );
     if (loginCheck.response === "User Found") {
-      setLogin(loginCheck.user.id);
-      console.log(login);
+      //setLogin(loginCheck.user.id);
+      //console.log(login);
+      navigate("/");
     } else {
       console.log(loginCheck.response);
     }
