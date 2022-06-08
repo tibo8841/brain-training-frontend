@@ -18,7 +18,7 @@ function Chat({ socket, username, room }) {
         room: room,
         author: username,
         message: currentMessage,
-        time: new Date(Date.now()).getUTCDate(),
+        time: new Date(Date.now()).toLocaleTimeString(),
       };
 
       await socket.emit("send_message", messageData);
