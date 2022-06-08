@@ -148,7 +148,7 @@ export default function MultiplayerGame() {
     sendScore();
   }, [score]);
 
-  if (questionNumber > 2) {
+  if (questionNumber > 3) {
     console.log(finalScoreList);
     return (
       <div>
