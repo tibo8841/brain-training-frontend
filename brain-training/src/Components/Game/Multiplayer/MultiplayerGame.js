@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
-import fromTheStart from "../../../Sounds/fromTheStart.mp3";
+import brainTrainCalm from "../../../Sounds/brainTrainCalm.mp3";
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -18,12 +18,23 @@ export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
   const [score, setScore] = useState(0);
   const [sneakySecondsLeft, setSneakySecondsLeft] = useState(0);
-  const [play, { stop }] = useSound(fromTheStart, { volume: 0.1 });
+  const [playbackRate, setPlaybackRate] = useState(0.85);
+  const [play, { stop }] = useSound(brainTrainCalm, {
+    playbackRate,
+    volume: 0.2,
+  });
   const [scoreList, setScoreList] = useState([]);
   const [username, setUsername] = useState("");
   const [showUser, setShowUser] = useState(true);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [finalScoreList, setFinalScoreList] = useState([]);
+
+  const handleMusicClick = () => {
+    stop();
+    setPlaybackRate(playbackRate + 0.1);
+    play();
+  };
+
 
   socket.emit("join_room", { username, room });
 
@@ -32,6 +43,7 @@ export default function MultiplayerGame() {
       <QuestionsAndAnswers
         addToScore={addToScore}
         resetSneakySeconds={resetSneakySeconds}
+        handleMusicClick={handleMusicClick}
       />
     );
   }
@@ -133,6 +145,7 @@ export default function MultiplayerGame() {
   useEffect(() => {
     sendScore();
   }, [score]);
+
 
   if (questionNumber > 2) {
     console.log(finalScoreList);

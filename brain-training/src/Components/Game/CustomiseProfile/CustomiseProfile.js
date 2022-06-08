@@ -7,7 +7,7 @@ import UserWinMessageForm from "./UserWinMessageForm";
 
 export default function CustomiseProfile() {
   const [userAvatar, setUserAvatar] = useState(
-    "/static/media/blueCar.3e6bc083ed4e8b29e3cc.jpg"
+    "/static/media/Avatar1.3a808b587ef8820a42e5.png"
   );
   const [userWinMessage, setUserWinMessage] = useState("I win!");
 
@@ -27,10 +27,10 @@ export default function CustomiseProfile() {
           selectedAvatar={userAvatar}
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
+        <UserWinMessageDisplay userWinMessage={userWinMessage} />
         <CollapsibleAvatarList
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
-        <UserWinMessageDisplay userWinMessage={userWinMessage} />
         <UserWinMessageForm updateUsersWinMessage={updateUsersWinMessage} />
       </Container>
     </div>

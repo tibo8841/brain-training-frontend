@@ -25,6 +25,7 @@ export default function QuestionsAndAnswers(props) {
     if (!isClicked) {
       setIsClicked(true);
       setIsClickedIncorrect(true);
+      props.handleMusicClick();
     }
   }
 
@@ -34,6 +35,7 @@ export default function QuestionsAndAnswers(props) {
       setPoints((5 + secondsLeft) * 5);
       setIsClickedCorrect(true);
       props.addToScore((5 + secondsLeft) * 5);
+      props.handleMusicClick();
     }
   }
 
