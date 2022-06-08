@@ -22,7 +22,6 @@ function Chat({ socket, username, room }) {
       };
 
       await socket.emit("send_message", messageData);
-      console.log("sending message is happening");
       setMessageList([...messageList, messageData]);
       setCurrentMessage("");
     }
