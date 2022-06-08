@@ -63,7 +63,7 @@ export default function MultiplayerGame() {
     const currentScore = score;
     setScore(currentScore + points);
   }
-
+ 
   async function retrieveUser() {
     const user = await getProfile();
     setUsername(user.user.username);
@@ -105,7 +105,7 @@ export default function MultiplayerGame() {
 
   function displayUserScores() {
     let highest = highScore();
-    let highUser = "anon";
+    let highUser = "ANONYMOUS";
     scoreList.forEach(function (user) {
       if (user.score === highest) {
         highUser = user.username;
