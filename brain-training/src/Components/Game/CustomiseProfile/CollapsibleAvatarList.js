@@ -10,38 +10,42 @@ import {
   Box,
   Container,
 } from "@mui/material";
-import blueCar from "../../../AvatarsPictures/blueCar.jpg";
-import blueHelicopter from "../../../AvatarsPictures/blueHelicopter.jpg";
-import blueTrain from "../../../AvatarsPictures/blueTrain.jpg";
-import blueTram from "../../../AvatarsPictures/blueTram.jpg";
-import greenCar from "../../../AvatarsPictures/greenCar.jpg";
-import greenTram from "../../../AvatarsPictures/greenTram.jpg";
-import orangeTram from "../../../AvatarsPictures/orangeTram.jpg";
-import pinkHelicopter from "../../../AvatarsPictures/pinkHelicopter.jpg";
-import pinkTrain from "../../../AvatarsPictures/pinkTrain.jpg";
-import redBus from "../../../AvatarsPictures/redBus.jpg";
-import yellowCar from "../../../AvatarsPictures/yellowCar.jpg";
+
+import avatar1 from "../../../avatars/Avatar1.png";
+import avatar2 from "../../../avatars/Avatar2.png";
+import avatar3 from "../../../avatars/Avatar3.png";
+import avatar4 from "../../../avatars/Avatar4.png";
+import avatar5 from "../../../avatars/Avatar5.png";
+import avatar6 from "../../../avatars/Avatar6.png";
+import avatar7 from "../../../avatars/Avatar7.png";
+import avatar8 from "../../../avatars/Avatar8.png";
+import avatar9 from "../../../avatars/Avatar9.png";
+import avatar10 from "../../../avatars/Avatar10.png";
+import avatar11 from "../../../avatars/Avatar11.png";
+import avatar12 from "../../../avatars/Avatar12.png";
+import avatar13 from "../../../avatars/Avatar13.png";
+import avatar14 from "../../../avatars/Avatar14.png";
 
 export default function CollapsibleAvatarList(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const avatarOptions = [
-    { alt: "Blue car", src: blueCar },
-    { alt: "Blue helicopter", src: blueHelicopter },
-    { alt: "Blue train", src: blueTrain },
-    { alt: "Blue Tram", src: blueTram },
-    { alt: "Green car", src: greenCar },
-    { alt: "Green tram", src: greenTram },
-    { alt: "Orange tram", src: orangeTram },
-    { alt: "Pink helicopter", src: pinkHelicopter },
-    { alt: "Pink train", src: pinkTrain },
-    { alt: "Red bus", src: redBus },
-    { alt: "Yellow car", src: yellowCar },
+    { alt: "Green dude ", src: avatar1 },
+    { alt: "Red dude ", src: avatar2 },
+    { alt: "Blue dude ", src: avatar3 },
+    { alt: "Yellow dude ", src: avatar4 },
+    { alt: "Green dude ", src: avatar5 },
+    { alt: "Blue glasses dude ", src: avatar6 },
+    { alt: "Pink dude ", src: avatar7 },
+    { alt: "Purple dude ", src: avatar8 },
+    { alt: "Green lashes dude ", src: avatar9 },
+    { alt: "Yellow scared dude ", src: avatar10 },
+    { alt: "Purple glasses dude ", src: avatar11 },
+    { alt: "Pink cheeky dude ", src: avatar12 },
+    { alt: " Super cheeky dude ", src: avatar13 },
+    { alt: "Super duper cheeky dude ", src: avatar14 },
   ];
 
-  // make function to create buttons outside of return statement
-  // map the returns element individually, and replace with function
-  // each element should have a unique key.
   return (
     <div>
       <Container align="center">
