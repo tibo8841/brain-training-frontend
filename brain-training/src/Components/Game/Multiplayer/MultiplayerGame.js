@@ -10,6 +10,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
 import MultiplayerResults from "./MultiplayerResults";
+import { getProfile } from "../../Networking";
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
 // const username = "tibooooo";
@@ -24,10 +25,15 @@ export default function MultiplayerGame() {
     volume: 0.2,
   });
   const [scoreList, setScoreList] = useState([]);
-  const [username, setUsername] = useState("");
-  const [showUser, setShowUser] = useState(true);
+  const [username, setUsername] = useState("ANONYMOUS");
   const [questionNumber, setQuestionNumber] = useState(1);
   const [finalScoreList, setFinalScoreList] = useState([]);
+
+  async function retrieveUser(){
+   const user = await getProfile()
+   setUsername(user.user.username)
+   return user
+  }
 
   const handleMusicClick = () => {
     stop();
@@ -72,10 +78,6 @@ export default function MultiplayerGame() {
     setScore(currentScore + points);
   }
 
-  function submitUsername() {
-    setShowUser(false);
-  }
-
   const sendScore = async () => {
     const scoreData = {
       username: username,
@@ -111,7 +113,7 @@ export default function MultiplayerGame() {
 
   function displayUserScores() {
     let highest = highScore();
-    let highUser = "anon";
+    let highUser = "";
     scoreList.forEach(function (user) {
       if (user.score === highest) {
         highUser = user.username;
@@ -173,22 +175,6 @@ export default function MultiplayerGame() {
       </Box>
       <Box align="center">
         {sneakySecondsLeft === 0 ? loadQuestion() : null}
-      </Box>
-      <Box align="center">
-        {showUser ? (
-          <input
-            type="text"
-            value={username}
-            placeholder="Name"
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-            onKeyPress={(event) => {
-              event.key === "Enter" && submitUsername();
-            }}
-          />
-        ) : null}
-        {showUser ? <button onClick={submitUsername}>&#9658;</button> : null}
       </Box>
     </Container>
   );
