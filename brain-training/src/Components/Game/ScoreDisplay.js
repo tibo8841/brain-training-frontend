@@ -1,7 +1,7 @@
 export default function ScoreDisplay(props) {
   return (
     <div>
-      <h3>{props.score}</h3>
+      <h3>Score: {props.score}</h3>
     </div>
   );
 }

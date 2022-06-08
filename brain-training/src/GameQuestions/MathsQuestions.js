@@ -238,7 +238,7 @@ export function MathsQuestions() {
       Question: "What is ((600/60) + (700/70)) * 2?",
       Answers: [
         { answer: 60, correct: false },
-        { answer: 20, correct: true },
+        { answer: 40, correct: true },
         { answer: 70, correct: false },
         { answer: 50, correct: false },
       ],

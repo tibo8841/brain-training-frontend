@@ -35,7 +35,6 @@ export default function QuestionsAndAnswers(props) {
       setIsClickedCorrect(true);
       props.addToScore((5 + secondsLeft) * 5);
     }
-    setTimeout(props.newQuestion(), 3000);
   }
 
   function calculateSecondsLeft(seconds) {
@@ -48,12 +47,13 @@ export default function QuestionsAndAnswers(props) {
         calculateSecondsLeft={calculateSecondsLeft}
         isClicked={isClicked}
         resetSneakySeconds={props.resetSneakySeconds}
+        gameType={props.gameType}
       />
-      <Box mt={"5%"}>
-        <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+      <Box mt={"3%"}>
+        <Typography variant="h3" align="center" gutterBottom>
           {question}
         </Typography>
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           {answers.map((answer) => {
             if (answer.correct) {
               return (
@@ -66,8 +66,8 @@ export default function QuestionsAndAnswers(props) {
                     size="xl"
                     fullWidth={true}
                     sx={{
-                      padding: "5%",
-                      fontSize: "220%",
+                      padding: "3%",
+                      fontSize: "200%",
                     }}
                   >
                     {answer.answer}
@@ -85,8 +85,8 @@ export default function QuestionsAndAnswers(props) {
                     size="xl"
                     fullWidth={true}
                     sx={{
-                      padding: "5%",
-                      fontSize: "220%",
+                      padding: "3%",
+                      fontSize: "200%",
                     }}
                   >
                     {answer.answer}
