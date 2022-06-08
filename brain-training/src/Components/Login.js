@@ -1,4 +1,5 @@
 import * as React from "react";
+//import { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -10,17 +11,27 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { getLogin, startSession } from "./Networking";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function Login() {
-  const handleSubmit = (event) => {
+export default function Login(props) {
+  let navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
+    const loginCheck = await getLogin(
+      data.get("username"),
+      data.get("password")
+    );
+    if (loginCheck.response === "User Found") {
+      startSession(loginCheck.user.id);
+      navigate("/");
+    } else {
+      console.log(loginCheck.response);
+    }
   };
 
   return (

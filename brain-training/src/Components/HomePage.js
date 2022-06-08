@@ -44,10 +44,10 @@ export default function HomePage() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained" href="/" size="large">
+              <Button variant="contained" href="/play" size="large">
                 Single-Player
               </Button>
-              <Button variant="contained" href="/" size="large">
+              <Button variant="contained" href="/lobby" size="large">
                 Multi-Player
               </Button>
               <Button variant="contained" href="/how+to+play" size="large">
