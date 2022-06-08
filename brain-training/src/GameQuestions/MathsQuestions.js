@@ -249,7 +249,7 @@ export function MathsQuestions() {
         { answer: 870, correct: false },
         { answer: 790, correct: false },
         { answer: 890, correct: false },
-        { answer: 1070, correct: true },
+        { answer: 1700, correct: true },
       ],
     },
     {

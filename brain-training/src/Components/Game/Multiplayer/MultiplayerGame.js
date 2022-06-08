@@ -22,8 +22,8 @@ export default function MultiplayerGame() {
   const [scoreList, setScoreList] = useState([]);
   const [username, setUsername] = useState("");
   const [showUser, setShowUser] = useState(true);
-  const [questionNumber, setQuestionNumber] = useState(1)
-  const [finalScoreList, setFinalScoreList] = useState([])
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [finalScoreList, setFinalScoreList] = useState([]);
 
   socket.emit("join_room", { username, room });
 
@@ -38,7 +38,7 @@ export default function MultiplayerGame() {
 
   function resetSneakySeconds() {
     setSneakySecondsLeft(20);
-    setQuestionNumber(questionNumber + 1)
+    setQuestionNumber(questionNumber + 1);
     setTimeout(newNewQuestion, 500);
   }
 
@@ -74,7 +74,9 @@ export default function MultiplayerGame() {
     await socket.emit("send_score", scoreData);
     console.log("sending score is happening");
     setScoreList([...scoreList, scoreData]);
-    if(questionNumber>9){setFinalScoreList([...finalScoreList, scoreData])}
+    if (questionNumber > 9) {
+      setFinalScoreList([...finalScoreList, scoreData]);
+    }
   };
 
   useEffect(() => {
@@ -132,17 +134,14 @@ export default function MultiplayerGame() {
     sendScore();
   }, [score]);
 
-  
-
-  if(questionNumber > 10){
-    console.log(finalScoreList)
+  if (questionNumber > 10) {
+    console.log(finalScoreList);
     return (
       <div>
-        <MultiplayerResults finalScoreList = {finalScoreList} />
+        <MultiplayerResults finalScoreList={finalScoreList} />
       </div>
-    )
+    );
   }
-  
 
   return (
     <Container align="center">
