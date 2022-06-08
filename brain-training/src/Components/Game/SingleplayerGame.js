@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import { Button } from "@mui/material";
 import { Box, Grid } from "@mui/material";
 import useSound from "use-sound";
-import fromTheStart from "../../Sounds/fromTheStart.mp3";
+import brainTrainCalm from "../../Sounds/brainTrainCalm.mp3";
 import { useState } from "react";
 import SingleplayerResults from "./SingleplayerResults";
 
@@ -13,7 +13,11 @@ export default function SingleplayerGame() {
   const [score, setScore] = useState(0);
   const [sneakySecondsLeft, setSneakySecondsLeft] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [play, { stop }] = useSound(fromTheStart, { volume: 0.1 });
+  const [playbackRate, setPlaybackRate] = useState(0.85);
+  const [play, { stop }] = useSound(brainTrainCalm, {
+    playbackRate,
+    volume: 0.2,
+  });
 
   function loadQuestion() {
     return (
@@ -21,9 +25,16 @@ export default function SingleplayerGame() {
         nextQuestion={nextQuestion}
         addToScore={addToScore}
         resetSneakySeconds={resetSneakySeconds}
+        handleMusicClick={handleMusicClick}
       />
     );
   }
+
+  const handleMusicClick = () => {
+    stop();
+    setPlaybackRate(playbackRate + 0.1);
+    play();
+  };
 
   function resetSneakySeconds() {
     setSneakySecondsLeft(20);
