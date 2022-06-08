@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import AvatarOptions from "../CustomiseProfile/AvatarOptions";
+
 import {
   Avatar,
   Collapse,
@@ -9,42 +11,12 @@ import {
   ListItemText,
   Box,
   Container,
+  ImageList,
+  ImageListItem,
 } from "@mui/material";
-
-import avatar1 from "../../../avatars/Avatar1.png";
-import avatar2 from "../../../avatars/Avatar2.png";
-import avatar3 from "../../../avatars/Avatar3.png";
-import avatar4 from "../../../avatars/Avatar4.png";
-import avatar5 from "../../../avatars/Avatar5.png";
-import avatar6 from "../../../avatars/Avatar6.png";
-import avatar7 from "../../../avatars/Avatar7.png";
-import avatar8 from "../../../avatars/Avatar8.png";
-import avatar9 from "../../../avatars/Avatar9.png";
-import avatar10 from "../../../avatars/Avatar10.png";
-import avatar11 from "../../../avatars/Avatar11.png";
-import avatar12 from "../../../avatars/Avatar12.png";
-import avatar13 from "../../../avatars/Avatar13.png";
-import avatar14 from "../../../avatars/Avatar14.png";
 
 export default function CollapsibleAvatarList(props) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const avatarOptions = [
-    { alt: "Green dude ", src: avatar1 },
-    { alt: "Red dude ", src: avatar2 },
-    { alt: "Blue dude ", src: avatar3 },
-    { alt: "Yellow dude ", src: avatar4 },
-    { alt: "Green dude ", src: avatar5 },
-    { alt: "Blue glasses dude ", src: avatar6 },
-    { alt: "Pink dude ", src: avatar7 },
-    { alt: "Purple dude ", src: avatar8 },
-    { alt: "Green lashes dude ", src: avatar9 },
-    { alt: "Yellow scared dude ", src: avatar10 },
-    { alt: "Purple glasses dude ", src: avatar11 },
-    { alt: "Pink cheeky dude ", src: avatar12 },
-    { alt: " Super cheeky dude ", src: avatar13 },
-    { alt: "Super duper cheeky dude ", src: avatar14 },
-  ];
 
   return (
     <div>
@@ -58,17 +30,28 @@ export default function CollapsibleAvatarList(props) {
           </ListItem>
         </List>
         <Collapse in={isOpen}>
-          <List sx={{ width: 300, background: "grey" }}>
-            {avatarOptions.map((avatar, index) => (
-              <ListItem key={index} id={index}>
-                <ListItemButton
-                  onClick={(event) => props.handleChosenAvatarClick(avatar.src)}
-                >
-                  {avatar.alt}
-                  <ListItemText>{<Avatar src={avatar.src} />}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
+          <List sx={{ width: 300, background: "light bl" }}>
+            <ImageList
+              sx={{ width: 500, height: 450 }}
+              cols={3}
+              rowHeight={164}
+            >
+              {AvatarOptions().map((avatar, index) => (
+                <ImageListItem key={index}>
+                  <img
+                    onClick={(event) => {
+                      props.handleChosenAvatarClick(avatar.src);
+                      console.log(event.target);
+                    }}
+                    style={{ cursor: "pointer" }}
+                    src={`${avatar.src}?w=164&h=164&fit=crop&auto=format`}
+                    srcSet={`${avatar.src}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                    alt={avatar.title}
+                    loading="loading..."
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
           </List>
         </Collapse>
         <Box align="center" sx={{ justifyContent: "space-between" }}></Box>
