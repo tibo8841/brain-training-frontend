@@ -30,6 +30,7 @@ export default function MultiplayerGame() {
   const [finalScoreList, setFinalScoreList] = useState([]);
 
   const handleMusicClick = () => {
+    stop();
     setPlaybackRate(playbackRate + 0.1);
     play();
   };
