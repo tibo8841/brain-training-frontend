@@ -4,13 +4,13 @@ import { Container } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
-import brainTrainCalm from "../../../Sounds/brainTrainCalm.mp3";
+import brainTrainCalm from '../../../Sounds/brainTrainCalm.mp3'
+import { getProfile } from "../../Networking";
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
 import MultiplayerResults from "./MultiplayerResults";
-import { getProfile } from "../../Networking";
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
 // const username = "tibooooo";
@@ -29,19 +29,6 @@ export default function MultiplayerGame() {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [finalScoreList, setFinalScoreList] = useState([]);
 
-  async function retrieveUser(){
-   const user = await getProfile()
-   setUsername(user.user.username)
-   return user
-  }
-
-  const handleMusicClick = () => {
-    stop();
-    setPlaybackRate(playbackRate + 0.1);
-    play();
-  };
-
-
   socket.emit("join_room", { username, room });
 
   function loadQuestion() {
@@ -49,7 +36,6 @@ export default function MultiplayerGame() {
       <QuestionsAndAnswers
         addToScore={addToScore}
         resetSneakySeconds={resetSneakySeconds}
-        handleMusicClick={handleMusicClick}
       />
     );
   }
@@ -77,6 +63,12 @@ export default function MultiplayerGame() {
     const currentScore = score;
     setScore(currentScore + points);
   }
+ 
+  async function retrieveUser() {
+    const user = await getProfile();
+    setUsername(user.user.username);
+    return user;
+  }
 
   const sendScore = async () => {
     const scoreData = {
@@ -88,7 +80,7 @@ export default function MultiplayerGame() {
     await socket.emit("send_score", scoreData);
     console.log("sending score is happening");
     setScoreList([...scoreList, scoreData]);
-    if (questionNumber > 1) {
+    if (questionNumber > 2) {
       setFinalScoreList([...finalScoreList, scoreData]);
     }
   };
@@ -98,7 +90,7 @@ export default function MultiplayerGame() {
     displayUserScores();
     socket.on("receive_score", (data) => {
       setScoreList([...scoreList, data]);
-      if (questionNumber > 1) {
+      if (questionNumber > 2) {
         setFinalScoreList([...finalScoreList, data]);
       }
     });
@@ -113,7 +105,7 @@ export default function MultiplayerGame() {
 
   function displayUserScores() {
     let highest = highScore();
-    let highUser = "";
+    let highUser = "ANONYMOUS";
     scoreList.forEach(function (user) {
       if (user.score === highest) {
         highUser = user.username;
@@ -148,13 +140,8 @@ export default function MultiplayerGame() {
     sendScore();
   }, [score]);
 
-
-  if (questionNumber > 2) {
+  if (questionNumber > 3) {
     console.log(finalScoreList);
-    setTimeout(loadResults, 2000);
-  }
-
-  function loadResults() {
     return (
       <div>
         <MultiplayerResults finalScoreList={finalScoreList} />
