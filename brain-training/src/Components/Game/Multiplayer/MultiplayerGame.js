@@ -37,7 +37,6 @@ export default function MultiplayerGame() {
     }
   };
 
-
   socket.emit("join_room", { username, room });
 
   function loadQuestion() {
@@ -76,12 +75,12 @@ export default function MultiplayerGame() {
   async function retrieveUser() {
     const user = await getProfile();
     setUsername(user.user.username);
-    return user.user.username;
+    return user;
   }
 
   const sendScore = async () => {
     const scoreData = {
-      username: await retrieveUser(),
+      username: username,
       score: score,
       time: new Date(Date.now()).getUTCDate(),
     };
@@ -149,31 +148,17 @@ export default function MultiplayerGame() {
     sendScore();
   }, [score]);
 
-  // if (questionNumber > 3) {
-  //   console.log(finalScoreList);
-  //   return (
-  //     <div>
-  //       <MultiplayerResults finalScoreList={finalScoreList} />
-  //     </div>
-  //   );
-  // }
-
-  async function loadResults() {
-    let highest = highScore();
-    let highUser = "";
-    scoreList.forEach(function (user) {
-      if (user.score === highest) {
-        highUser = user.user;
-      }
-    });
+  if (questionNumber > 2) {
+    console.log(finalScoreList);
     return (
-      <MultiplayerResults score = {highest} username={highUser}/>
+      <div>
+        <MultiplayerResults finalScoreList={finalScoreList} />
+      </div>
     );
   }
 
   return (
     <Container align="center">
-      {questionNumber > 3 ? loadResults() : null}
       {!isMusic ? (
         <Button onClick={handlePlayClick}>Play Music!</Button>
       ) : (
