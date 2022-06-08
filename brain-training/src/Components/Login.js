@@ -11,13 +11,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { getLogin } from "./Networking";
+import { getLogin, startSession } from "./Networking";
 import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function Login() {
-  //const { login, setLogin } = useState("");
+export default function Login(props) {
   let navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -28,8 +27,7 @@ export default function Login() {
       data.get("password")
     );
     if (loginCheck.response === "User Found") {
-      //setLogin(loginCheck.user.id);
-      //console.log(login);
+      startSession(loginCheck.user.id);
       navigate("/");
     } else {
       console.log(loginCheck.response);

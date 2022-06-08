@@ -14,14 +14,20 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
+import { useNavigate } from "react-router-dom";
 
-const pages = ["Home", "Single Player", "Multiplayer"];
-const settings = ["Profile", "Logout"];
+const pages = [];
+let settings = ["Login"];
 
-export default function Header() {
+export default function Header(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const gameName = "Dr Alex";
+  let navigate = useNavigate();
+  if (props.user) {
+    console.log(props.user);
+    settings = ["Profile", "Logout"];
+  } else console.log(props.user);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,6 +43,12 @@ export default function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  function handleMenuSelect(event) {
+    const target = event.target.innerHTML.toLowerCase();
+    navigate(`/${target}`);
+    handleCloseUserMenu();
+  }
 
   return (
     <AppBar position="static">
@@ -151,7 +163,7 @@ export default function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleMenuSelect}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
