@@ -125,9 +125,7 @@ export default function Lobby() {
             </List>
           </Grid>
           <Grid item xs={7} component={Box}>
-            <Typography align="center" variant="h6">
-              <Chat room={room} username={username} socket={socket} />
-            </Typography>
+            <Chat room={room} username={username} socket={socket} />
           </Grid>
         </Grid>
       </Box>
