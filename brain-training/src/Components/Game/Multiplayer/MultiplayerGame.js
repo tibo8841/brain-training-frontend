@@ -72,7 +72,7 @@ export default function MultiplayerGame() {
 
   const sendScore = async () => {
     const scoreData = {
-      username: retrieveUser(),
+      username: await retrieveUser(),
       score: score,
       time: new Date(Date.now()).getUTCDate(),
     };
@@ -149,12 +149,12 @@ export default function MultiplayerGame() {
   //   );
   // }
 
-  function loadResults() {
+  async function loadResults() {
     let highest = highScore();
     let highUser = "";
     scoreList.forEach(function (user) {
       if (user.score === highest) {
-        highUser = user.username;
+        highUser = user.user;
       }
     });
     return (
