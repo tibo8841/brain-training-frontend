@@ -1,15 +1,17 @@
 import QuestionsAndAnswers from "../QuestionsAndAnswers";
 import ScoreDisplay from "../ScoreDisplay";
-import { Container } from "@mui/system";
-import { Button } from "@mui/material";
+import { Container, maxHeight } from "@mui/system";
+import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
 import fromTheStart from "../../../Sounds/fromTheStart.mp3";
 import { useState, useEffect } from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
-const username = "tibooooo";
+// const username = "tibooooo";
 
 export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
@@ -17,6 +19,8 @@ export default function MultiplayerGame() {
   const [sneakySecondsLeft, setSneakySecondsLeft] = useState(0);
   const [play, { stop }] = useSound(fromTheStart, { volume: 0.1 });
   const [scoreList, setScoreList] = useState([]);
+  const [username, setUsername] = useState("");
+  const [showUser, setShowUser] = useState(true);
 
   socket.emit("join_room", { username, room });
 
@@ -52,6 +56,10 @@ export default function MultiplayerGame() {
     setScore(currentScore + points);
   }
 
+  function submitUsername() {
+    setShowUser(false);
+  }
+
   const sendScore = async () => {
     const scoreData = {
       username: username,
@@ -66,11 +74,51 @@ export default function MultiplayerGame() {
 
   useEffect(() => {
     console.log("use effect running");
+    displayUserScores();
     socket.on("receive_score", (data) => {
-      console.log(data);
       setScoreList([...scoreList, data]);
     });
   }, [scoreList]);
+
+  function highScore() {
+    let highScoreList = scoreList.map((user) => user.score);
+    console.log(highScoreList);
+    console.log(Math.max(...highScoreList));
+    return Math.max(...highScoreList);
+  }
+
+  function displayUserScores() {
+    let highest = highScore();
+    let highUser = "anon";
+    scoreList.forEach(function (user) {
+      if (user.score === highest) {
+        highUser = user.username;
+      }
+    });
+    return (
+      <Card
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          bgcolor: "rgb(24,118,209)",
+        }}
+      >
+        <CardContent>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            align="center"
+            color="white"
+          >
+            {`High Score: ${highest} - ${highUser}  `}
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  }
 
   useEffect(() => {
     sendScore();
@@ -85,9 +133,26 @@ export default function MultiplayerGame() {
       )}
       <Box align="center" sx={{ justifyContent: "space-between" }}>
         <ScoreDisplay score={score} />
+        {displayUserScores()}
       </Box>
       <Box align="center">
         {sneakySecondsLeft === 0 ? loadQuestion() : null}
+      </Box>
+      <Box align="center">
+        {showUser ? (
+          <input
+            type="text"
+            value={username}
+            placeholder="Name"
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+            onKeyPress={(event) => {
+              event.key === "Enter" && submitUsername();
+            }}
+          />
+        ) : null}
+        {showUser ? <button onClick={submitUsername}>&#9658;</button> : null}
       </Box>
     </Container>
   );
