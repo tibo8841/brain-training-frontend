@@ -1,6 +1,6 @@
 import QuestionsAndAnswers from "../QuestionsAndAnswers";
 import ScoreDisplay from "../ScoreDisplay";
-import { Container, maxHeight } from "@mui/system";
+import { Container } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
+import MultiplayerResults from "./MultiplayerResults";
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
 // const username = "tibooooo";
@@ -21,6 +22,8 @@ export default function MultiplayerGame() {
   const [scoreList, setScoreList] = useState([]);
   const [username, setUsername] = useState("");
   const [showUser, setShowUser] = useState(true);
+  const [questionNumber, setQuestionNumber] = useState(1)
+  const [finalScoreList, setFinalScoreList] = useState([])
 
   socket.emit("join_room", { username, room });
 
@@ -35,6 +38,7 @@ export default function MultiplayerGame() {
 
   function resetSneakySeconds() {
     setSneakySecondsLeft(20);
+    setQuestionNumber(questionNumber + 1)
     setTimeout(newNewQuestion, 500);
   }
 
@@ -70,6 +74,7 @@ export default function MultiplayerGame() {
     await socket.emit("send_score", scoreData);
     console.log("sending score is happening");
     setScoreList([...scoreList, scoreData]);
+    if(questionNumber>9){setFinalScoreList([...finalScoreList, scoreData])}
   };
 
   useEffect(() => {
@@ -77,6 +82,9 @@ export default function MultiplayerGame() {
     displayUserScores();
     socket.on("receive_score", (data) => {
       setScoreList([...scoreList, data]);
+      if (questionNumber > 9) {
+        setFinalScoreList([...finalScoreList, data]);
+      }
     });
   }, [scoreList]);
 
@@ -123,6 +131,18 @@ export default function MultiplayerGame() {
   useEffect(() => {
     sendScore();
   }, [score]);
+
+  
+
+  if(questionNumber > 10){
+    console.log(finalScoreList)
+    return (
+      <div>
+        <MultiplayerResults finalScoreList = {finalScoreList} />
+      </div>
+    )
+  }
+  
 
   return (
     <Container align="center">
