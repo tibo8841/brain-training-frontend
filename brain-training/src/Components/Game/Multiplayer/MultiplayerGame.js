@@ -88,7 +88,7 @@ export default function MultiplayerGame() {
     await socket.emit("send_score", scoreData);
     console.log("sending score is happening");
     setScoreList([...scoreList, scoreData]);
-    if (questionNumber > 9) {
+    if (questionNumber > 1) {
       setFinalScoreList([...finalScoreList, scoreData]);
     }
   };
@@ -98,7 +98,7 @@ export default function MultiplayerGame() {
     displayUserScores();
     socket.on("receive_score", (data) => {
       setScoreList([...scoreList, data]);
-      if (questionNumber > 9) {
+      if (questionNumber > 1) {
         setFinalScoreList([...finalScoreList, data]);
       }
     });
