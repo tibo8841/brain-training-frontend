@@ -21,19 +21,21 @@ export default function QuestionsAndAnswers(props) {
     setAnswers(randomQuestionAndAnswers.Answers);
   }, []);
 
-  function handleClickIncorrect(e) {
+  function handleClickIncorrect() {
     if (!isClicked) {
       setIsClicked(true);
       setIsClickedIncorrect(true);
+      props.handleMusicClick();
     }
   }
 
-  function handleClickCorrect(e) {
+  function handleClickCorrect() {
     if (!isClicked) {
       setIsClicked(true);
       setPoints((5 + secondsLeft) * 5);
       setIsClickedCorrect(true);
       props.addToScore((5 + secondsLeft) * 5);
+      props.handleMusicClick();
     }
   }
 
@@ -46,12 +48,14 @@ export default function QuestionsAndAnswers(props) {
       <Timer
         calculateSecondsLeft={calculateSecondsLeft}
         isClicked={isClicked}
+        resetSneakySeconds={props.resetSneakySeconds}
+        gameType={props.gameType}
       />
-      <Box mt={"5%"}>
-        <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+      <Box mt={"3%"}>
+        <Typography variant="h3" align="center" gutterBottom>
           {question}
         </Typography>
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           {answers.map((answer) => {
             if (answer.correct) {
               return (
@@ -64,8 +68,8 @@ export default function QuestionsAndAnswers(props) {
                     size="xl"
                     fullWidth={true}
                     sx={{
-                      padding: "5%",
-                      fontSize: "220%",
+                      padding: "3%",
+                      fontSize: "200%",
                     }}
                   >
                     {answer.answer}
@@ -83,8 +87,8 @@ export default function QuestionsAndAnswers(props) {
                     size="xl"
                     fullWidth={true}
                     sx={{
-                      padding: "5%",
-                      fontSize: "220%",
+                      padding: "3%",
+                      fontSize: "200%",
                     }}
                   >
                     {answer.answer}
@@ -101,6 +105,10 @@ export default function QuestionsAndAnswers(props) {
         ) : isClickedIncorrect ? (
           <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
             Incorrect... Unluckyyy
+          </Typography>
+        ) : secondsLeft === 0 ? (
+          <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+            You ran out of time... Unluckyyy
           </Typography>
         ) : null}
       </Box>

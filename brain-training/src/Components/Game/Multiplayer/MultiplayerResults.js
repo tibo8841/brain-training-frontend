@@ -1,42 +1,68 @@
-import {
-  Container,
-  Typography,
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { Stack } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-export default function MultiplayerResults() {
+const theme = createTheme();
+
+export default function MultiplayerResults(props) {
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
-        Results!!!
-      </Typography>
-      <Typography
-        variant="h4"
-        align="center"
-        gutterBottom
-        marginTop={"15%"}
-        marginBottom={"15%"}
-      >
-        Alex Wins!!! - u just got alex'd
-      </Typography>
-      <List>
-        <ListItem sx={{ backgroundColor: "#FBE966 ", marginBottom: "2%" }}>
-          <ListItemText align="center">Alex</ListItemText>
-        </ListItem>
-        <ListItem sx={{ backgroundColor: "#CECEC9  ", marginBottom: "2%" }}>
-          <ListItemText align="center">Kamilah</ListItemText>
-        </ListItem>
-        <ListItem sx={{ backgroundColor: "#D49454 ", marginBottom: "2%" }}>
-          <ListItemText align="center">
-            Player Profile component would go here, with picture and stuff
-          </ListItemText>
-        </ListItem>
-      </List>
-      <Box mt={"10%"}>Chat component would go down here</Box>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <main>
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Final Scores!
+            </Typography>
+          </Container>
+        </Box>
+        <Container maxWidth="md">
+          <Stack
+            sx={{ pt: 4 }}
+            direction="column"
+            spacing={2}
+            justifyContent="center"
+          >
+            {props.finalScoreList.map((player) => (
+              <Stack>
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                      align="center"
+                    >
+                      {`${player.username}'s - Final Score: ${player.score}`}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Stack>
+            ))}
+          </Stack>
+        </Container>
+      </main>
+    </ThemeProvider>
   );
 }
 

@@ -2,7 +2,7 @@
 //     -Function for each fetch request
 //     -import to other components when needed
 
-const URL = " asymmetrical-panda-clari8ly65npjsif4rfnhvg1.herokudns.com";
+const URL = "https://dr-alex-brain-trainer.herokuapp.com";
 
 export async function getLogin(username, password) {
   const result = await fetch(
@@ -13,7 +13,7 @@ export async function getLogin(username, password) {
 }
 
 export async function registerUser(username, password) {
-  const userDetails = { username, password };
+  const userDetails = { username: username, password: password };
   const result = await fetch(`${URL}/register`, {
     method: "POST",
     headers: {
@@ -32,7 +32,7 @@ export async function getLeaderboard(userID) {
 }
 
 export async function postToLeaderboard(username, userID, score) {
-  const scoreDetails = { username, userID, score };
+  const scoreDetails = { username: username, userID: userID, score: score };
   const result = await fetch(`${URL}/leaderboard`, {
     method: "POST",
     headers: {
@@ -44,10 +44,11 @@ export async function postToLeaderboard(username, userID, score) {
   return json;
 }
 
-export async function updateWinMessage(userID, message) {
-  const newMessage = { userID, message };
+export async function updateWinMessage(message) {
+  const newMessage = { message: message };
   const result = await fetch(`${URL}/profile/win_message`, {
     method: "PATCH",
+    credentials: "include",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newMessage),
   });
@@ -55,10 +56,11 @@ export async function updateWinMessage(userID, message) {
   return json;
 }
 
-export async function updateProfilePicture(userID, pictureID) {
-  const newPicture = { userID, pictureID };
+export async function updateProfilePicture(pictureID) {
+  const newPicture = { pictureID: pictureID };
   const result = await fetch(`${URL}/profile/picture`, {
     method: "PATCH",
+    credentials: "include",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newPicture),
   });
@@ -66,8 +68,53 @@ export async function updateProfilePicture(userID, pictureID) {
   return json;
 }
 
-export async function getProfile(userID) {
-  const result = await fetch(`${URL}/profile?id=${userID}`);
+export async function getProfile() {
+  const result = await fetch(`${URL}/profile`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const json = await result.json();
   return json;
+}
+
+export async function startSession(userID) {
+  const user = { userID: userID };
+  const result = await fetch(`${URL}/sessions`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  const json = await result.json();
+  console.log("here");
+  console.log(json);
+  console.log("check");
+  await checkSessions();
+  return json;
+}
+
+export async function endSession() {
+  const result = await fetch(`${URL}/sessions`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+  });
+  const json = await result.json();
+  return json;
+}
+
+export async function checkSessions() {
+  const result = await fetch(`${URL}/sessions`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const json = await result.json();
+  console.log(json);
+  return json.response;
 }

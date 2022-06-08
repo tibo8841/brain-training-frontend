@@ -8,17 +8,35 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { registerUser } from "./Networking";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export default function Registration() {
-  const handleSubmit = (event) => {
+  let navigate = useNavigate();
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
+      username: data.get("username"),
       password: data.get("password"),
+      confirmPassword: data.get("confirm-password"),
     });
+    if (data.get("password") === data.get("confirm-password")) {
+      const registerCheck = await registerUser(
+        data.get("username"),
+        data.get("password")
+      );
+      if (registerCheck.response === "username already exists") {
+        console.log(registerCheck.response);
+      } else {
+        console.log(registerCheck.response);
+        navigate("/login");
+      }
+    } else {
+      console.log("passwords do not match");
+    }
   };
 
   return (

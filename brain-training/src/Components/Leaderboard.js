@@ -10,13 +10,21 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { Stack } from "@mui/material";
 import Select from "@mui/material/Select";
-
-const cards = [1, 2, 3, 3, 3, 3, 3, 3];
+import { getLeaderboard } from "./Networking";
 
 const theme = createTheme();
 
 export default function Leaderboard() {
   const [sort, setSort] = React.useState("");
+  const [cards, setCards] = React.useState([]);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const data = await getLeaderboard("");
+      console.log(data);
+      setCards(data);
+    };
+    fetchData();
+  }, []);
 
   function handleChange(event) {
     setSort(event.target.value);
@@ -85,7 +93,7 @@ export default function Leaderboard() {
                       component="h2"
                       align="center"
                     >
-                      Position and Username goes here
+                      {`name: ${card.username}, score: ${card.score}`}
                     </Typography>
                   </CardContent>
                 </Card>
