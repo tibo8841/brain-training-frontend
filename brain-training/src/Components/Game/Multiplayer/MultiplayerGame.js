@@ -30,11 +30,12 @@ export default function MultiplayerGame() {
   const [finalScoreList, setFinalScoreList] = useState([]);
 
   const handleMusicClick = () => {
-    stop();
-    setPlaybackRate(playbackRate + 0.1);
-    play();
+    if (isMusic) {
+      stop();
+      setPlaybackRate(playbackRate + 0.1);
+      play();
+    }
   };
-
 
   socket.emit("join_room", { username, room });
 
@@ -145,7 +146,6 @@ export default function MultiplayerGame() {
   useEffect(() => {
     sendScore();
   }, [score]);
-
 
   if (questionNumber > 2) {
     console.log(finalScoreList);
