@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
-import brainTrainCalm from '../../../Sounds/brainTrainCalm.mp3'
+import brainTrainCalm from "../../../Sounds/brainTrainCalm.mp3";
 import { getProfile } from "../../Networking";
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
@@ -63,16 +63,16 @@ export default function MultiplayerGame() {
     const currentScore = score;
     setScore(currentScore + points);
   }
- 
+
   async function retrieveUser() {
     const user = await getProfile();
     setUsername(user.user.username);
-    return user;
+    return user.user.username;
   }
 
   const sendScore = async () => {
     const scoreData = {
-      username: username,
+      username: retrieveUser(),
       score: score,
       time: new Date(Date.now()).getUTCDate(),
     };
@@ -140,17 +140,31 @@ export default function MultiplayerGame() {
     sendScore();
   }, [score]);
 
-  if (questionNumber > 3) {
-    console.log(finalScoreList);
+  // if (questionNumber > 3) {
+  //   console.log(finalScoreList);
+  //   return (
+  //     <div>
+  //       <MultiplayerResults finalScoreList={finalScoreList} />
+  //     </div>
+  //   );
+  // }
+
+  function loadResults() {
+    let highest = highScore();
+    let highUser = "";
+    scoreList.forEach(function (user) {
+      if (user.score === highest) {
+        highUser = user.username;
+      }
+    });
     return (
-      <div>
-        <MultiplayerResults finalScoreList={finalScoreList} />
-      </div>
+      <MultiplayerResults score = {highest} username={highUser}/>
     );
   }
 
   return (
     <Container align="center">
+      {questionNumber > 3 ? loadResults() : null}
       {!isMusic ? (
         <Button onClick={handlePlayClick}>Play Music!</Button>
       ) : (
