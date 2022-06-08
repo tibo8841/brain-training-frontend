@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import { Button } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
-import fromTheStart from "../../../Sounds/fromTheStart.mp3";
+import fromTheStart from "../../Sounds/fromTheStart.mp3";
 import { useState } from "react";
 
 export default function SingleplayerGame() {
