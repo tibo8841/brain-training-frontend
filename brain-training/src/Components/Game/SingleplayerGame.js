@@ -2,7 +2,7 @@ import QuestionsAndAnswers from "./QuestionsAndAnswers";
 import ScoreDisplay from "./ScoreDisplay";
 import { Container } from "@mui/system";
 import { Button } from "@mui/material";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import useSound from "use-sound";
 import fromTheStart from "../../Sounds/fromTheStart.mp3";
 import { useState } from "react";
@@ -68,10 +68,15 @@ export default function SingleplayerGame() {
       ) : (
         <Button onClick={handleStopClick}>Stop Music!</Button>
       )}
-      <h4>Question {questionNumber}/10</h4>
-      <Box align="center" sx={{ justifyContent: "space-between" }}>
-        <ScoreDisplay score={score} />
-      </Box>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <h3>Question {questionNumber}/10</h3>
+        </Grid>
+        <Grid item xs={6}>
+          <ScoreDisplay score={score} />
+        </Grid>
+      </Grid>
+      <Button onClick={nextQuestion}>Skip to next question!</Button>
       <Box align="center">
         {sneakySecondsLeft === 0 ? loadQuestion() : null}
       </Box>
