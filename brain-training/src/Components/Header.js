@@ -15,19 +15,35 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
+import { checkSessions, endSession } from "./Networking";
 
 const pages = [];
 let settings = ["Login"];
 
-export default function Header(props) {
+export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [sessionAuthentication, setSessionAuthentication] =
+    React.useState(false);
+
+  React.useEffect(() => {
+    checkLoggedIn(); // eslint-disable-next-line
+  }, []);
+
+  async function checkLoggedIn() {
+    const authentication = await checkSessions();
+    console.log(authentication);
+    authentication
+      ? setSessionAuthentication(true)
+      : setSessionAuthentication(false);
+    console.log(sessionAuthentication);
+  }
+
   const gameName = "Dr Alex";
   let navigate = useNavigate();
-  if (props.user) {
-    console.log(props.user);
+  if (sessionAuthentication === true) {
     settings = ["Profile", "Logout"];
-  } else console.log(props.user);
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -45,9 +61,19 @@ export default function Header(props) {
   };
 
   function handleMenuSelect(event) {
-    const target = event.target.innerHTML.toLowerCase();
-    navigate(`/${target}`);
-    handleCloseUserMenu();
+    const target = event.target.innerHTML;
+    if (target === "Login") {
+      navigate(`/login`);
+      handleCloseUserMenu();
+    } else if (target === "Profile") {
+      navigate("/profile");
+      handleCloseUserMenu();
+    } else if (target === "Logout") {
+      endSession();
+      navigate("/");
+      handleCloseUserMenu();
+      window.location.reload(false);
+    }
   }
 
   return (

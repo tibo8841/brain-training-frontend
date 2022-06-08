@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import AvatarOptions from "../CustomiseProfile/AvatarOptions";
 
 import {
-  Avatar,
   Collapse,
   List,
   ListItem,
