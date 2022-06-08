@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { getLogin, startSession } from "./Networking";
+import { getLogin, startSession, checkSessions } from "./Networking";
 import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
@@ -27,8 +27,12 @@ export default function Login(props) {
       data.get("password")
     );
     if (loginCheck.response === "User Found") {
-      startSession(loginCheck.user.id);
+      await startSession(loginCheck.user.id);
+      console.log(loginCheck.user.id);
+      console.log("sessions should be started");
+      console.log(await checkSessions());
       navigate("/");
+      window.location.reload(false);
     } else {
       console.log(loginCheck.response);
     }
