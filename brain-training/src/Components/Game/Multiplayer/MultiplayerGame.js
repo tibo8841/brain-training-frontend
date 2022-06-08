@@ -35,6 +35,7 @@ export default function MultiplayerGame() {
     play();
   };
 
+
   socket.emit("join_room", { username, room });
 
   function loadQuestion() {
@@ -145,8 +146,13 @@ export default function MultiplayerGame() {
     sendScore();
   }, [score]);
 
-  if (questionNumber > 10) {
+
+  if (questionNumber > 2) {
     console.log(finalScoreList);
+    setTimeout(loadResults, 2000);
+  }
+
+  function loadResults() {
     return (
       <div>
         <MultiplayerResults finalScoreList={finalScoreList} />
