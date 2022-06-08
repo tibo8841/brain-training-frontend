@@ -6,8 +6,37 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Stack, Button } from "@mui/material";
+import { checkSessions, getProfile, postToLeaderboard } from "../Networking";
 
 export default function SingleplayerResults(props) {
+  const [sessionAuthentication, setSessionAuthentication] =
+    React.useState(false);
+
+  React.useEffect(() => {
+    checkLoggedIn(); // eslint-disable-next-line
+  }, []);
+
+  async function checkLoggedIn() {
+    const authentication = await checkSessions();
+    console.log(authentication);
+    authentication
+      ? setSessionAuthentication(true)
+      : setSessionAuthentication(false);
+    console.log(sessionAuthentication);
+    checkPostToLeaderboard();
+  }
+
+  async function checkPostToLeaderboard() {
+    if (sessionAuthentication === true) {
+      const player = await getProfile();
+      await postToLeaderboard(
+        player.user.username,
+        player.user.id,
+        props.score
+      );
+    }
+  }
+
   const theme = createTheme();
 
   function displayMessage() {
@@ -100,9 +129,7 @@ export default function SingleplayerResults(props) {
             </Stack>
           </Stack>
         </Container>
-        <Button>
-          This will eventually be a button to take you str8 to leaderbaord
-        </Button>
+        <Button href={"/leaderboard"}>leaderbaord</Button>
       </main>
     </ThemeProvider>
   );

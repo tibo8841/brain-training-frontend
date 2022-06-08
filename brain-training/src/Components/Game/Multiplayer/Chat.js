@@ -22,7 +22,6 @@ function Chat({ socket, username, room }) {
       };
 
       await socket.emit("send_message", messageData);
-      console.log("sending message is happening");
       setMessageList([...messageList, messageData]);
       setCurrentMessage("");
     }
@@ -81,8 +80,3 @@ function Chat({ socket, username, room }) {
 }
 
 export default Chat;
-// -Chat
-//     -uses websockets
-//     -can chat to other players in lobby
-//     -displays username/profile pic of each chat
-//     -displays time of each message
