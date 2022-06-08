@@ -5,7 +5,10 @@ export default function UserCurrentAvatar(props) {
   return (
     <Container align="center">
       <Box align="center" sx={{ justifyContent: "space-between" }}></Box>
-      <Avatar src={props.selectedAvatar} />
+      <Avatar
+        sx={{ height: "300px", width: "300px" }}
+        src={props.selectedAvatar}
+      />
       <Box align="center"></Box>
     </Container>
   );

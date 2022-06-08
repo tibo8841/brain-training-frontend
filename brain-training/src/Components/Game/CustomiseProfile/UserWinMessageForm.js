@@ -18,7 +18,7 @@ export default function UserWinMessageForm(props) {
     event.preventDefault();
     event.target.reset();
   }
-  let usersNewWinMessage = "";
+  let usersNewWinMessage = "I win!";
   /*
   useEffect(() => {
     async function fetchUserWinMessage() {
