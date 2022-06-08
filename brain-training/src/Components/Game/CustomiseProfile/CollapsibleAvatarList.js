@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import AvatarOptions from "../CustomiseProfile/AvatarOptions";
+
 import {
   Avatar,
   Collapse,
@@ -9,39 +11,13 @@ import {
   ListItemText,
   Box,
   Container,
+  ImageList,
+  ImageListItem,
 } from "@mui/material";
-import blueCar from "../../../AvatarsPictures/blueCar.jpg";
-import blueHelicopter from "../../../AvatarsPictures/blueHelicopter.jpg";
-import blueTrain from "../../../AvatarsPictures/blueTrain.jpg";
-import blueTram from "../../../AvatarsPictures/blueTram.jpg";
-import greenCar from "../../../AvatarsPictures/greenCar.jpg";
-import greenTram from "../../../AvatarsPictures/greenTram.jpg";
-import orangeTram from "../../../AvatarsPictures/orangeTram.jpg";
-import pinkHelicopter from "../../../AvatarsPictures/pinkHelicopter.jpg";
-import pinkTrain from "../../../AvatarsPictures/pinkTrain.jpg";
-import redBus from "../../../AvatarsPictures/redBus.jpg";
-import yellowCar from "../../../AvatarsPictures/yellowCar.jpg";
 
 export default function CollapsibleAvatarList(props) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const avatarOptions = [
-    { alt: "Blue car", src: blueCar },
-    { alt: "Blue helicopter", src: blueHelicopter },
-    { alt: "Blue train", src: blueTrain },
-    { alt: "Blue Tram", src: blueTram },
-    { alt: "Green car", src: greenCar },
-    { alt: "Green tram", src: greenTram },
-    { alt: "Orange tram", src: orangeTram },
-    { alt: "Pink helicopter", src: pinkHelicopter },
-    { alt: "Pink train", src: pinkTrain },
-    { alt: "Red bus", src: redBus },
-    { alt: "Yellow car", src: yellowCar },
-  ];
-
-  // make function to create buttons outside of return statement
-  // map the returns element individually, and replace with function
-  // each element should have a unique key.
   return (
     <div>
       <Container align="center">
@@ -54,17 +30,28 @@ export default function CollapsibleAvatarList(props) {
           </ListItem>
         </List>
         <Collapse in={isOpen}>
-          <List sx={{ width: 300, background: "grey" }}>
-            {avatarOptions.map((avatar, index) => (
-              <ListItem key={index} id={index}>
-                <ListItemButton
-                  onClick={(event) => props.handleChosenAvatarClick(avatar.src)}
-                >
-                  {avatar.alt}
-                  <ListItemText>{<Avatar src={avatar.src} />}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
+          <List sx={{ width: 300, background: "light bl" }}>
+            <ImageList
+              sx={{ width: 500, height: 450 }}
+              cols={3}
+              rowHeight={164}
+            >
+              {AvatarOptions().map((avatar, index) => (
+                <ImageListItem key={index}>
+                  <img
+                    onClick={(event) => {
+                      props.handleChosenAvatarClick(avatar.src);
+                      console.log(event.target);
+                    }}
+                    style={{ cursor: "pointer" }}
+                    src={`${avatar.src}?w=164&h=164&fit=crop&auto=format`}
+                    srcSet={`${avatar.src}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                    alt={avatar.title}
+                    loading="loading..."
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
           </List>
         </Collapse>
         <Box align="center" sx={{ justifyContent: "space-between" }}></Box>
