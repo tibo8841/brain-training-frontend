@@ -238,7 +238,7 @@ export function MathsQuestions() {
       Question: "What is ((600/60) + (700/70)) * 2?",
       Answers: [
         { answer: 60, correct: false },
-        { answer: 20, correct: true },
+        { answer: 40, correct: true },
         { answer: 70, correct: false },
         { answer: 50, correct: false },
       ],
@@ -277,6 +277,96 @@ export function MathsQuestions() {
         { answer: 199, correct: false },
         { answer: 197, correct: true },
         { answer: 196, correct: false },
+      ],
+    },
+    {
+      Question: "In Roman Numerals, what does X equate to?",
+      Answers: [
+        { answer: 10, correct: true },
+        { answer: 100, correct: false },
+        { answer: 50, correct: false },
+        { answer: 0, correct: false },
+      ],
+    },
+    {
+      Question: "What is the square root of 49?",
+      Answers: [
+        { answer: 9, correct: false },
+        { answer: 6, correct: false },
+        { answer: 7, correct: true },
+        { answer: 8, correct: false },
+      ],
+    },
+    {
+      Question: "Which is not a prime number?",
+      Answers: [
+        { answer: 23, correct: false },
+        { answer: 21, correct: true },
+        { answer: 19, correct: false },
+        { answer: 17, correct: false },
+      ],
+    },
+    {
+      Question: "How many sides does a heptagon have?",
+      Answers: [
+        { answer: 9, correct: false },
+        { answer: 13, correct: false },
+        { answer: 7, correct: true },
+        { answer: 11, correct: false },
+      ],
+    },
+    {
+      Question: "How many sides does a trapezium have?",
+      Answers: [
+        { answer: 3, correct: false },
+        { answer: 8, correct: false },
+        { answer: 6, correct: false },
+        { answer: 4, correct: true },
+      ],
+    },
+    {
+      Question: "What is -7 - 2?",
+      Answers: [
+        { answer: -5, correct: false },
+        { answer: -9, correct: true },
+        { answer: 5, correct: false },
+        { answer: 9, correct: false },
+      ],
+    },
+    {
+      Question: "What is 3/4 + 8/32?",
+      Answers: [
+        { answer: 1, correct: true },
+        { answer: "1 and 1/16", correct: false },
+        { answer: "28/32", correct: false },
+        { answer: "34/32", correct: false },
+      ],
+    },
+    {
+      Question: "How many corners altogether are there on 8 triangles?",
+      Answers: [
+        { answer: 25, correct: false },
+        { answer: 27, correct: false },
+        { answer: 24, correct: true },
+        { answer: 26, correct: false },
+      ],
+    },
+    {
+      Question: "How many corners altogether are there on 9 squares?",
+      Answers: [
+        { answer: 36, correct: true },
+        { answer: 32, correct: false },
+        { answer: 34, correct: false },
+        { answer: 38, correct: false },
+      ],
+    },
+    {
+      Question: "What is 23 + 32?",
+      Answers: [
+        { answer: 66, correct: false },
+        { answer: 64, correct: false },
+        { answer: 65, correct: false },
+        { answer: 55, correct: true },
       ],
     },
   ];
