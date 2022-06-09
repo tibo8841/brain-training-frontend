@@ -3,6 +3,7 @@
 //     -import to other components when needed
 
 const URL = "https://dralexbraintrainer.sigmalabs.co.uk";
+//const URL = "http://localhost:8080";
 
 export async function getLogin(username, password) {
   const result = await fetch(
