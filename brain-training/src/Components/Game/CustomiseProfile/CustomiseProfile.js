@@ -1,22 +1,32 @@
 import { React, useState } from "react";
-import { Container } from "@mui/material";
+import { Container, Button } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
 import UserCurrentAvatar from "./UserCurrentAvatarDisplay";
 import UserWinMessageDisplay from "./UserWinMessageDisplay";
 import UserWinMessageForm from "./UserWinMessageForm";
+import { updateWinMessage } from "../../Networking";
+import { updateProfilePicture } from "../../Networking";
 
 export default function CustomiseProfile() {
   const [userAvatar, setUserAvatar] = useState(
     "/static/media/Avatar1.3a808b587ef8820a42e5.png"
   );
+  const [userAvatarId, setUserAvatarId] = useState(1);
   const [userWinMessage, setUserWinMessage] = useState("I win!");
 
-  function handleChosenAvatarClick(selectedAvatarSrc) {
+  function handleChosenAvatarClick(selectedAvatarSrc, selectedAvatarid) {
     setUserAvatar(selectedAvatarSrc);
+    setUserAvatarId(selectedAvatarid);
   }
 
   function updateUsersWinMessage(usersUpdatedMessage) {
     setUserWinMessage(usersUpdatedMessage);
+  }
+
+  function handleSaveChanges() {
+    updateWinMessage(userWinMessage);
+    updateProfilePicture(userAvatarId);
+    console.log("changes saved");
   }
 
   return (
@@ -24,14 +34,16 @@ export default function CustomiseProfile() {
       <Container align="center">
         <h1> Customise your profile! </h1>
         <UserCurrentAvatar
-          selectedAvatar={userAvatar}
+          selectedAvatar={userAvatarId}
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
+        <h2> My win message: </h2>
         <UserWinMessageDisplay userWinMessage={userWinMessage} />
         <CollapsibleAvatarList
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
         <UserWinMessageForm updateUsersWinMessage={updateUsersWinMessage} />
+        <Button onClick={() => handleSaveChanges()}>save changes</Button>
       </Container>
     </div>
   );

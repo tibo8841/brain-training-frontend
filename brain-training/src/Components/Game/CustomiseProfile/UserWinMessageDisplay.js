@@ -1,9 +1,16 @@
 import { React } from "react";
+import { getProfile } from "../../Networking";
 
-export default function UserWinMessageDisplay(props) {
+export default function UserWinMessageDisplay() {
+  async function fetchUserWinMessage() {
+    const user = await getProfile();
+    const userWinMessage = user.user.win_message;
+    return userWinMessage;
+  }
+
   return (
     <div>
-      <h2>{props.userWinMessage}</h2>
+      <h2>{fetchUserWinMessage()}</h2>
     </div>
   );
 }

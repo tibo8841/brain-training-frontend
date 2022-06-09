@@ -5,6 +5,8 @@ import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
 import brainTrainCalm from "../../../Sounds/brainTrainCalm.mp3";
+import { checkSessions, getProfile } from "../../Networking";
+
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -12,13 +14,13 @@ import io from "socket.io-client";
 import MultiplayerResults from "./MultiplayerResults";
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
-// const username = "tibooooo";
 
 export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
   const [score, setScore] = useState(0);
   const [sneakySecondsLeft, setSneakySecondsLeft] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(0.85);
+  const [username, setUsername] = useState("");
   const [play, { stop }] = useSound(brainTrainCalm, {
     playbackRate,
     volume: 0.2,
@@ -29,6 +31,11 @@ export default function MultiplayerGame() {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [finalScoreList, setFinalScoreList] = useState([]);
 
+  useEffect(() => {
+    retrieveUsername();
+    console.log(username)
+  }, []);
+
   const handleMusicClick = () => {
     if (isMusic) {
       stop();
@@ -36,6 +43,17 @@ export default function MultiplayerGame() {
       play();
     }
   };
+
+  async function retrieveUsername() {
+    const auth = await checkSessions();
+    if (auth) {
+      const user = await getProfile();
+      console.log(user)
+      setUsername(user.user.username);
+    } else {
+      setUsername("ANON");
+    }
+  }
 
   socket.emit("join_room", { username, room });
 
@@ -77,6 +95,7 @@ export default function MultiplayerGame() {
     setShowUser(false);
   }
 
+
   const sendScore = async () => {
     const scoreData = {
       username: username,
@@ -106,7 +125,6 @@ export default function MultiplayerGame() {
   function highScore() {
     let highScoreList = scoreList.map((user) => user.score);
     console.log(highScoreList);
-    console.log(Math.max(...highScoreList));
     return Math.max(...highScoreList);
   }
 
@@ -147,7 +165,7 @@ export default function MultiplayerGame() {
     sendScore();
   }, [score]);
 
-  if (questionNumber > 2) {
+  if (questionNumber > 3) {
     console.log(finalScoreList);
     setTimeout(loadResults, 2000);
   }
