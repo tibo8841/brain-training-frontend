@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import AlwaysScrollToBottom from "./AlwaysScrollToBottom";
 import "./Chat.css";
-// import io from "socket.io-client";
-// import { useState } from "react";
-// import Chat from "./Chat";
 
 function Chat({ socket, username, room }) {
   // if (username !== "" && room !== "") {
@@ -11,6 +9,15 @@ function Chat({ socket, username, room }) {
 
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messageList]);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -57,6 +64,7 @@ function Chat({ socket, username, room }) {
                   <p id="author">{messageContent.author}</p>
                 </div>
               </div>
+              <AlwaysScrollToBottom />
             </div>
           );
         })}
