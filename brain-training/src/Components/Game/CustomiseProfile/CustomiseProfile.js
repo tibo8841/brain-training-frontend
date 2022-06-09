@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import { Container, Button } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
 import UserCurrentAvatarDisplay from "./UserCurrentAvatarDisplay";
