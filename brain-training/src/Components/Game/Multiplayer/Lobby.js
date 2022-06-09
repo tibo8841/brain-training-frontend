@@ -57,8 +57,7 @@ export default function Lobby() {
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
     <Container sx={{ width: "80%" }}>
-      <Box align="center">
-        <Button onClick={startGame}>Start Game!</Button>
+      <Box align="center" marginBottom={"1%"}>
         <CopyToClipboard
           text={"https://brain-training-website.sigmalabs.co.uk/lobby"}
           //put real link in text above
@@ -93,7 +92,12 @@ export default function Lobby() {
           </Tooltip>
         </CopyToClipboard>
       </Box>
-      <Box sx={{ flexGrow: 1, marginTop: "5%" }}>
+      <Box align="center" textAlign={"center"}>
+        <Button onClick={startGame} variant="contained">
+          Start Game for everyone!
+        </Button>
+      </Box>
+      <Box sx={{ flexGrow: 1, marginTop: "2%" }}>
         <Grid container spacing={2}>
           <Grid item xs={8} component={Box}>
             {/* render below conditionally based on if lobby is full, if is full say "ready to start" instead */}
@@ -106,7 +110,7 @@ export default function Lobby() {
             <Typography variant="h4">A: 7/16</Typography>
           </Grid>
         </Grid>
-        <Grid container spacing={2} marginTop={"5%"}>
+        <Grid container spacing={2} marginTop={"1%"}>
           <Grid item xs={5} component={Box}>
             <Typography align="center" variant="h5">
               Players in Lobby
