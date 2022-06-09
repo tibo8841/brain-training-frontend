@@ -7,12 +7,12 @@ import useSound from "use-sound";
 import brainTrainCalm from "../../../Sounds/brainTrainCalm.mp3";
 import { checkSessions, getProfile } from "../../Networking";
 import Paper from "@mui/material/Paper";
-
 import Grid from "@mui/material/Grid";
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
+import AvatarOption from "../CustomiseProfile/AvatarOptions";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
@@ -32,7 +32,6 @@ export default function MultiplayerGame() {
     volume: 0.2,
   });
   const [scoreList, setScoreList] = useState([]);
-
   const [questionNumber, setQuestionNumber] = useState(1);
   const [finalScoreList, setFinalScoreList] = useState([]);
 
@@ -98,6 +97,12 @@ export default function MultiplayerGame() {
   function addToScore(points) {
     const currentScore = score;
     setScore(currentScore + points);
+  }
+
+  function getAvatarLink(avatarID) {
+    let chosenAvatar = AvatarOption().find((avatar) => avatar.id === avatarID);
+    console.log(chosenAvatar.link);
+    return chosenAvatar.link;
   }
 
   const sendScore = async () => {
@@ -191,7 +196,7 @@ export default function MultiplayerGame() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: "url(https://source.unsplash.com/random)",
+              backgroundImage: `url(${getAvatarLink(avatar)})`,
               backgroundRepeat: "no-repeat",
               backgroundColor: (t) =>
                 t.palette.mode === "light"

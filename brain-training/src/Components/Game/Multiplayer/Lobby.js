@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Chat from "./Chat";
 import { useNavigate } from "react-router-dom";
@@ -18,16 +18,60 @@ import {
 
 import io from "socket.io-client";
 
-const socket = io.connect(
-  "https://brain-training-multiplayer.sigmalabs.co.uk/"
-);
+// const socket = io.connect(
+//   "https://brain-training-multiplayer.sigmalabs.co.uk/"
+// );
+const socket = io.connect("http://localhost:3001");
 const room = 1234;
 
 export default function Lobby() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("username");
   const [startPlay, setStartPlay] = useState(false);
-  socket.emit("join_room", { username, room });
+  const [userList, setUserList] = useState([]);
+
+  async function joinRoom() {
+    await socket.emit("join_room", { username: username, room: room });
+  }
+
+  useEffect(() => {
+    console.log("joining room");
+    getUsername();
+    addToUserList();
+  }, []);
+
+  useEffect(() => {
+    addToUserList();
+    joinRoom();
+  }, [username]);
+
+  // useEffect(() => {
+  //   console.log(username);
+  //   console.log("above is username");
+  //   socket.on("join_room", (data) => {
+  //     console.log(data);
+  //     console.log("above is data");
+  //     setUserList([...userList, data]);
+  //   });
+  //   console.log(userList);
+  //   console.log("above is user list");
+  // }, [userList]);
+
+  useEffect(() => {
+    addToUserList();
+  }, [userList]);
+
+  function addToUserList() {
+    console.log(username);
+    console.log("above is username");
+    socket.on("join_room", (data) => {
+      console.log(data);
+      console.log("above is data");
+      setUserList([...userList, data]);
+    });
+    console.log(userList);
+    console.log("above is user list");
+  }
 
   async function checkLogin() {
     let auth = await checkSessions();
@@ -44,7 +88,7 @@ export default function Lobby() {
     }
   }
 
-  getUsername();
+  // getUsername();
 
   let navigate = useNavigate();
 
@@ -60,7 +104,6 @@ export default function Lobby() {
       <Box align="center" marginBottom={"1%"}>
         <CopyToClipboard
           text={"https://brain-training-website.sigmalabs.co.uk/lobby"}
-          //put real link in text above
           onCopy={() => setCopiedLobbyLink("Lobby-Link")}
         >
           <Tooltip
