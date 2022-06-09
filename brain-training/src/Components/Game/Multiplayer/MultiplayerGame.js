@@ -26,7 +26,6 @@ export default function MultiplayerGame() {
     volume: 0.2,
   });
   const [scoreList, setScoreList] = useState([]);
-  const [username, setUsername] = useState("");
   const [showUser, setShowUser] = useState(true);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [finalScoreList, setFinalScoreList] = useState([]);
