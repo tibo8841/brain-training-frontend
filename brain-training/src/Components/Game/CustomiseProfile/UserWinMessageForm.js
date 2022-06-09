@@ -10,12 +10,14 @@ import {
   Box,
   Container,
 } from "@mui/material";
+import { updateWinMessage } from "../../Networking";
 export default function UserWinMessageForm(props) {
   const [isOpen, setIsOpen] = useState(false);
   // const winMessageCharacterLimit = 20;
 
   function handleSubmit(event) {
     event.preventDefault();
+    updateWinMessage(event.target.value);
     event.target.reset();
   }
   let usersNewWinMessage = "I win!";
