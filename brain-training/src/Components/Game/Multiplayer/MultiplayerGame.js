@@ -7,14 +7,13 @@ import useSound from "use-sound";
 import brainTrainCalm from "../../../Sounds/brainTrainCalm.mp3";
 import { checkSessions, getProfile } from "../../Networking";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
+
 import Grid from "@mui/material/Grid";
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Stack } from "@mui/material";
 
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
@@ -33,7 +32,7 @@ export default function MultiplayerGame() {
     volume: 0.2,
   });
   const [scoreList, setScoreList] = useState([]);
-  const [showUser, setShowUser] = useState(true);
+
   const [questionNumber, setQuestionNumber] = useState(1);
   const [finalScoreList, setFinalScoreList] = useState([]);
 
