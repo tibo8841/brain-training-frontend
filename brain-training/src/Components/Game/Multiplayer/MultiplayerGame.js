@@ -10,9 +10,15 @@ import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MultiplayerResults from "./MultiplayerResults";
+import { Stack } from "@mui/material";
+
+
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
+const theme = createTheme();
+
 
 export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
@@ -20,6 +26,8 @@ export default function MultiplayerGame() {
   const [sneakySecondsLeft, setSneakySecondsLeft] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(0.85);
   const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState(1);
+  const [winMessage, setWinMessage] = useState("");
   const [play, { stop }] = useSound(brainTrainCalm, {
     playbackRate,
     volume: 0.2,
@@ -30,8 +38,8 @@ export default function MultiplayerGame() {
 
   useEffect(() => {
     retrieveUsername();
-    console.log(username)
-  }, []);
+    //console.log(username);
+  }, [username]);
 
   const handleMusicClick = () => {
     if (isMusic) {
@@ -45,10 +53,14 @@ export default function MultiplayerGame() {
     const auth = await checkSessions();
     if (auth) {
       const user = await getProfile();
-      console.log(user)
+      console.log(user);
       setUsername(user.user.username);
+      setAvatar(user.user.profile_picture_id);
+      setWinMessage(user.user.win_message);
     } else {
       setUsername("ANON");
+      setAvatar(1);
+      setWinMessage("I have the biggest brain!");
     }
   }
   socket.emit("join_room", { username, room });
@@ -90,11 +102,13 @@ export default function MultiplayerGame() {
     const scoreData = {
       username: username,
       score: score,
+      winMessage: winMessage,
+      avatar: avatar,
       time: new Date(Date.now()).getUTCDate(),
     };
 
     await socket.emit("send_score", scoreData);
-    console.log("sending score is happening");
+    console.log(scoreData);
     setScoreList([...scoreList, scoreData]);
     if (questionNumber > 2) {
       setFinalScoreList([...finalScoreList, scoreData]);
@@ -102,7 +116,7 @@ export default function MultiplayerGame() {
   };
 
   useEffect(() => {
-    console.log("use effect running");
+    //console.log("use effect running");
     displayUserScores();
     socket.on("receive_score", (data) => {
       setScoreList([...scoreList, data]);
@@ -114,7 +128,7 @@ export default function MultiplayerGame() {
 
   function highScore() {
     let highScoreList = scoreList.map((user) => user.score);
-    console.log(highScoreList);
+    //console.log(highScoreList);
     return Math.max(...highScoreList);
   }
 
@@ -156,10 +170,70 @@ export default function MultiplayerGame() {
   }, [score]);
 
   if (questionNumber > 3) {
-    console.log(finalScoreList);
+    let highest = highScore();
+    let highUser = "ANONYMOUS";
+    let highMessage = "";
+    scoreList.forEach(function (user) {
+      if (user.score === highest) {
+        highUser = user.username;
+        highMessage = user.winMessage;
+      }
+    });
     return (
       <div>
-        <MultiplayerResults finalScoreList={finalScoreList} />
+        <ThemeProvider theme={theme}>
+          <main>
+            <Box
+              sx={{
+                bgcolor: "background.paper",
+                pt: 8,
+                pb: 6,
+              }}
+            >
+              <Container maxWidth="sm">
+                <Typography
+                  component="h1"
+                  variant="h2"
+                  align="center"
+                  color="text.primary"
+                  gutterBottom
+                >
+                  Final Scores!
+                </Typography>
+              </Container>
+            </Box>
+            <Container maxWidth="md">
+              <Stack
+                sx={{ pt: 4 }}
+                direction="column"
+                spacing={2}
+                justifyContent="center"
+              >
+                <Stack>
+                  <Card
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <CardContent>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="h2"
+                        align="center"
+                      >
+                        {`${highUser} Wins's! \n ${highMessage} \n  Final Score: ${highest}`}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Stack>
+              </Stack>
+            </Container>
+          </main>
+        </ThemeProvider>
       </div>
     );
   }
