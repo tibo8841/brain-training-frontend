@@ -1,16 +1,19 @@
-import { React } from "react";
+import { useState } from "react";
 import { getProfile } from "../../Networking";
 
-export default function UserWinMessageDisplay() {
+export default function UserWinMessageDisplay(props) {
+  const [winMessage, setWinMessage] = useState("");
   async function fetchUserWinMessage() {
-    const user = await getProfile();
-    const userWinMessage = user.user.win_message;
-    return userWinMessage;
+    const authoriseUser = await getProfile();
+    if (authoriseUser) {
+      setWinMessage(authoriseUser.user.win_message);
+    }
   }
+  fetchUserWinMessage();
 
   return (
     <div>
-      <h2>{fetchUserWinMessage()}</h2>
+      <h2>{winMessage}</h2>
     </div>
   );
 }

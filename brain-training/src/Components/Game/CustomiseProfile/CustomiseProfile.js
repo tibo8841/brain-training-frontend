@@ -25,7 +25,7 @@ export default function CustomiseProfile() {
 
   function handleSaveChanges() {
     updateWinMessage(userWinMessage);
-    updateProfilePicture(userAvatarId);
+    updateProfilePicture(userAvatar);
     console.log("changes saved");
   }
 
@@ -34,7 +34,7 @@ export default function CustomiseProfile() {
       <Container align="center">
         <h1> Customise your profile! </h1>
         <UserCurrentAvatar
-          selectedAvatar={userAvatarId}
+          selectedAvatar={userAvatar}
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
         <h2> My win message: </h2>
