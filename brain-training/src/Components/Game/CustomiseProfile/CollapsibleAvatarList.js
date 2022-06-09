@@ -38,9 +38,8 @@ export default function CollapsibleAvatarList(props) {
               {AvatarOptions().map((avatar, index) => (
                 <ImageListItem key={index}>
                   <img
-                    onClick={(event) => {
-                      props.handleChosenAvatarClick(avatar.src);
-                      console.log(event.target);
+                    onClick={() => {
+                      props.handleChosenAvatarClick(avatar.src, avatar.id);
                     }}
                     style={{ cursor: "pointer" }}
                     src={`${avatar.src}?w=164&h=164&fit=crop&auto=format`}
