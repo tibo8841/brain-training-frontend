@@ -10,17 +10,16 @@ import {
   Box,
   Container,
 } from "@mui/material";
-import { updateWinMessage } from "../../Networking";
 export default function UserWinMessageForm(props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [defaultMessage, setDefaultMessage] = useState("");
   // const winMessageCharacterLimit = 20;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    updateWinMessage(event.target.value);
     event.target.reset();
   }
-  let usersNewWinMessage = "I win!";
+
   /*
   useEffect(() => {
     async function fetchUserWinMessage() {
@@ -58,19 +57,18 @@ export default function UserWinMessageForm(props) {
               <ListItem>
                 <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                   <TextField
-                    onChange={(event) =>
-                      (usersNewWinMessage = event.target.value)
-                    }
+                    value={defaultMessage}
+                    onChange={(event) => {
+                      setDefaultMessage(event.target.value);
+                    }}
                     label="Enter your win message"
                     variant="outlined"
                     style={{ width: 300 }}
                   />
                   <button
                     onClick={(event) => {
-                      props.updateUsersWinMessage(usersNewWinMessage);
-                      console.log(
-                        "write a fetch request to send the backend for this win message: "
-                      );
+                      props.updateUsersWinMessage(defaultMessage);
+                      console.log("Win message submitted ");
                     }}
                     type="submit"
                     variant="contained"
