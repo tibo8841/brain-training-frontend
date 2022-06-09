@@ -15,11 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MultiplayerResults from "./MultiplayerResults";
 import { Stack } from "@mui/material";
 
-
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
 const theme = createTheme();
-
 
 export default function MultiplayerGame() {
   const [isMusic, setIsMusic] = useState(false);
@@ -42,7 +40,6 @@ export default function MultiplayerGame() {
     retrieveUsername();
     //console.log(username);
   }, [username]);
-
 
   const handleMusicClick = () => {
     if (isMusic) {
@@ -101,10 +98,6 @@ export default function MultiplayerGame() {
   function addToScore(points) {
     const currentScore = score;
     setScore(currentScore + points);
-  }
-
-  function submitUsername() {
-    setShowUser(false);
   }
 
   const sendScore = async () => {
@@ -179,7 +172,6 @@ export default function MultiplayerGame() {
   }, [score]);
 
   if (questionNumber > 3) {
-
     let highest = highScore();
     let highUser = "ANONYMOUS";
     let highMessage = "";
@@ -262,22 +254,6 @@ export default function MultiplayerGame() {
       </Box>
       <Box align="center">
         {sneakySecondsLeft === 0 ? loadQuestion() : null}
-      </Box>
-      <Box align="center">
-        {showUser ? (
-          <input
-            type="text"
-            value={username}
-            placeholder="Name"
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-            onKeyPress={(event) => {
-              event.key === "Enter" && submitUsername();
-            }}
-          />
-        ) : null}
-        {showUser ? <button onClick={submitUsername}>&#9658;</button> : null}
       </Box>
     </Container>
   );
