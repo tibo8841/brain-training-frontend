@@ -58,7 +58,9 @@ export default function UserWinMessageForm(props) {
                 <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                   <TextField
                     value={defaultMessage}
-                    onChange={(event) => setDefaultMessage(event.target.value)}
+                    onChange={(event) => {
+                      setDefaultMessage(event.target.value);
+                    }}
                     label="Enter your win message"
                     variant="outlined"
                     style={{ width: 300 }}
@@ -66,9 +68,7 @@ export default function UserWinMessageForm(props) {
                   <button
                     onClick={(event) => {
                       props.updateUsersWinMessage(defaultMessage);
-                      console.log(
-                        "write a fetch request to send the backend for this win message: "
-                      );
+                      console.log("Win message submitted ");
                     }}
                     type="submit"
                     variant="contained"

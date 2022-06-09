@@ -1,11 +1,13 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Container, Button } from "@mui/material";
 import CollapsibleAvatarList from "./CollapsibleAvatarList";
-import UserCurrentAvatar from "./UserCurrentAvatarDisplay";
+import UserCurrentAvatarDisplay from "./UserCurrentAvatarDisplay";
 import UserWinMessageDisplay from "./UserWinMessageDisplay";
 import UserWinMessageForm from "./UserWinMessageForm";
 import { updateWinMessage } from "../../Networking";
 import { updateProfilePicture } from "../../Networking";
+import { getProfile, checkSessions } from "../../Networking";
+import AvatarOption from "./AvatarOptions";
 
 export default function CustomiseProfile() {
   const [userAvatarId, setUserAvatarId] = useState(1);
@@ -13,37 +15,86 @@ export default function CustomiseProfile() {
   const [userAvatar, setUserAvatar] = useState(
     "/static/media/Avatar1.3a808b587ef8820a42e5.png"
   );
+  const [originalWinMessage, setOriginalWinMessage] = useState("");
+  const [originalAvatarID, setOriginalAvatarID] = useState(1);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isNewWinMessage, setIsNewWinMessage] = useState(false);
+  const [isNewAvatar, setIsNewAvatar] = useState(false);
+
+  async function checkLogin() {
+    let auth = await checkSessions();
+    if (auth === true) {
+      setIsAuthenticated(true);
+    }
+  }
+
+  async function fetchUserWinMessage() {
+    if (isAuthenticated) {
+      const user = await getProfile();
+      setOriginalWinMessage(user.user.win_message);
+    }
+  }
+
+  checkLogin();
+  fetchUserWinMessage();
+  fetchOriginalAvatar();
+
+  function getAvatarLink(avatarID) {
+    let chosenAvatar = AvatarOption().find((avatar) => avatar.id === avatarID);
+    console.log(chosenAvatar.link);
+    console.log("above is link");
+    return chosenAvatar.link;
+  }
+
+  async function fetchOriginalAvatar() {
+    if (isAuthenticated) {
+      const user = await getProfile();
+      setOriginalAvatarID(user.user.profile_picture_id);
+    }
+  }
 
   function handleChosenAvatarClick(selectedAvatarSrc, selectedAvatarid) {
+    setIsNewAvatar(true);
     setUserAvatar(selectedAvatarSrc);
     setUserAvatarId(selectedAvatarid);
   }
 
   function updateUsersWinMessage(usersUpdatedMessage) {
+    setIsNewWinMessage(true);
     setUserWinMessage(usersUpdatedMessage);
   }
 
-  function handleSaveChanges() {
+  function handleSaveMessage() {
     updateWinMessage(userWinMessage);
-    updateProfilePicture(userAvatar);
-    console.log("changes saved");
+    console.log("changes saved!");
+  }
+
+  function handleSaveAvatar() {
+    updateProfilePicture(userAvatarId);
   }
 
   return (
     <div>
       <Container align="center">
         <h1> Customise your profile! </h1>
-        <UserCurrentAvatar
+        <UserCurrentAvatarDisplay
+          isNewAvatar={isNewAvatar}
           selectedAvatar={userAvatar}
-          handleChosenAvatarClick={handleChosenAvatarClick}
+          getAvatarLink={getAvatarLink}
+          originalAvatarID={originalAvatarID}
         />
         <h2> My win message: </h2>
-        <UserWinMessageDisplay userWinMessage={userWinMessage} />
+        <UserWinMessageDisplay
+          isNewWinMessage={isNewWinMessage}
+          userWinMessage={userWinMessage}
+          originalWinMessage={originalWinMessage}
+        />
         <CollapsibleAvatarList
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
+        <Button onClick={handleSaveAvatar}>save avatar</Button>
         <UserWinMessageForm updateUsersWinMessage={updateUsersWinMessage} />
-        <Button onClick={handleSaveChanges}>save changes</Button>
+        <Button onClick={handleSaveMessage}>save message</Button>
       </Container>
     </div>
   );

@@ -58,8 +58,8 @@ export async function updateWinMessage(message) {
   return json;
 }
 
-export async function updateProfilePicture(pictureID) {
-  const newPicture = { pictureID: pictureID };
+export async function updateProfilePicture(profilePictureID) {
+  const newPicture = { profilePictureID: profilePictureID };
   const result = await fetch(`${URL}/profile/picture`, {
     method: "PATCH",
     credentials: "include",

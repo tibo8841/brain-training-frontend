@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getProfile } from "../../Networking";
 
 export default function UserWinMessageDisplay(props) {
@@ -13,9 +13,13 @@ export default function UserWinMessageDisplay(props) {
   // }
   // fetchUserWinMessage();
 
-  return (
-    <div>
-      <h2>{props.userWinMessage}</h2>
-    </div>
-  );
+  function showWinMessage() {
+    if (props.isNewWinMessage) {
+      return <h2>{props.userWinMessage}</h2>;
+    } else {
+      return <h2>{props.originalWinMessage}</h2>;
+    }
+  }
+
+  return <div>{showWinMessage()}</div>;
 }
