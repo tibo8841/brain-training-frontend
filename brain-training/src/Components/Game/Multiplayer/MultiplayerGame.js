@@ -239,7 +239,7 @@ export default function MultiplayerGame() {
                   </Box>
                   <Box item md sx={{ mt: 4 }}>
                     <Typography component="h2" variant="h2">
-                      {`${highMessage} `}
+                      {`"${highMessage}" `}
                     </Typography>
                   </Box>
                   <Box item md sx={{ mt: 4 }}>
