@@ -34,7 +34,7 @@ export default function CustomiseProfile() {
       <Container align="center">
         <h1> Customise your profile! </h1>
         <UserCurrentAvatar
-          selectedAvatar={userAvatar}
+          selectedAvatar={userAvatarId}
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
         <h2> My win message: </h2>
