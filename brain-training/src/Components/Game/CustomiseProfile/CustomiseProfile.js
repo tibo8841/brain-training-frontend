@@ -41,8 +41,8 @@ export default function CustomiseProfile() {
 
   function getAvatarLink(avatarID) {
     let chosenAvatar = AvatarOption().find((avatar) => avatar.id === avatarID);
-    console.log(chosenAvatar.link);
-    console.log("above is link");
+    //console.log(chosenAvatar.link);
+    // console.log("above is link");
     return chosenAvatar.link;
   }
 
@@ -66,7 +66,6 @@ export default function CustomiseProfile() {
 
   function handleSaveMessage() {
     updateWinMessage(userWinMessage);
-    console.log("changes saved!");
   }
 
   function handleSaveAvatar() {
