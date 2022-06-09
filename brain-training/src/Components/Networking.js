@@ -4,7 +4,6 @@
 
 const URL = "https://dralexbraintrainer.sigmalabs.co.uk";
 
-
 export async function getLogin(username, password) {
   const result = await fetch(
     `${URL}/login?username=${username}&password=${password}`

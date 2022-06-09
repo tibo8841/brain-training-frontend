@@ -18,10 +18,10 @@ import {
 
 import io from "socket.io-client";
 
-// const socket = io.connect(
-//   "https://brain-training-multiplayer.sigmalabs.co.uk/"
-// );
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect(
+  "https://brain-training-multiplayer.sigmalabs.co.uk/"
+);
+
 const room = 1234;
 
 export default function Lobby() {
@@ -29,6 +29,7 @@ export default function Lobby() {
   const [username, setUsername] = useState("username");
   const [startPlay, setStartPlay] = useState(false);
   const [userList, setUserList] = useState([]);
+  const [avatarID, setAvatarID] = useState(1);
 
   async function joinRoom() {
     await socket.emit("join_room", { username: username, room: room });
@@ -88,7 +89,7 @@ export default function Lobby() {
     }
   }
 
-  // getUsername();
+  getUsername();
 
   let navigate = useNavigate();
 
