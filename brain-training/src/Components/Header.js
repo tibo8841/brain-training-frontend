@@ -32,11 +32,9 @@ export default function Header() {
 
   async function checkLoggedIn() {
     const authentication = await checkSessions();
-    console.log(authentication);
     authentication
       ? setSessionAuthentication(true)
       : setSessionAuthentication(false);
-    console.log(sessionAuthentication);
   }
 
   const gameName = "Dr Alex";
