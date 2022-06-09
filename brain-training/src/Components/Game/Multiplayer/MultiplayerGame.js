@@ -32,7 +32,7 @@ export default function MultiplayerGame() {
 
   useEffect(() => {
     retrieveUsername();
-    console.log(username)
+    console.log(username);
   }, []);
 
   const handleMusicClick = () => {
@@ -47,7 +47,7 @@ export default function MultiplayerGame() {
     const auth = await checkSessions();
     if (auth) {
       const user = await getProfile();
-      console.log(user)
+      console.log(user);
       setUsername(user.user.username);
     } else {
       setUsername("ANON");
@@ -93,7 +93,6 @@ export default function MultiplayerGame() {
   function submitUsername() {
     setShowUser(false);
   }
-
 
   const sendScore = async () => {
     const scoreData = {

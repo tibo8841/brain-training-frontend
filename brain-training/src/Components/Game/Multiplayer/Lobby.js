@@ -58,7 +58,7 @@ export default function Lobby() {
   return (
     <Container sx={{ width: "80%" }}>
       <Box align="center">
-        <Button onClick={startGame()}></Button>
+        <Button onClick={startGame}></Button>
         <CopyToClipboard
           text={"https://brain-training-website.sigmalabs.co.uk/lobby"}
           //put real link in text above
