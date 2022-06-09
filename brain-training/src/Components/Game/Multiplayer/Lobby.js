@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Chat from "./Chat";
+import { useNavigate } from "react-router-dom";
+import { getProfile, checkSessions } from "../../Networking";
 import {
   Container,
   Typography,
@@ -11,6 +13,7 @@ import {
   ListItemText,
   CircularProgress,
   Tooltip,
+  Button,
 } from "@mui/material";
 
 import io from "socket.io-client";
@@ -19,20 +22,45 @@ const socket = io.connect(
   "https://brain-training-multiplayer.sigmalabs.co.uk/"
 );
 const room = 1234;
-const username = "username";
 
 export default function Lobby() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState("username");
+  const [startPlay, setStartPlay] = useState(false);
   socket.emit("join_room", { username, room });
+
+  async function checkLogin() {
+    let auth = await checkSessions();
+    if (auth === true) {
+      setIsAuthenticated(true);
+    }
+  }
+
+  async function getUsername() {
+    checkLogin();
+    if (isAuthenticated) {
+      let profile = await getProfile();
+      setUsername(profile.user.username);
+    }
+  }
+
+  getUsername();
+
+  let navigate = useNavigate();
+
+  function startGame() {
+    setStartPlay(true);
+    socket.emit("send_play", { startPlay });
+    navigate("/lobby/play");
+  }
 
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
     <Container sx={{ width: "80%" }}>
-      <Typography variant="h4" align="center" gutterBottom marginTop={"5%"}>
-        You are in lobby A
-      </Typography>
       <Box align="center">
+        <Button onClick={startGame()}></Button>
         <CopyToClipboard
-          text={"Lobby-Link-Here"}
+          text={"https://brain-training-website.sigmalabs.co.uk/lobby"}
           //put real link in text above
           onCopy={() => setCopiedLobbyLink("Lobby-Link")}
         >
@@ -59,7 +87,7 @@ export default function Lobby() {
             >
               <div>
                 <i className="Lobby-Link-Here" />
-                <span>Click to copy link to a lobby</span>
+                <span>Click to copy link to the lobby</span>
               </div>
             </Box>
           </Tooltip>

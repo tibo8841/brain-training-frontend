@@ -4,8 +4,7 @@ import { Container } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import useSound from "use-sound";
-import brainTrainCalm from '../../../Sounds/brainTrainCalm.mp3'
-import { getProfile } from "../../Networking";
+import brainTrainCalm from "../../../Sounds/brainTrainCalm.mp3";
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -25,7 +24,8 @@ export default function MultiplayerGame() {
     volume: 0.2,
   });
   const [scoreList, setScoreList] = useState([]);
-  const [username, setUsername] = useState("ANONYMOUS");
+  const [username, setUsername] = useState("");
+  const [showUser, setShowUser] = useState(true);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [finalScoreList, setFinalScoreList] = useState([]);
 
@@ -37,7 +37,6 @@ export default function MultiplayerGame() {
     }
   };
 
-
   socket.emit("join_room", { username, room });
 
   function loadQuestion() {
@@ -45,6 +44,7 @@ export default function MultiplayerGame() {
       <QuestionsAndAnswers
         addToScore={addToScore}
         resetSneakySeconds={resetSneakySeconds}
+        handleMusicClick={handleMusicClick}
       />
     );
   }
@@ -72,11 +72,9 @@ export default function MultiplayerGame() {
     const currentScore = score;
     setScore(currentScore + points);
   }
- 
-  async function retrieveUser() {
-    const user = await getProfile();
-    setUsername(user.user.username);
-    return user;
+
+  function submitUsername() {
+    setShowUser(false);
   }
 
   const sendScore = async () => {
@@ -89,7 +87,7 @@ export default function MultiplayerGame() {
     await socket.emit("send_score", scoreData);
     console.log("sending score is happening");
     setScoreList([...scoreList, scoreData]);
-    if (questionNumber > 2) {
+    if (questionNumber > 9) {
       setFinalScoreList([...finalScoreList, scoreData]);
     }
   };
@@ -99,7 +97,7 @@ export default function MultiplayerGame() {
     displayUserScores();
     socket.on("receive_score", (data) => {
       setScoreList([...scoreList, data]);
-      if (questionNumber > 2) {
+      if (questionNumber > 9) {
         setFinalScoreList([...finalScoreList, data]);
       }
     });
@@ -114,7 +112,7 @@ export default function MultiplayerGame() {
 
   function displayUserScores() {
     let highest = highScore();
-    let highUser = "ANONYMOUS";
+    let highUser = "anon";
     scoreList.forEach(function (user) {
       if (user.score === highest) {
         highUser = user.username;
@@ -151,6 +149,10 @@ export default function MultiplayerGame() {
 
   if (questionNumber > 2) {
     console.log(finalScoreList);
+    setTimeout(loadResults, 2000);
+  }
+
+  function loadResults() {
     return (
       <div>
         <MultiplayerResults finalScoreList={finalScoreList} />
@@ -171,6 +173,22 @@ export default function MultiplayerGame() {
       </Box>
       <Box align="center">
         {sneakySecondsLeft === 0 ? loadQuestion() : null}
+      </Box>
+      <Box align="center">
+        {showUser ? (
+          <input
+            type="text"
+            value={username}
+            placeholder="Name"
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+            onKeyPress={(event) => {
+              event.key === "Enter" && submitUsername();
+            }}
+          />
+        ) : null}
+        {showUser ? <button onClick={submitUsername}>&#9658;</button> : null}
       </Box>
     </Container>
   );
