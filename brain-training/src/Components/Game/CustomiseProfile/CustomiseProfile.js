@@ -8,11 +8,11 @@ import { updateWinMessage } from "../../Networking";
 import { updateProfilePicture } from "../../Networking";
 
 export default function CustomiseProfile() {
+  const [userAvatarId, setUserAvatarId] = useState(1);
+  const [userWinMessage, setUserWinMessage] = useState("");
   const [userAvatar, setUserAvatar] = useState(
     "/static/media/Avatar1.3a808b587ef8820a42e5.png"
   );
-  const [userAvatarId, setUserAvatarId] = useState(1);
-  const [userWinMessage, setUserWinMessage] = useState("I win!");
 
   function handleChosenAvatarClick(selectedAvatarSrc, selectedAvatarid) {
     setUserAvatar(selectedAvatarSrc);
@@ -43,7 +43,7 @@ export default function CustomiseProfile() {
           handleChosenAvatarClick={handleChosenAvatarClick}
         />
         <UserWinMessageForm updateUsersWinMessage={updateUsersWinMessage} />
-        <Button onClick={() => handleSaveChanges()}>save changes</Button>
+        <Button onClick={handleSaveChanges}>save changes</Button>
       </Container>
     </div>
   );
