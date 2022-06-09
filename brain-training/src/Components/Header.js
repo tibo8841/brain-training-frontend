@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -17,17 +17,19 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import { checkSessions, endSession } from "./Networking";
 import PlayerDisplayCard from "./Game/Multiplayer/PlayerDisplayCard";
+import AvatarOption from "./Game/CustomiseProfile/AvatarOptions";
+import { getProfile } from "./Networking";
 
 const pages = [];
 let settings = ["Login"];
 
 export default function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [sessionAuthentication, setSessionAuthentication] =
-    React.useState(false);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [sessionAuthentication, setSessionAuthentication] = useState(false);
+  const [avatarID, setAvatarID] = useState(1);
 
-  React.useEffect(() => {
+  useEffect(() => {
     checkLoggedIn(); // eslint-disable-next-line
   }, []);
 
@@ -74,6 +76,23 @@ export default function Header() {
       window.location.reload(false);
     }
   }
+
+  function getAvatarLink(avatarID) {
+    let chosenAvatar = AvatarOption().find((avatar) => avatar.id === avatarID);
+    return chosenAvatar.link;
+  }
+
+  async function fetchAvatar() {
+    if (sessionAuthentication === true) {
+      const user = await getProfile();
+      setAvatarID(user.user.profile_picture_id);
+    }
+  }
+  fetchAvatar();
+  getAvatarLink(avatarID);
+  /*
+- render user logged in avatar in header.
+  */
 
   return (
     <AppBar position="static">
@@ -168,7 +187,7 @@ export default function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <PlayerDisplayCard />
+                <Avatar src={getAvatarLink(avatarID)} />
               </IconButton>
             </Tooltip>
             <Menu

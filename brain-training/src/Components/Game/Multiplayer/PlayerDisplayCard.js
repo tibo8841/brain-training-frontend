@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Container } from "@mui/system";
 import Avatar from "@mui/material/Avatar";
 import { checkSessions } from "../../Networking";
