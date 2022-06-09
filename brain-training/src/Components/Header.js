@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import { checkSessions, endSession } from "./Networking";
+import PlayerDisplayCard from "./Game/Multiplayer/PlayerDisplayCard";
 
 const pages = [];
 let settings = ["Login"];
@@ -167,7 +168,7 @@ export default function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <PlayerDisplayCard />
               </IconButton>
             </Tooltip>
             <Menu
