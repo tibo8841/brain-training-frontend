@@ -6,13 +6,14 @@ import { Box } from "@mui/material";
 import useSound from "use-sound";
 import brainTrainCalm from "../../../Sounds/brainTrainCalm.mp3";
 import { checkSessions, getProfile } from "../../Networking";
-
+import Paper from "@mui/material/Paper";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import MultiplayerResults from "./MultiplayerResults";
 import { Stack } from "@mui/material";
 
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
@@ -58,7 +59,7 @@ export default function MultiplayerGame() {
       setAvatar(user.user.profile_picture_id);
       setWinMessage(user.user.win_message);
     } else {
-      setUsername("ANON");
+      setUsername("ANONYMOUS");
       setAvatar(1);
       setWinMessage("I have the biggest brain!");
     }
@@ -136,7 +137,7 @@ export default function MultiplayerGame() {
 
   function displayUserScores() {
     let highest = highScore();
-    let highUser = "anon";
+    let highUser = "ANONYMOUS";
     scoreList.forEach(function (user) {
       if (user.score === highest) {
         highUser = user.username;
@@ -183,61 +184,71 @@ export default function MultiplayerGame() {
     });
 
     return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <main>
+      <ThemeProvider theme={theme}>
+        <Grid container component="main" sx={{ height: "100vh" }}>
+          <Grid
+            item
+            xs={false}
+            sm={4}
+            md={7}
+            sx={{
+              backgroundImage: "url(https://source.unsplash.com/random)",
+              backgroundRepeat: "no-repeat",
+              backgroundColor: (t) =>
+                t.palette.mode === "light"
+                  ? t.palette.grey[50]
+                  : t.palette.grey[900],
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            md={5}
+            component={Paper}
+            elevation={6}
+            square
+          >
             <Box
               sx={{
-                bgcolor: "background.paper",
-                pt: 8,
-                pb: 6,
+                my: 8,
+                mx: 4,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              <Container maxWidth="sm">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
-                  Final Scores!
-                </Typography>
-              </Container>
+              <Box component="winner-display" noValidate sx={{ mt: 1 }}>
+                <Box container>
+                  <Box item xl sx={{ mt: 4 }}>
+                    <Typography component="h1" variant="h1">
+                      Winner!
+                    </Typography>
+                  </Box>
+
+                  <Box item md sx={{ mt: 4 }}>
+                    <Typography component="h2" variant="h2">
+                      {`${highUser}`}
+                    </Typography>
+                  </Box>
+                  <Box item md sx={{ mt: 4 }}>
+                    <Typography component="h2" variant="h2">
+                      {`${highMessage} `}
+                    </Typography>
+                  </Box>
+                  <Box item md sx={{ mt: 4 }}>
+                    <Typography component="h3" variant="h3">
+                      {`Score: ${highest}`}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
             </Box>
-            <Container maxWidth="md">
-              <Stack
-                sx={{ pt: 4 }}
-                direction="column"
-                spacing={2}
-                justifyContent="center"
-              >
-                <Stack>
-                  <Card
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
-                        align="center"
-                      >
-                        {`${highUser} Wins's! \n ${highMessage} \n  Final Score: ${highest}`}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Stack>
-              </Stack>
-            </Container>
-          </main>
-        </ThemeProvider>
-      </div>
+          </Grid>
+        </Grid>
+      </ThemeProvider>
     );
   }
 
