@@ -7,33 +7,20 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Stack, Button } from "@mui/material";
 import { checkSessions, getProfile, postToLeaderboard } from "../Networking";
+import { useNavigate } from "react-router-dom";
 
 export default function SingleplayerResults(props) {
-  const [sessionAuthentication, setSessionAuthentication] =
-    React.useState(false);
-
-  React.useEffect(() => {
-    checkLoggedIn(); // eslint-disable-next-line
-  }, []);
-
-  async function checkLoggedIn() {
+  const [isClicked, setIsClicked] = React.useState(false);
+  let navigate = useNavigate();
+  async function handleClick(e) {
     const authentication = await checkSessions();
     console.log(authentication);
-    authentication
-      ? setSessionAuthentication(true)
-      : setSessionAuthentication(false);
-    console.log(sessionAuthentication);
-    checkPostToLeaderboard();
-  }
-
-  async function checkPostToLeaderboard() {
-    if (sessionAuthentication === true) {
-      const player = await getProfile();
-      await postToLeaderboard(
-        player.user.username,
-        player.user.id,
-        props.score
-      );
+    if (authentication === true) {
+      const profile = await getProfile();
+      await postToLeaderboard(profile.user.username, props.score);
+      setIsClicked(true);
+    } else {
+      navigate("/login");
     }
   }
 
@@ -129,6 +116,9 @@ export default function SingleplayerResults(props) {
             </Stack>
           </Stack>
         </Container>
+        {isClicked ? null : (
+          <Button onClick={handleClick}>Send Score To Leaderboard</Button>
+        )}
         <Button href={"/leaderboard"}>leaderbaord</Button>
       </main>
     </ThemeProvider>

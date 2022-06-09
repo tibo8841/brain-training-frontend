@@ -2,8 +2,8 @@
 //     -Function for each fetch request
 //     -import to other components when needed
 
-const URL = "https://dralexbraintrainer.sigmalabs.co.uk";
-
+//const URL = "https://dralexbraintrainer.sigmalabs.co.uk";
+const URL = "http://localhost:8080";
 export async function getLogin(username, password) {
   const result = await fetch(
     `${URL}/login?username=${username}&password=${password}`
@@ -31,10 +31,11 @@ export async function getLeaderboard(userID) {
   return json;
 }
 
-export async function postToLeaderboard(username, userID, score) {
-  const scoreDetails = { username: username, userID: userID, score: score };
+export async function postToLeaderboard(username, score) {
+  const scoreDetails = { username: username, score: score };
   const result = await fetch(`${URL}/leaderboard`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -89,9 +90,6 @@ export async function startSession(userID) {
     body: JSON.stringify(user),
   });
   const json = await result.json();
-  console.log("here");
-  console.log(json);
-  console.log("check");
   await checkSessions();
   return json;
 }
@@ -115,6 +113,5 @@ export async function checkSessions() {
     },
   });
   const json = await result.json();
-  console.log(json);
   return json.response;
 }
