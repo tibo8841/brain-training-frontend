@@ -24,9 +24,9 @@ export default function MultiplayerGame() {
   const [score, setScore] = useState(0);
   const [sneakySecondsLeft, setSneakySecondsLeft] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(0.85);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("Anonymous");
   const [avatar, setAvatar] = useState(1);
-  const [winMessage, setWinMessage] = useState("");
+  const [winMessage, setWinMessage] = useState("I have the biggest brain!");
   const [play, { stop }] = useSound(brainTrainCalm, {
     playbackRate,
     volume: 0.2,
@@ -39,7 +39,7 @@ export default function MultiplayerGame() {
   useEffect(() => {
     retrieveUsername();
     //console.log(username);
-  }, [username]);
+  }, []);
 
   const handleMusicClick = () => {
     if (isMusic) {
