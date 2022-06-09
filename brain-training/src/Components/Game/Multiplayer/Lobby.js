@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Chat from "./Chat";
+import { useNavigate } from "react-router-dom";
+import { getProfile, checkSessions } from "../../Networking";
 import {
   Container,
   Typography,
@@ -11,6 +13,7 @@ import {
   ListItemText,
   CircularProgress,
   Tooltip,
+  Button,
 } from "@mui/material";
 
 import io from "socket.io-client";
@@ -19,20 +22,44 @@ const socket = io.connect(
   "https://brain-training-multiplayer.sigmalabs.co.uk/"
 );
 const room = 1234;
-const username = "username";
 
 export default function Lobby() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState("username");
+  const [startPlay, setStartPlay] = useState(false);
   socket.emit("join_room", { username, room });
+
+  async function checkLogin() {
+    let auth = await checkSessions();
+    if (auth === true) {
+      setIsAuthenticated(true);
+    }
+  }
+
+  async function getUsername() {
+    checkLogin();
+    if (isAuthenticated) {
+      let profile = await getProfile();
+      setUsername(profile.user.username);
+    }
+  }
+
+  getUsername();
+
+  let navigate = useNavigate();
+
+  function startGame() {
+    setStartPlay(true);
+    socket.emit("send_play", { startPlay });
+    navigate("/lobby/play");
+  }
 
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
     <Container sx={{ width: "80%" }}>
-      <Typography variant="h4" align="center" gutterBottom marginTop={"5%"}>
-        You are in lobby A
-      </Typography>
-      <Box align="center">
+      <Box align="center" marginBottom={"1%"}>
         <CopyToClipboard
-          text={"Lobby-Link-Here"}
+          text={"https://brain-training-website.sigmalabs.co.uk/lobby"}
           //put real link in text above
           onCopy={() => setCopiedLobbyLink("Lobby-Link")}
         >
@@ -59,13 +86,18 @@ export default function Lobby() {
             >
               <div>
                 <i className="Lobby-Link-Here" />
-                <span>Click to copy link to a lobby</span>
+                <span>Click to copy link to the lobby</span>
               </div>
             </Box>
           </Tooltip>
         </CopyToClipboard>
       </Box>
-      <Box sx={{ flexGrow: 1, marginTop: "5%" }}>
+      <Box align="center" textAlign={"center"}>
+        <Button onClick={startGame} variant="contained">
+          Start Game for everyone!
+        </Button>
+      </Box>
+      <Box sx={{ flexGrow: 1, marginTop: "2%" }}>
         <Grid container spacing={2}>
           <Grid item xs={8} component={Box}>
             {/* render below conditionally based on if lobby is full, if is full say "ready to start" instead */}
@@ -78,7 +110,7 @@ export default function Lobby() {
             <Typography variant="h4">A: 7/16</Typography>
           </Grid>
         </Grid>
-        <Grid container spacing={2} marginTop={"5%"}>
+        <Grid container spacing={2} marginTop={"1%"}>
           <Grid item xs={5} component={Box}>
             <Typography align="center" variant="h5">
               Players in Lobby

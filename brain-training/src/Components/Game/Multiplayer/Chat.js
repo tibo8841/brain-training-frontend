@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import AlwaysScrollToBottom from "./AlwaysScrollToBottom";
 import "./Chat.css";
 
@@ -9,15 +9,6 @@ function Chat({ socket, username, room }) {
 
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const messagesEndRef = useRef(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messageList]);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
