@@ -29,10 +29,19 @@ export default function HowToPlay() {
                 <br />
                 <br />
                 -You will be asked a series of questions in which you must
-                answer correctly within the time limit <br />- The faster you
-                answer the more points you will receive <br />- The more points
-                you receive the bigger your brain is and you can flex on all the
-                opps
+                answer correctly within the time limit
+                <br />- The faster you answer the more points you will receive
+                <br />- Once finishing the singleplayer, please post your scores to the Leaderboard!
+                <br />- Loading into multiplayer will bring you to a lobby where
+                you an chat with other users
+                <br />- While waiting in the lobby you will have the option to
+                start the game, this will start the game for everyone so please
+                be careful!
+                <br />- Please also take the time to build your custom profile!
+                You can find this by clicking in the top left corner of the
+                page.
+                <br />- The more points you receive the bigger your brain is and
+                you can flex on all the opps
               </Typography>
             </Grid>
           </Box>
