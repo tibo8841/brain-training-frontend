@@ -53,22 +53,6 @@ export default function Leaderboard() {
           </Container>
         </Box>
         <Container maxWidth="md">
-          <Box marginBottom={5}>
-            <FormControl fullWidth>
-              <InputLabel id="sort-label">Sort</InputLabel>
-              <Select
-                labelId="sort-button-label"
-                id="sort-button"
-                value={sort}
-                label="Sort"
-                onChange={handleChange}
-              >
-                <MenuItem value={"ASC"}>Ascending</MenuItem>
-                <MenuItem value={"DSC"}>Descending</MenuItem>
-                <MenuItem value={"RAND"}>Random</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
           {/* End hero unit */}
           <Stack
             sx={{ pt: 4 }}
