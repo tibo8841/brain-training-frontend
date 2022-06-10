@@ -33,8 +33,8 @@ export async function registerUser(username, password) {
   return json;
 }
 
-export async function getLeaderboard(userID) {
-  const result = await fetch(`${URL}/leaderboard${userID}`, {
+export async function getLeaderboard() {
+  const result = await fetch(`${URL}/leaderboard`, {
     method: "GET",
     credentials: "include",
     headers: {

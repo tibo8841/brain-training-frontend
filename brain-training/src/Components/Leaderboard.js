@@ -19,7 +19,7 @@ export default function Leaderboard() {
   const [cards, setCards] = React.useState([]);
   React.useEffect(() => {
     const fetchData = async () => {
-      const data = await getLeaderboard("");
+      const data = await getLeaderboard();
       console.log(data);
       setCards(data);
     };
