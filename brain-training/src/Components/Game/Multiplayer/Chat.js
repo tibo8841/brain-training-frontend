@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AlwaysScrollToBottom from "./AlwaysScrollToBottom";
 import "./Chat.css";
+import { Avatar } from "@mui/material";
 
 function Chat({ socket, username, room }) {
-  // if (username !== "" && room !== "") {
-  //   socket.emit("join_room", room);
-  // }
-
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
@@ -48,6 +45,7 @@ function Chat({ socket, username, room }) {
             >
               <div>
                 <div className="message-content">
+                  <Avatar sx={{ margin: "3%" }} />
                   <p>{messageContent.message}</p>
                 </div>
                 <div className="message-meta">

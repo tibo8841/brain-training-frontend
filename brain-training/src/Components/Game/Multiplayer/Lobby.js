@@ -8,9 +8,6 @@ import {
   Typography,
   Box,
   Grid,
-  List,
-  ListItem,
-  ListItemText,
   CircularProgress,
   Tooltip,
   Button,
@@ -95,9 +92,20 @@ export default function Lobby() {
 
   function startGame() {
     setStartPlay(true);
-    socket.emit("send_play", { startPlay });
+    sendPlay(true);
     navigate("/lobby/play");
   }
+
+  async function sendPlay(ready) {
+    await socket.emit("send_play", { ready: ready });
+  }
+
+  useEffect(() => {
+    socket.on("receive_play", (data) => {
+      console.log(data);
+      startGame();
+    });
+  }, [socket, startPlay]);
 
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
@@ -143,64 +151,17 @@ export default function Lobby() {
       </Box>
       <Box sx={{ flexGrow: 1, marginTop: "2%" }}>
         <Grid container spacing={2}>
-          <Grid item xs={8} component={Box}>
+          <Grid item xs={12} component={Box}>
             {/* render below conditionally based on if lobby is full, if is full say "ready to start" instead */}
             <Typography variant="h4">
-              Waiting for lobby to fill...{"  "}
+              Wait for your friends before starting game, chat below while you
+              wait..{"  "}
               <CircularProgress color="secondary" size={30} />
             </Typography>
           </Grid>
-          <Grid item xs={4} component={Box}>
-            <Typography variant="h4">A: 7/16</Typography>
-          </Grid>
         </Grid>
         <Grid container spacing={2} marginTop={"1%"}>
-          <Grid item xs={5} component={Box}>
-            <Typography align="center" variant="h5">
-              Players in Lobby
-            </Typography>
-            <List
-              sx={{ overflow: "auto", position: "relative", maxHeight: "70%" }}
-            >
-              <ListItem sx={{ marginBottom: "2%" }}>
-                <ListItemText align="center">Alex</ListItemText>
-              </ListItem>
-              <ListItem sx={{ marginBottom: "2%" }}>
-                <ListItemText align="center">Kamilah</ListItemText>
-              </ListItem>
-              <ListItem sx={{ marginBottom: "2%" }}>
-                <ListItemText align="center">
-                  Player Profile component would go here, with picture and stuff
-                </ListItemText>
-              </ListItem>
-              <ListItem sx={{ marginBottom: "2%" }}>
-                <ListItemText align="center">
-                  It would also be a scrolly list
-                </ListItemText>
-              </ListItem>
-              <ListItem sx={{ marginBottom: "2%" }}>
-                <ListItemText align="center">
-                  It would also be a scrolly list
-                </ListItemText>
-              </ListItem>
-              <ListItem sx={{ marginBottom: "2%" }}>
-                <ListItemText align="center">
-                  It would also be a scrolly list
-                </ListItemText>
-              </ListItem>
-              <ListItem sx={{ marginBottom: "2%" }}>
-                <ListItemText align="center">
-                  It would also be a scrolly list
-                </ListItemText>
-              </ListItem>
-              <ListItem sx={{ marginBottom: "2%" }}>
-                <ListItemText align="center">
-                  It would also be a scrolly list
-                </ListItemText>
-              </ListItem>
-            </List>
-          </Grid>
-          <Grid item xs={7} component={Box}>
+          <Grid item xs={12} component={Box}>
             <Chat room={room} username={username} socket={socket} />
           </Grid>
         </Grid>
