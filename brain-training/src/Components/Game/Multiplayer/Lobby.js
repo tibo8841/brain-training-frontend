@@ -68,66 +68,68 @@ export default function Lobby() {
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
     <Container sx={{ width: "80%" }}>
-      <Box align="center" marginBottom={"1%"}>
-        <CopyToClipboard
-          text={"https://brain-training-website.sigmalabs.co.uk/lobby"}
-          onCopy={() => setCopiedLobbyLink("Lobby-Link")}
-        >
-          <Tooltip
-            title={
-              copiedLobbyLink === "Lobby-Link"
-                ? "This was Copied!"
-                : "Copy To Clipboard"
-            }
-            placement="top"
+      <Box marginBottom="200px">
+        <Box align="center" marginBottom={"1%"}>
+          <CopyToClipboard
+            text={"https://brain-training-website.sigmalabs.co.uk/lobby"}
+            onCopy={() => setCopiedLobbyLink("Lobby-Link")}
           >
-            <Box
-              component="button"
-              data-clipboard-text="album-2"
-              type="button"
-              fontFamily="inherit"
-              fontSize="16px"
-              fontWeight="400"
-              lineHeight="1.25"
-              display="inline-block"
-              width="100%"
-              margin=".5rem 0"
-              padding="1%"
+            <Tooltip
+              title={
+                copiedLobbyLink === "Lobby-Link"
+                  ? "This was Copied!"
+                  : "Copy To Clipboard"
+              }
+              placement="top"
             >
-              <div>
-                <i className="Lobby-Link-Here" />
-                <span>Click to copy link to the lobby</span>
-              </div>
-            </Box>
-          </Tooltip>
-        </CopyToClipboard>
-      </Box>
-      <Box align="center" textAlign={"center"}>
-        <Button onClick={startGame} variant="contained">
-          Start Game for everyone!
-        </Button>
-      </Box>
-      <Box sx={{ flexGrow: 1, marginTop: "2%" }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} component={Box}>
-            {/* render below conditionally based on if lobby is full, if is full say "ready to start" instead */}
-            <Typography variant="h4">
-              Wait for your friends before starting game, chat below while you
-              wait..{"  "}
-              <CircularProgress color="secondary" size={30} />
-            </Typography>
+              <Box
+                component="button"
+                data-clipboard-text="album-2"
+                type="button"
+                fontFamily="inherit"
+                fontSize="16px"
+                fontWeight="400"
+                lineHeight="1.25"
+                display="inline-block"
+                width="100%"
+                margin=".5rem 0"
+                padding="1%"
+              >
+                <div>
+                  <i className="Lobby-Link-Here" />
+                  <span>Click to copy link to the lobby</span>
+                </div>
+              </Box>
+            </Tooltip>
+          </CopyToClipboard>
+        </Box>
+        <Box align="center" textAlign={"center"}>
+          <Button onClick={startGame} variant="contained">
+            Start Game for everyone!
+          </Button>
+        </Box>
+        <Box sx={{ flexGrow: 1, marginTop: "2%" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} component={Box}>
+              {/* render below conditionally based on if lobby is full, if is full say "ready to start" instead */}
+              <Typography variant="h4">
+                Wait for your friends before starting game, chat below while you
+                wait..{"  "}
+                <CircularProgress color="secondary" size={30} />
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid container spacing={2} marginTop={"1%"}>
-          <Grid item xs={12} component={Box}>
-            <Chat
-              room={room}
-              username={username}
-              socket={socket}
-              avatarID={avatarID}
-            />
+          <Grid container spacing={2} marginTop={"1%"}>
+            <Grid item xs={12} component={Box}>
+              <Chat
+                room={room}
+                username={username}
+                socket={socket}
+                avatarID={avatarID}
+              />
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Box>
     </Container>
   );
