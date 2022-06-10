@@ -6,13 +6,7 @@ const URL = "https://dralexbraintrainer.sigmalabs.co.uk";
 
 export async function getLogin(username, password) {
   const result = await fetch(
-    `${URL}/login?username=${username}&password=${password}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
+    `${URL}/login?username=${username}&password=${password}`
   );
   const json = await result.json();
   return json;
@@ -32,13 +26,7 @@ export async function registerUser(username, password) {
 }
 
 export async function getLeaderboard() {
-  const result = await fetch(`${URL}/leaderboard`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const result = await fetch(`${URL}/leaderboard`);
   const json = await result.json();
   return json;
 }
