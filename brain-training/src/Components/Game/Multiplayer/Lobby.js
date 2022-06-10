@@ -24,7 +24,6 @@ const room = 1234;
 export default function Lobby() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("username");
-  const [startPlay, setStartPlay] = useState(false);
   const [avatarID, setAvatarID] = useState(1);
 
   socket.emit("join_room", { username: username, room: room });
@@ -50,8 +49,11 @@ export default function Lobby() {
   let navigate = useNavigate();
 
   function startGame() {
-    setStartPlay(true);
     sendPlay(true);
+    navigate("/lobby/play");
+  }
+
+  function navigateToGame() {
     navigate("/lobby/play");
   }
 
@@ -59,12 +61,9 @@ export default function Lobby() {
     await socket.emit("send_play", { ready: ready });
   }
 
-  useEffect(() => {
-    socket.on("receive_play", (data) => {
-      console.log(data);
-      startGame();
-    });
-  }, [startPlay]);
+  socket.on("receive_play", (data) => {
+    navigateToGame();
+  });
 
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
