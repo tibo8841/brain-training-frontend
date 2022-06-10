@@ -9,7 +9,7 @@ The game plays as a 4 option multiple choice, where the user is rewarded for ans
 
 - [Objective](#Objective)
 - [Gameplay](#Gameplay)
-- [Our Team](#Our-Team)
+- [Our Team](#Contributors)
 
 ## Objective
 
@@ -45,41 +45,67 @@ The first page the user will be directed to will be the Homepage, where users ca
 After submitting a username, the user is able to fully customise their profile using different avatar presets and set a win message that will display on all the players screens.
 
 ### Main Game
+The first page the user will see is our homepage shown in the image below. The user can navigate throughout the hwole website through the homepage. In the top right corner, there is a small avatar representing the user profile navigation buttons. Clicking this will render a dropdown menu where you will have the option to login/register and when you are logged in the account you can navigate to the profile customisation page.
 
-<!-- <img width="1432" alt="Screenshot 2022-03-03 at 13 21 21" src="https://user-images.githubusercontent.com/94084605/156599321-ae89e2b3-d7f2-4d52-bc8d-559e70efb5e4.png"> -->
+The top left corner is also a button, you can click the logo for the game to return to the homepage at any point throughout the website.
+
+<img width="1080" alt="homepage" src="Screenshot 2022-06-09 at 16.21.18.png">
 
 Entering Singleplayer here allows you to play the game fully. The user will have 15 seconds to answer a random math question and will have 4 options to choose from. If the user answers or has not answered the question within the time limit, before the next question renders, the user has the option to skip to the next question. Points are scored relative to the timeframe you answer them within and one game is 10 questions long. At the end of the game, the user is presented with their results and an option to post their score to the Leaderboard.
-///////////////////////////////////////////
+There is also an in-game song created specifically for the game, the music intensifies the closer you get to the end of the game!
 
-<img width="1440" alt="Screenshot 2022-03-03 at 15 24 37" src="https://user-images.githubusercontent.com/94084605/156601064-3f9171be-9a52-4d91-8614-e5226695e60b.png">
-<img width="1440" alt="Screenshot 2022-03-03 at 15 25 26" src="https://user-images.githubusercontent.com/94084605/156601097-9660e33c-467e-4538-bf06-44c36219b58a.png">
-<img width="1440" alt="Screenshot 2022-03-03 at 15 26 53" src="https://user-images.githubusercontent.com/94084605/156601137-16bc1de6-cef1-47c8-8881-76920bd60091.png">
-<img width="1440" alt="Screenshot 2022-03-03 at 15 30 03" src="https://user-images.githubusercontent.com/94084605/156601163-09cec02b-316b-42ea-87a2-df264fb67eee.png">
+### Singleplayer Page
+Entering Singleplayer here allows you to play the game fully. The user will have 15 seconds to answer a random math question and will have 4 options to choose from. If the user answers or has not answered the question within the time limit, before the next question renders, the user has the option to skip to the next question. Points are scored relative to the timeframe you answer them within and one game is 10 questions long. At the end of the game, the user is presented with their results and an option to post their score to the Leaderboard.
 
-### Results Page
+<img width="1080" alt="Singleplayer game" src="Screenshot 2022-06-09 at 16.21.40.png">
+<img width="1080" alt="singleplayer results page" src="Screenshot 2022-06-10 at 09.40.15.png">
 
-<img width="1440" alt="Screenshot 2022-03-03 at 16 34 37" src="https://user-images.githubusercontent.com/94084605/156609216-b5dcd9c7-7912-4afe-937b-a9b4d09fb80c.png">
+### Multiplayer Page
+The first page the user is greeted with once clicking mutliplayer is the lobby, in the lobby users have the option to chat to eachother and when to start the game. Starting the game will start the game for everybody waiting to play in the lobby. The user can also copy the link to the website to send to friends to access the game quickly.
 
-## Assets
+ <img width="1080" alt="Multiplayer lobby" src=" Screenshot 2022-06-10 at 10.38.42.png">
+ 
+Starting the game allows you to play the game alongside other users on the site. The user will again have 15 seconds to answer a random math question and will have 4 options to choose from. The highscore component on the page renders the user that has the highest points live in real time. Points are scored relative to the timeframe you answer them within and one game is 10 questions long. At the end of the game, the user is presented with a results results page that displays the users avatar, username, custom win message and final score. You do not have to be logged in to the website to play as seen below, the default character presets:
 
-* Mountain Model - https://www.cgtrader.com/free-3d-models/exterior/landscape/mountainwithtress
-* Pedestal - https://sketchfab.com/3d-models/doric-twist-pedestal-7936fc9cbb6547459bfecb20910281ec
-* Audio SFX - https://www.zapsplat.com/
+<img width="1080" alt="Multiplayer results" src="Screenshot 2022-06-10 at 10.34.12.png">
+
+### Profile Csutomisation
+
+<img width="1080" alt="profile customisation" src="Screenshot 2022-06-10 at 09.30.36.png">
 
 ## Technologies
 
-* react-three/cannon @4.7.0
-* react-three/drei @8.10.6
-* react-three/fiber @7.0.26
-* react-three/xr @3.4.0
-* use-gesture/react @10.2.6
-* date-fns @2.28.0
-* react @17.0.2
-* react-spring @9.4.3
-* three @0.137.5
+"@emotion/react": "^11.9.0",
+"@emotion/styled": "^11.8.1",
+"@mui/icons-material": "^5.8.2",
+"@mui/material": "^5.8.2",
+"@mui/styled-engine-sc": "^5.8.0",
+"@testing-library/jest-dom": "^5.14.1",
+"@testing-library/react": "^13.0.0",
+"@testing-library/user-event": "^13.2.1",
+"react": "^18.1.0",
+"react-copy-to-clipboard": "^5.1.0",
+"react-dom": "^18.1.0",
+"react-router-dom": "^6.3.0",
+"react-scripts": "5.0.1",
+"socket.io-client": "^4.5.1",
+"styled-components": "^5.3.5",
+"use-sound": "^4.0.1",
+"useref": "^1.4.4",
+"web-vitals": "^2.1.0"
+"cookie-parser": "^1.4.6",
+"cors": "^2.8.5",
+"dotenv": "^16.0.1",
+"express": "^4.18.1",
+"pbkdf2-password-hash": "^3.1.0",
+"pg": "^8.7.3"
 
 ## Contributors
-* [Kiran Aatkar](https://github.com/kiranaatkar)
-* [Omar Shueb](https://github.com/Omar-Shueb)
-* [Tamoor Waheed](https://github.com/TamoorW)
-* [Tom Waghorn](https://github.com/tomw13)
+* [Thibaut Hucker](https://github.com/tibo8841)
+* [Alex Convoy](https://github.com/agConvoy)
+* [Kamilah Mohchin](https://github.com/KamCoder5)
+* [Milan Patel](https://github.com/milanpat42)
+
+
+<!-- <img width="1080" alt="Multiplayer results" src="Screenshot 2022-06-10 at 10.34.12.png">
+<img width="1080" alt="chat component" src="Screenshot 2022-06-09 at 16.22.17.png"> -->
