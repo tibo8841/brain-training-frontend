@@ -40,7 +40,7 @@ export default function Header() {
       : setSessionAuthentication(false);
   }
 
-  const gameName = "Dr Alex";
+  const gameName = "Dr Alex's Brain Training";
   let navigate = useNavigate();
   if (sessionAuthentication === true) {
     settings = ["Profile", "Logout"];
@@ -98,7 +98,6 @@ export default function Header() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
