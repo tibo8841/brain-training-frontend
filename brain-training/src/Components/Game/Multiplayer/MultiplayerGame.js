@@ -14,6 +14,7 @@ import CardContent from "@mui/material/CardContent";
 import io from "socket.io-client";
 import AvatarOption from "../CustomiseProfile/AvatarOptions";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Chat from "./Chat";
 
 const socket = io.connect("https://brain-training-multiplayer.sigmalabs.co.uk");
 const room = 5678;
@@ -225,28 +226,35 @@ export default function MultiplayerGame() {
                 alignItems: "center",
               }}
             >
-              <Box component="winner-display" noValidate sx={{ mt: 1 }}>
+              <Box component="winner-display" noValidate>
                 <Box container>
-                  <Box item xl sx={{ mt: 4 }}>
-                    <Typography component="h1" variant="h1">
-                      Winner!
-                    </Typography>
-                  </Box>
-
-                  <Box item md sx={{ mt: 4 }}>
-                    <Typography component="h2" variant="h2">
+                  <Box item xl>
+                    <Typography component="h1" variant="h2">
                       {`${highUser}`}
                     </Typography>
                   </Box>
-                  <Box item md sx={{ mt: 4 }}>
-                    <Typography component="h2" variant="h2">
+                  <Box item md sx={{ mt: 2 }}>
+                    <Typography component="h2" variant="h4">
+                      Winner!
+                    </Typography>
+                  </Box>
+                  <Box item md sx={{ mt: 2 }}>
+                    <Typography component="h2" variant="h4">
                       {`"${highMessage}" `}
                     </Typography>
                   </Box>
-                  <Box item md sx={{ mt: 4 }}>
-                    <Typography component="h3" variant="h3">
+                  <Box item md sx={{ mt: 2 }}>
+                    <Typography component="h3" variant="h5">
                       {`Score: ${highest}`}
                     </Typography>
+                  </Box>
+                  <Box marginTop={"5%"}>
+                    <Chat
+                      room={room}
+                      username={username}
+                      socket={socket}
+                      avatarID={avatar}
+                    />
                   </Box>
                 </Box>
               </Box>
