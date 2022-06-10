@@ -179,10 +179,12 @@ export default function MultiplayerGame() {
     let highest = highScore();
     let highUser = "ANONYMOUS";
     let highMessage = "";
+    let highAvatar = 1;
     scoreList.forEach(function (user) {
       if (user.score === highest) {
         highUser = user.username;
         highMessage = user.winMessage;
+        highAvatar = user.avatar;
       }
     });
 
@@ -195,7 +197,7 @@ export default function MultiplayerGame() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: `url(${getAvatarLink(avatar)})`,
+              backgroundImage: `url(${getAvatarLink(highAvatar)})`,
               backgroundRepeat: "no-repeat",
               backgroundColor: (t) =>
                 t.palette.mode === "light"
