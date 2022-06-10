@@ -7,11 +7,11 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Stack } from "@mui/material";
 import { getLeaderboard } from "./Networking";
+import PlayerDisplayCard from "./Game/Multiplayer/PlayerDisplayCard";
 
 const theme = createTheme();
 
 export default function Leaderboard() {
-  const [sort, setSort] = React.useState("");
   const [cards, setCards] = React.useState([]);
   React.useEffect(() => {
     const fetchData = async () => {
@@ -22,9 +22,6 @@ export default function Leaderboard() {
     fetchData();
   }, []);
 
-  function handleChange(event) {
-    setSort(event.target.value);
-  }
   return (
     <ThemeProvider theme={theme}>
       <main>
@@ -67,14 +64,19 @@ export default function Leaderboard() {
                   }}
                 >
                   <CardContent>
-                    <Typography
+                    {/* <Typography
                       gutterBottom
                       variant="h5"
                       component="h2"
                       align="center"
                     >
                       {`name: ${card.username}, score: ${card.score}`}
-                    </Typography>
+                    </Typography> */}
+                    <PlayerDisplayCard
+                      avatarID={card.profile_picture_id}
+                      username={card.username}
+                      score={card.score}
+                    />
                   </CardContent>
                 </Card>
               </Stack>

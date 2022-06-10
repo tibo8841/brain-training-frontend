@@ -176,7 +176,7 @@ export default function MultiplayerGame() {
     sendScore();
   }, [score]);
 
-  if (questionNumber > 3) {
+  if (questionNumber > 10) {
     let highest = highScore();
     let highUser = "ANONYMOUS";
     let highMessage = "";
@@ -267,17 +267,20 @@ export default function MultiplayerGame() {
 
   return (
     <Container align="center">
-      {!isMusic ? (
-        <Button onClick={handlePlayClick}>Play Music!</Button>
-      ) : (
-        <Button onClick={handleStopClick}>Stop Music!</Button>
-      )}
-      <Box align="center" sx={{ justifyContent: "space-between" }}>
-        <ScoreDisplay score={score} />
-        {displayUserScores()}
-      </Box>
-      <Box align="center">
-        {sneakySecondsLeft === 0 ? loadQuestion() : null}
+      <Box marginBottom="200px">
+        {!isMusic ? (
+          <Button onClick={handlePlayClick}>Play Music!</Button>
+        ) : (
+          <Button onClick={handleStopClick}>Stop Music!</Button>
+        )}
+        <Box align="center" sx={{ justifyContent: "space-between" }}>
+          <ScoreDisplay score={score} />
+          {displayUserScores()}
+        </Box>
+        <h4>Question {questionNumber}/10</h4>
+        <Box align="center">
+          {sneakySecondsLeft === 0 ? loadQuestion() : null}
+        </Box>
       </Box>
     </Container>
   );

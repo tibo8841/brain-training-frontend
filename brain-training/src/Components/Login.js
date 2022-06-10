@@ -49,6 +49,7 @@ export default function Login(props) {
             flexDirection: "column",
             alignItems: "center",
           }}
+          marginBottom="400px"
         >
           <Typography component="h1" variant="h5">
             Sign in
@@ -78,10 +79,6 @@ export default function Login(props) {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"

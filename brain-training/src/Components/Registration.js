@@ -50,6 +50,7 @@ export default function Registration() {
             flexDirection: "column",
             alignItems: "center",
           }}
+          marginBottom="400px"
         >
           <Typography component="h1" variant="h5">
             Sign up

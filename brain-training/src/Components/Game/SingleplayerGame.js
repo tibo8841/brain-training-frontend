@@ -1,7 +1,7 @@
 import QuestionsAndAnswers from "./QuestionsAndAnswers";
 import ScoreDisplay from "./ScoreDisplay";
 import { Container } from "@mui/system";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Box, Grid } from "@mui/material";
 import useSound from "use-sound";
 import brainTrainCalm from "../../Sounds/brainTrainCalm.mp3";
@@ -90,7 +90,7 @@ export default function SingleplayerGame() {
         </Grid>
       </Grid>
       <Button onClick={nextQuestion}>Skip to next question!</Button>
-      <Box align="center">
+      <Box align="center" marginBottom="15%">
         {sneakySecondsLeft === 0 ? loadQuestion() : null}
       </Box>
     </Container>
