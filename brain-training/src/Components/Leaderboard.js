@@ -5,11 +5,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import { Stack } from "@mui/material";
-import Select from "@mui/material/Select";
 import { getLeaderboard } from "./Networking";
 
 const theme = createTheme();

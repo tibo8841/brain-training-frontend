@@ -25,12 +25,9 @@ export default function Lobby() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("username");
   const [startPlay, setStartPlay] = useState(false);
-  const [userList, setUserList] = useState([]);
   const [avatarID, setAvatarID] = useState(1);
 
-  async function joinRoom() {
-    await socket.emit("join_room", { username: username, room: room });
-  }
+  socket.emit("join_room", { username: username, room: room });
 
   async function checkLogin() {
     let auth = await checkSessions();
@@ -67,7 +64,7 @@ export default function Lobby() {
       console.log(data);
       startGame();
     });
-  }, [socket, startPlay]);
+  }, [startPlay]);
 
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
