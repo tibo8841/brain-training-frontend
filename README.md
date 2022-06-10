@@ -106,6 +106,7 @@ Starting the game allows you to play the game alongside other users on the site.
 * [Kamilah Mohchin](https://github.com/KamCoder5)
 * [Milan Patel](https://github.com/milanpat42)
 
-
+<!-- ## Special Mention
+* [Dan Michelle](https://github.com/dan-michell) - Thanks for contributing to the questions!! -->
 <!-- <img width="1080" alt="Multiplayer results" src="Screenshot 2022-06-10 at 10.34.12.png">
 <img width="1080" alt="chat component" src="Screenshot 2022-06-09 at 16.22.17.png"> -->
