@@ -32,45 +32,6 @@ export default function Lobby() {
     await socket.emit("join_room", { username: username, room: room });
   }
 
-  useEffect(() => {
-    console.log("joining room");
-    getUsername();
-    addToUserList();
-  }, []);
-
-  useEffect(() => {
-    addToUserList();
-    joinRoom();
-  }, [username]);
-
-  // useEffect(() => {
-  //   console.log(username);
-  //   console.log("above is username");
-  //   socket.on("join_room", (data) => {
-  //     console.log(data);
-  //     console.log("above is data");
-  //     setUserList([...userList, data]);
-  //   });
-  //   console.log(userList);
-  //   console.log("above is user list");
-  // }, [userList]);
-
-  useEffect(() => {
-    addToUserList();
-  }, [userList]);
-
-  function addToUserList() {
-    console.log(username);
-    console.log("above is username");
-    socket.on("join_room", (data) => {
-      console.log(data);
-      console.log("above is data");
-      setUserList([...userList, data]);
-    });
-    console.log(userList);
-    console.log("above is user list");
-  }
-
   async function checkLogin() {
     let auth = await checkSessions();
     if (auth === true) {
@@ -78,15 +39,16 @@ export default function Lobby() {
     }
   }
 
-  async function getUsername() {
+  async function getUserInfo() {
     checkLogin();
     if (isAuthenticated) {
       let profile = await getProfile();
       setUsername(profile.user.username);
+      setAvatarID(profile.user.profile_picture_id);
     }
   }
 
-  getUsername();
+  getUserInfo();
 
   let navigate = useNavigate();
 
@@ -162,7 +124,12 @@ export default function Lobby() {
         </Grid>
         <Grid container spacing={2} marginTop={"1%"}>
           <Grid item xs={12} component={Box}>
-            <Chat room={room} username={username} socket={socket} />
+            <Chat
+              room={room}
+              username={username}
+              socket={socket}
+              avatarID={avatarID}
+            />
           </Grid>
         </Grid>
       </Box>

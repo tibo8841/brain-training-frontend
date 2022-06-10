@@ -101,7 +101,6 @@ export default function MultiplayerGame() {
 
   function getAvatarLink(avatarID) {
     let chosenAvatar = AvatarOption().find((avatar) => avatar.id === avatarID);
-    console.log(chosenAvatar.link);
     return chosenAvatar.link;
   }
 
