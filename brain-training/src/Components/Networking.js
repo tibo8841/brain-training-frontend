@@ -9,8 +9,6 @@ export async function getLogin(username, password) {
     `${URL}/login?username=${username}&password=${password}`,
     {
       method: "GET",
-      credentials: "include",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -24,8 +22,6 @@ export async function registerUser(username, password) {
   const userDetails = { username: username, password: password };
   const result = await fetch(`${URL}/register`, {
     method: "POST",
-    credentials: "include",
-    mode: "no-cors",
     headers: {
       "Content-Type": "application/json",
     },
@@ -51,7 +47,6 @@ export async function postToLeaderboard(username, score) {
   const scoreDetails = { username: username, score: score };
   const result = await fetch(`${URL}/leaderboard`, {
     method: "POST",
-    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
