@@ -9,7 +9,7 @@ The game plays as a 4 option multiple choice, where the user is rewarded for ans
 
 - [Objective](#Objective)
 - [Gameplay](#Gameplay)
-- [Our Team](#Our-Team)
+- [Our Team](#Contributors)
 
 ## Objective
 
