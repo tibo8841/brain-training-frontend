@@ -66,10 +66,12 @@ export default function CustomiseProfile() {
 
   function handleSaveMessage() {
     updateWinMessage(userWinMessage);
+    window.location.reload(false);
   }
 
   function handleSaveAvatar() {
     updateProfilePicture(userAvatarId);
+    window.location.reload(false);
   }
 
   return (
