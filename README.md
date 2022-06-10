@@ -69,7 +69,7 @@ Starting the game allows you to play the game alongside other users on the site.
 
 <img width="1080" alt="Multiplayer results" src="Screenshot 2022-06-10 at 10.34.12.png">
 
-### Profile Csutomisation
+### Profile Customisation
 
 <img width="1080" alt="profile customisation" src="Screenshot 2022-06-10 at 09.30.36.png">
 
