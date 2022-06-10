@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import AlwaysScrollToBottom from "./AlwaysScrollToBottom";
 import "./Chat.css";
 import { Avatar } from "@mui/material";
+import AvatarOption from "../CustomiseProfile/AvatarOptions";
 
-function Chat({ socket, username, room }) {
+function Chat({ socket, username, room, avatarID }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
@@ -13,6 +14,7 @@ function Chat({ socket, username, room }) {
         room: room,
         author: username,
         message: currentMessage,
+        avatarID: avatarID,
         time: new Date(Date.now()).toLocaleTimeString(),
       };
 
@@ -22,10 +24,14 @@ function Chat({ socket, username, room }) {
     }
   };
 
+  function getAvatarLink(avatarID) {
+    let chosenAvatar = AvatarOption().find((avatar) => avatar.id === avatarID);
+    return chosenAvatar.link;
+  }
+
   useEffect(() => {
     console.log("use effect running");
     socket.on("receive_message", (data) => {
-      console.log("this be data coming in");
       setMessageList([...messageList, data]);
     });
   }, [socket, messageList]);
@@ -45,7 +51,10 @@ function Chat({ socket, username, room }) {
             >
               <div>
                 <div className="message-content">
-                  <Avatar sx={{ margin: "3%" }} />
+                  <Avatar
+                    src={getAvatarLink(messageContent.avatarID)}
+                    sx={{ margin: "3%" }}
+                  />
                   <p>{messageContent.message}</p>
                 </div>
                 <div className="message-meta">
