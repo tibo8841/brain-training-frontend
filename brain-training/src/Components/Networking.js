@@ -35,6 +35,7 @@ export async function postToLeaderboard(username, score) {
   const scoreDetails = { username: username, score: score };
   const result = await fetch(`${URL}/leaderboard`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
