@@ -10,6 +10,7 @@ export async function getLogin(username, password) {
     {
       method: "GET",
       credentials: "include",
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -24,6 +25,7 @@ export async function registerUser(username, password) {
   const result = await fetch(`${URL}/register`, {
     method: "POST",
     credentials: "include",
+    mode: "no-cors",
     headers: {
       "Content-Type": "application/json",
     },
