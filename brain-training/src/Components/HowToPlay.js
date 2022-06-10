@@ -49,6 +49,8 @@ export default function HowToPlay() {
                 <br />
                 <br />- The more points you receive the bigger your brain is and
                 you can flex on all the opps
+                <br />
+                <br />
               </Typography>
             </Grid>
           </Box>
