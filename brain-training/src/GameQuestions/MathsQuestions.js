@@ -226,6 +226,96 @@ export function MathsQuestions() {
       ],
     },
     {
+      Question: "What is the integral of 2x^2",
+      Answers: [
+        { answer: "2/3x^3 + c", correct: true },
+        { answer: "2/3x^3", correct: false },
+        { answer: "4x", correct: false },
+        { answer: "4x^2", correct: true },
+      ],
+    },
+    {
+      Question: "What is square root of -1?",
+      Answers: [
+        { answer: 1, correct: false },
+        { answer: 2, correct: false },
+        { answer: "i", correct: true },
+        { answer: "x", correct: false },
+      ],
+    },
+    {
+      Question: "What is (-10 * 4) * -5",
+      Answers: [
+        { answer: 400, correct: false },
+        { answer: 200, correct: true },
+        { answer: -80, correct: false },
+        { answer: -200, correct: false },
+      ],
+    },
+    {
+      Question: "What is 36% of 50?",
+      Answers: [
+        { answer: 14, correct: false },
+        { answer: 25, correct: false },
+        { answer: 18, correct: true },
+        { answer: 16, correct: false },
+      ],
+    },
+    {
+      Question: "What is 12% of 75?",
+      Answers: [
+        { answer: 7, correct: false },
+        { answer: 8, correct: false },
+        { answer: 12, correct: false },
+        { answer: 9, correct: true },
+      ],
+    },
+    {
+      Question: "What is 24% of 25?",
+      Answers: [
+        { answer: 99, correct: false },
+        { answer: 6, correct: true },
+        { answer: 4, correct: false },
+        { answer: 7, correct: false },
+      ],
+    },
+    {
+      Question: "How many sides does a nonagon have?",
+      Answers: [
+        { answer: 7, correct: false },
+        { answer: 8, correct: false },
+        { answer: 9, correct: true },
+        { answer: 10, correct: false },
+      ],
+    },
+    {
+      Question: "How many sides does a dodecagon have?",
+      Answers: [
+        { answer: 12, correct: true },
+        { answer: 13, correct: false },
+        { answer: 14, correct: false },
+        { answer: 16, correct: false },
+      ],
+    },
+    {
+      Question: "What is the meaning of life?",
+      Answers: [
+        { answer: 42, correct: true },
+        { answer: 54, correct: false },
+        { answer: 46, correct: false },
+        { answer: 420, correct: false },
+      ],
+    },
+    {
+      Question: "How many faces does a sphere have?",
+      Answers: [
+        { answer: 1, correct: false },
+        { answer: 0, correct: true },
+        { answer: "infinite", correct: false },
+        { answer: 12, correct: false },
+      ],
+    },
+    {
       Question: "What is 14 * 6?",
       Answers: [
         { answer: 84, correct: true },
