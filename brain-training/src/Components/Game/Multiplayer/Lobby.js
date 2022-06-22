@@ -68,7 +68,7 @@ export default function Lobby() {
   const [copiedLobbyLink, setCopiedLobbyLink] = useState();
   return (
     <Container sx={{ width: "80%" }}>
-      <Box marginBottom="200px">
+      <Box marginBottom="35px">
         <Box align="center" marginBottom={"1%"}>
           <CopyToClipboard
             text={"https://brain-training-website.sigmalabs.co.uk/lobby"}

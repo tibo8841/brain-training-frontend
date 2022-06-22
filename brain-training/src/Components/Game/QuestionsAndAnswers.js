@@ -23,6 +23,9 @@ export default function QuestionsAndAnswers(props) {
 
   function handleClickIncorrect() {
     if (!isClicked) {
+      if (secondsLeft === 0) {
+        return;
+      }
       setIsClicked(true);
       setIsClickedIncorrect(true);
       props.handleMusicClick();
@@ -31,11 +34,15 @@ export default function QuestionsAndAnswers(props) {
 
   function handleClickCorrect() {
     if (!isClicked) {
-      setIsClicked(true);
-      setPoints((5 + secondsLeft) * 5);
-      setIsClickedCorrect(true);
-      props.addToScore((5 + secondsLeft) * 5);
-      props.handleMusicClick();
+      if (secondsLeft === 0) {
+        return;
+      } else {
+        setIsClicked(true);
+        setPoints((5 + secondsLeft) * 5);
+        setIsClickedCorrect(true);
+        props.addToScore((5 + secondsLeft) * 5);
+        props.handleMusicClick();
+      }
     }
   }
 
@@ -99,15 +106,15 @@ export default function QuestionsAndAnswers(props) {
           })}
         </Grid>
         {isClickedCorrect ? (
-          <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+          <Typography variant="h3" align="center" gutterBottom marginTop={"2%"}>
             Correct! You got {points} points
           </Typography>
         ) : isClickedIncorrect ? (
-          <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+          <Typography variant="h3" align="center" gutterBottom marginTop={"2%"}>
             Incorrect... Unluckyyy
           </Typography>
         ) : secondsLeft === 0 ? (
-          <Typography variant="h3" align="center" gutterBottom marginTop={"5%"}>
+          <Typography variant="h3" align="center" gutterBottom marginTop={"2%"}>
             You ran out of time... Unluckyyy
           </Typography>
         ) : null}

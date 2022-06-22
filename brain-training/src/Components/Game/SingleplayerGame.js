@@ -41,7 +41,7 @@ export default function SingleplayerGame() {
   function resetSneakySeconds() {
     setSneakySecondsLeft(20);
     setQuestionNumber(questionNumber + 1);
-    setTimeout(newNewQuestion, 500);
+    setTimeout(newNewQuestion, 1);
   }
 
   function newNewQuestion() {

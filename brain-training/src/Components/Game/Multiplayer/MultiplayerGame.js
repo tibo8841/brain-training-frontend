@@ -79,7 +79,7 @@ export default function MultiplayerGame() {
   function resetSneakySeconds() {
     setSneakySecondsLeft(20);
     setQuestionNumber(questionNumber + 1);
-    setTimeout(newNewQuestion, 500);
+    setTimeout(newNewQuestion, 1);
   }
 
   function newNewQuestion() {
@@ -150,21 +150,13 @@ export default function MultiplayerGame() {
     return (
       <Card
         sx={{
-          height: "100%",
           display: "flex",
-          flexDirection: "column",
           justifyContent: "center",
           bgcolor: "rgb(24,118,209)",
         }}
       >
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h2"
-            align="center"
-            color="white"
-          >
+          <Typography variant="h5" component="h2" align="center" color="white">
             {`High Score: ${highest} - ${highUser}  `}
           </Typography>
         </CardContent>
@@ -267,7 +259,7 @@ export default function MultiplayerGame() {
 
   return (
     <Container align="center">
-      <Box marginBottom="200px">
+      <Box marginBottom="150px">
         {!isMusic ? (
           <Button onClick={handlePlayClick}>Play Music!</Button>
         ) : (

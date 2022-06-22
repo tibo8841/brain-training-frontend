@@ -47,8 +47,8 @@ export default function Timer(props) {
 
   return (
     <div>
-      <h3 style={{ color: timerColour, fontSize: "250%" }}>{seconds}</h3>
-      <h5>next question in {sneakySeconds}</h5>
+      <h4 style={{ color: timerColour, fontSize: "200%" }}>{seconds}</h4>
+      <h6>next question in {sneakySeconds}</h6>
     </div>
   );
 }
