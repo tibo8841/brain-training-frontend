@@ -298,15 +298,6 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "What is the meaning of life?",
-      Answers: [
-        { answer: 42, correct: true },
-        { answer: 54, correct: false },
-        { answer: 46, correct: false },
-        { answer: 420, correct: false },
-      ],
-    },
-    {
       Question: "How many faces does a sphere have?",
       Answers: [
         { answer: 1, correct: false },
@@ -343,12 +334,12 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "How many corners/vertices does a triangular prism have?",
+      Question: "How many vertices does a cone have?",
       Answers: [
-        { answer: 6, correct: true },
+        { answer: 0, correct: false },
+        { answer: 1, correct: true },
         { answer: 3, correct: false },
-        { answer: 8, correct: false },
-        { answer: 9, correct: false },
+        { answer: 2, correct: false },
       ],
     },
     {
@@ -370,7 +361,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "In Roman Numerals, what does X equate to?",
+      Question: "In Roman Numerals, what is X?",
       Answers: [
         { answer: 10, correct: true },
         { answer: 100, correct: false },
@@ -433,7 +424,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "How many corners altogether are there on 8 triangles?",
+      Question: "How many corners are there on 8 triangles?",
       Answers: [
         { answer: 25, correct: false },
         { answer: 27, correct: false },
@@ -442,7 +433,7 @@ export function MathsQuestions() {
       ],
     },
     {
-      Question: "How many corners altogether are there on 9 squares?",
+      Question: "How many corners are there on 9 squares?",
       Answers: [
         { answer: 36, correct: true },
         { answer: 32, correct: false },
