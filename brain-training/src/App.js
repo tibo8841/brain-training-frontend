@@ -13,7 +13,7 @@ import MultiplayerResults from "./Components/Game/Multiplayer/MultiplayerResults
 import Header from "./Components/Header";
 import { useState } from "react";
 
-function App() {
+export default function App() {
   const [user, setUser] = useState("");
   return (
     <div className="App">
@@ -43,5 +43,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
